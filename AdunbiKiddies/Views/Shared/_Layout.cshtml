@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewBag.Title - Adunbi</title>
+
+    <!-- BEGIN META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="your,keywords">
+    <meta name="description" content="Short explanation about this website">
+    <!-- END META -->
+    <!-- BEGIN STYLESHEETS -->
+    <link href="~/Content/landing-page.css" rel="stylesheet" />
+    <link href="~/assets/css/theme-default/materialadmin_demo.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css' />
+    <link type="text/css" rel="stylesheet" href="~/assets/css/theme-4/bootstrap.css?1422792965" />
+    <link type="text/css" rel="stylesheet" href="~/assets/css/theme-4/materialadmin.css?1425466319" />
+    <link type="text/css" rel="stylesheet" href="~/assets/css/theme-4/font-awesome.min.css?1422529194" />
+    <link type="text/css" rel="stylesheet" href="~/assets/css/theme-4/material-design-iconic-font.min.css?1421434286" />
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <!-- END STYLESHEETS -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="~/assets/js/libs/utils/html5shiv.js?1403934957"></script>
+    <script type="text/javascript" src="~/assets/js/libs/utils/respond.min.js?1403934956"></script>
+    <![endif]-->
+</head>
+
+<body class="menubar-hoverable header-fixed menubar-pin ">
+    @if (Request.IsAuthenticated)
+    {
+        <!-- BEGIN HEADER-->
+        <header id="header">
+            <div class="headerbar">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="headerbar-left">
+                    <ul class="header-nav header-nav-options">
+                        <li class="header-nav-brand">
+                            <div class="brand-holder">
+                                <a href="@Url.Action("Index", "Home")">
+
+                                    @*<img class="img-circle" src="~/Images/k1.jpg" />*@
+                                    <img src="~/Images/adunbilogo.png" />
+                                    <span class="text-lg text-bold text-primary"><strong>Adunbi Kiddies</strong> </span>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="headerbar-right">
+                    <ul class="header-nav header-nav-options">             
+                        <li><a href="@Url.Action("Partners", "Home")"><strong>Partners</strong></a></li>
+                        <li><a href="@Url.Action("About", "Home")"><strong>About</strong></a></li>
+                        <li><a href="@Url.Action("Contact", "Home")"><strong>Contact</strong></a></li>
+                    </ul>
+                    @*<ul class="header-nav header-nav-options">
+                            <li><a href="#"><strong>Services</strong></a></li>
+                        </ul>*@
+                    <ul class="header-nav header-nav-options">
+                        @Html.Partial("_LoginPartial")
+                    </ul><!--end .header-nav-options -->
+                    <!--end .header-nav-options -->
+                </div><!--end #header-navbar-collapse -->
+            </div>
+        </header>
+        <!-- END HEADER-->
+        <!-- BEGIN BASE-->
+        <div id="base">
+
+            <!-- BEGIN OFFCANVAS LEFT -->
+            <div class="offcanvas">
+            </div><!--end .offcanvas-->
+            <!-- END OFFCANVAS LEFT -->
+            <!-- BEGIN CONTENT-->
+            <div id="content">
+
+                <!-- BEGIN BLANK SECTION -->
+                <section>
+                    <div class="section-body">
+                        @RenderBody()
+
+                        <br />
+                        <br />
+                        <br />
+                        <div class="menubar-foot-panel">
+
+                            <span class="opacity-75">
+                                &copy;ADUNBI KIDDIES @DateTime.Now.Year All rights reserved.
+                            </span>
+
+                            <span class="opacity-75">Designed by Compunet</span>
+
+                        </div>
+                        <hr />
+
+
+                    </div>
+
+                </section>
+
+                <!-- BEGIN BLANK SECTION -->
+            </div><!--end #content-->
+            <!-- END CONTENT -->
+            <!-- BEGIN MENUBAR-->
+            <div id="menubar" class="menubar-inverse ">
+                <div class="menubar-fixed-panel">
+                    <div>
+                        <a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </div>
+                    <div class="expanded">
+                        <a href="#">
+                            <span class="text-lg text-bold text-primary ">ADUNBI KIDDIES)</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="menubar-scroll-panel">
+
+                    <!-- BEGIN MAIN MENU -->
+                    <ul id="main-menu" class="gui-controls">
+
+                        <!-- BEGIN DASHBOARD -->
+                        <li>
+                            <a href="@Url.Action("Index", "Home")">
+                                <div class="gui-icon"><i class="md md-home"></i></div>
+                                <span class="title">Admin Dashboard</span>
+                            </a>
+                        </li><!--end /menu-li -->
+                        <!-- END DASHBOARD -->
+
+                        <!-- BEGIN PRODUCTS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><i class="md md-account-box"></i></div>
+                                <span class="title">Products</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("Index", "Products")">Search</a></li>
+                                <li>
+                                    <a class="page-scroll" href="@Url.Action("Create", "Products")">Create</a>
+                                </li>                            
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN CATEGORIES -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><i class="md md-account-box"></i></div>
+                                <span class="title">Categories</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>  
+                                <li><a href="@Url.Action("Index", "Categories")">Search</a></li>                             
+                                <li><a href="@Url.Action("Create", "Categories")">Create</a></li>                      
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+
+                        <!-- BEGIN STOCKS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><i class="md md-account-box"></i></div>
+                                <span class="title">Stocks</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>                               
+                                <li><a href="@Url.Action("Index", "Stocks")">View Stock</a></li>
+                                <li><a href="@Url.Action("Create", "Stocks")">Add to Stock</a></li>                    
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li --> 
+
+                        <!-- BEGIN SALES -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><i class="md md-account-box"></i></div>
+                                <span class="title">Sales</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                
+                                <li><a href="@Url.Action("Index", "Sales")">Search</a></li>
+                                @*<li><a href="@Url.Action("Create", "Account")">Add User</a></li>
+                                <li>
+                                    <a class="page-scroll" href="@Url.Action("Index", "Posts")">NEWS</a>
+                                </li>*@
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+
+                        <!-- BEGIN ANALYTICS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><i class="md md-account-box"></i></div>
+                                <span class="title">Analytics</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>                               
+                                <li><a href="@Url.Action("Index", "Analytics")">Statistics</a></li>                           s
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+
+                   
+                    
+                        <!-- BEGIN SUPPLIERS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><i class="md md-account-box"></i></div>
+                                <span class="title">Suppliers</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>                             
+                                <li><a href="@Url.Action("Index", "Suppliers")">Search Supplier</a></li>
+                                <li><a href="@Url.Action("Create", "Suppliers")">Add Supplier</a></li>
+                              
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->    
+
+                        <!-- BEGIN ROLES -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><i class="md md-account-box"></i></div>
+                                <span class="title">User Role</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>                               
+                                <li><a href="@Url.Action("Index", "RolesAdmin")">View</a></li>
+                                <li><a href="@Url.Action("Create", "RolesAdmin")">Add User Role</a></li>
+                                <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+
+
+                    </ul><!--end .main-menu -->
+                    <!-- END MAIN MENU -->
+
+                    @*<div class="menubar-foot-panel">
+
+                        <span class="opacity-75">
+                            &copy; @DateTime.Now.Year All rights reserved.
+                        </span>
+
+                        <span class="opacity-75">Designed by Joseph</span>
+
+                    </div>*@
+                </div><!--end .menubar-scroll-panel-->
+            </div><!--end #menubar-->
+            <!-- END MENUBAR -->           
+
+
+        </div><!--end #base-->
+        <!-- END BASE -->
+    }
+    else
+    {
+           <!-- BEGIN HEADER-->
+        <header id="header">
+            <div class="headerbar">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="headerbar-left">
+                    <ul class="header-nav header-nav-options">
+                        <li class="header-nav-brand">
+                            <div class="brand-holder">
+                                <a href="@Url.Action("Index", "Home")">
+                                    <img src="~/Images/adunbilogo.png" />
+                                    <span class="text-lg text-bold text-primary"><strong>ADUNBI KIDDIES</strong> </span>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="headerbar-right">
+                    <ul class="header-nav header-nav-options">
+                        <li><a href="@Url.Action("About", "Home")"><strong>About</strong></a></li>
+                        <li><a href="@Url.Action("Contact", "Home")"><strong>Contact</strong></a></li>
+                    </ul>
+
+                    <ul class="header-nav header-nav-options">
+                        @Html.Partial("_LoginPartial")
+                    </ul><!--end .header-nav-options -->
+                    <!--end .header-nav-options -->
+                </div><!--end #header-navbar-collapse -->
+            </div>
+        </header>
+        <!-- END HEADER-->
+
+
+            <!-- BEGIN CONTENT-->
+        <div id="content">
+
+            <!-- BEGIN BLANK SECTION -->
+            <section>
+                <div class="section-body">
+                    @RenderBody()
+                    <hr />
+                    <br />
+                    <br />
+                    <div class="menubar-foot-panel">
+
+                        <span class="opacity-75">
+                            &copy;ADUNBI KIDDIES @DateTime.Now.Year All rights reserved.
+                        </span>
+
+                        <span class="opacity-75">Designed by Compunet</span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- BEGIN BLANK SECTION -->
+        </div><!--end #content-->
+            <!-- END CONTENT -->
+
+
+
+        <!-- END BASE -->
+    }
+    <!-- BEGIN JAVASCRIPT -->
+    <script src="~/assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
+    <script src="~/assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/assets/js/libs/bootstrap/bootstrap.min.js"></script>
+    <script src="~/assets/js/libs/spin.js/spin.min.js"></script>
+    <script src="~/assets/js/libs/autosize/jquery.autosize.min.js"></script>
+    <script src="~/assets/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
+    <script src="~/assets/js/core/source/App.js"></script>
+    <script src="~/assets/js/core/source/AppNavigation.js"></script>
+    <script src="~/assets/js/core/source/AppOffcanvas.js"></script>
+    <script src="~/assets/js/core/source/AppCard.js"></script>
+    <script src="~/assets/js/core/source/AppForm.js"></script>
+    <script src="~/assets/js/core/source/AppNavSearch.js"></script>
+    <script src="~/assets/js/core/source/AppVendor.js"></script>
+    <script src="~/assets/js/core/demo/Demo.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@RenderSection("scripts", required: false)*@
+    <!-- END JAVASCRIPT -->
+    @RenderSection("scripts", required: false)
+
+    <script src="~/lcsk/assets/js/jquery.signalR-2.1.1.min.js" type="text/javascript"></script>
+    <script src="~/signalr/hubs" type="text/javascript"></script>
+    <script src="~/lcsk/chat.js" type="text/javascript"></script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560770f61b38eef5" async="async"></script>
+    <script type="text/javascript" src="~/Scripts/twitter.js" async="async"></script>
+
+</body>
+</html>

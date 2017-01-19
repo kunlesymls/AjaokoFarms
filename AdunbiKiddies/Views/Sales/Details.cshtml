@@ -1,0 +1,99 @@
+﻿@model AdunbiKiddies.Models.Sale
+@{
+    ViewBag.Title = "Details";
+}
+<h2>Details</h2>
+
+<div>
+    <h4>Sales Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+ 
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesRepName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SalesRepName)
+        </dd>
+   
+    </dl>
+</div>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            Item Purchased
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Price
+        </th>
+    </tr>
+    @{
+        int quat = 0;
+        decimal unit;
+        decimal totalUnit;
+        decimal totalAmount = 0.0m;
+
+        foreach (var item in Model.SaleDetails)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                @{
+                    quat = item.Quantity;
+                    unit = item.UnitPrice;
+                    totalUnit = quat * unit;
+                    totalAmount += totalUnit;
+                }
+
+
+            </tr>
+                    }
+                    ViewBag.Total = totalAmount.ToString();
+    }
+    <tr>
+        <th>
+            Total
+        </th>
+        <td>
+            @{
+
+            }
+        </td>
+        <td>
+            @ViewBag.Total
+        </td>
+    </tr>
+</table>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SaleId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

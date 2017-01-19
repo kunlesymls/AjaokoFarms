@@ -1,0 +1,112 @@
+﻿@model AdunbiKiddies.Models.Product
+@using AdunbiKiddies.Extensions
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Product</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoriesId, "CategoriesId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CategoriesId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoriesId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">BarCode Number </div>           
+            <div class="col-md-10">
+                <input id="BarcodeInput" name="BarcodeInput" type="text" autofocus />
+                <br>
+                <div class="test">
+                    <input id="scannerInput" type="text" value="barcodescan" autofocus />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ItemPictureUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ItemPictureUrl, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ItemPictureUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="editor-label">
+            Upload Image
+        </div>
+        <div class="editor-field">
+            @Html.FileFor(model => model.File)
+            @Html.ValidationMessageFor(model => model.File)
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).scannerDetection({
+
+        //https://github.com/kabachello/jQuery-Scanner-Detection
+
+        timeBeforeScanTest: 200, // wait for the next character for upto 200ms
+        avgTimeByChar: 40, // it's not a barcode if a character takes longer than 100ms
+        preventDefault: true,
+
+        endChar: [13],
+        onComplete: function (barcode, qty) {
+            validScan = true;
+
+
+            $('#scannerInput').val(barcode);
+
+        } // main callback function ,
+    ,
+        onError: function (string, qty) {
+
+            $('#BarcodeInput').val($('#BarcodeInput').val() + string);
+
+        }
+    });
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<string>
+
+<div class="well">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <a href="@Url.Action("Index", "Products",
+                new
+                {
+                    category = "",
+                    page = 1
+
+                })">All Categories</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var link in Model)
+            {
+                @*@Html.RouteLink(link, new
+                    {
+                        controller = "Items",
+                        action = "Index",
+                        category = link,
+                        page = 1
+                    },
+                        new {@class = "btn btn-block btn-default btn-lg"}
+                    )*@
+
+                <tr class="success">
+                    <td>
+                        <a href="@Url.Action("Index", "Products",
+                new
+                {
+                    category = link,
+                    page = 1
+
+                })">@link</a>
+            </td>
+
+        </tr>
+
+            }
+
+        </tbody>
+    </table>
+</div>
