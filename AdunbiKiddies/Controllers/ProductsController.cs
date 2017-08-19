@@ -4,13 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace AdunbiKiddies.Controllers
 {
+    //[Authorize]
     public class ProductsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -38,30 +44,33 @@ namespace AdunbiKiddies.Controllers
 
             if (!String.IsNullOrEmpty(barString))
             {
-                items = items.Where(s => s.BarcodeInput.Contains(barString.Trim()));
+                items = items.Where(s => s.Barcode.Equals(barString.Trim()));
             }
             else if (!String.IsNullOrEmpty(searchString))
             {
                 items = items.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper())
-                                       || s.Catagorie.Name.ToUpper().Contains(searchString.ToUpper())
-                                       || s.BarcodeInput.Contains(searchString.Trim()));
+                                       || s.Catagory.Name.ToUpper().Contains(searchString.ToUpper())
+                                       || s.Barcode.Equals(searchString.Trim()));
             }
             else if (!String.IsNullOrEmpty(category))
             {
-                items = items.Where(s => s.Catagorie.Name.ToUpper().Contains(category.ToUpper()));
+                items = items.Where(s => s.Catagory.Name.ToUpper().Contains(category.ToUpper()));
             }
             switch (sortOrder)
             {
                 case "name_desc":
                     items = items.OrderByDescending(s => s.Name);
                     break;
+
                 case "Price":
                     items = items.OrderBy(s => s.Price);
                     break;
+
                 case "price_desc":
                     items = items.OrderByDescending(s => s.Price);
                     break;
-                default:  // Name ascending 
+
+                default:  // Name ascending
                     items = items.OrderBy(s => s.Name);
                     break;
             }
@@ -71,9 +80,87 @@ namespace AdunbiKiddies.Controllers
             return View(items.ToPagedList(pageNumber, pageSize));
             ;
 
+            //var items = db.Items.Include(i => i.Catagorie);
+            //return View(await items.ToListAsync());
+        }
+
+        public async Task<ActionResult> ItemLeft()
+        {
+            var items = from i in db.Products
+                        select i;
+
+            items = items.Where(s => s.StockQuantity.Value <= 3);
+
+            return View(await items.ToListAsync());
 
             //var items = db.Items.Include(i => i.Catagorie);
             //return View(await items.ToListAsync());
+        }
+
+        public ActionResult UploadProducts()
+        {
+            //ViewBag.CourseName = new SelectList(db.Courses, "CourseName", "CourseName");
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> UploadProducts(HttpPostedFileBase excelfile)
+        {
+            if (excelfile == null || excelfile.ContentLength == 0)
+            {
+                ViewBag.Error = "Please Select a excel file <br/>";
+                return RedirectToAction("UploadProducts", "Products");
+            }
+            else
+            {
+                if (excelfile.FileName.EndsWith("xls") || excelfile.FileName.EndsWith("xlsx"))
+                {
+                    string path = Server.MapPath("~/Content/ExcelUploadedFile/" + excelfile.FileName);
+                    if (System.IO.File.Exists(path))
+                        System.IO.File.Delete(path);
+                    excelfile.SaveAs(path);
+
+                    // Read data from excel file
+                    Excel.Application application = new Excel.Application();
+                    Excel.Workbook workbook = application.Workbooks.Open(path);
+                    Excel.Worksheet worksheet = workbook.ActiveSheet;
+                    Excel.Range range = worksheet.UsedRange;
+
+                    for (int row = 2; row <= range.Rows.Count; row++)
+                    {
+                        var productCount = db.Products.AsNoTracking().Count();
+                        productCount += 1;
+                        int id = int.Parse(((Excel.Range)range.Cells[row, 1]).Text);
+                        int cat = int.Parse(((Excel.Range)range.Cells[row, 2]).Text);
+                        string name = ((Excel.Range)range.Cells[row, 3]).Text;
+                        decimal price = decimal.Parse(((Excel.Range)range.Cells[row, 4]).Text);
+                        string generatedBarcode = $"DC Cat{cat} item{productCount}";
+
+                        Zen.Barcode.Code128BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.Code128WithChecksum;
+                        byte[] generatedImage = ImageTobyteArray(barcode.Draw(generatedBarcode, 50));
+
+                        Product newProduct = new Product
+                        {
+                            CategoryId = cat,
+                            Name = name.Trim(),
+                            Price = price,
+                            Barcode = generatedBarcode.Trim(),
+                            BarcodeImage = generatedImage
+                        };
+                        db.Products.Add(newProduct);
+                        await db.SaveChangesAsync();
+                    }
+                    workbook.Close(0);
+                    application.Quit();
+                    ViewBag.Message = "Success";
+                    return View();
+                }
+                else
+                {
+                    ViewBag.Error = "File type is Incorrect <br/>";
+                    return View("Index");
+                }
+            }
         }
 
         public PartialViewResult Menu()
@@ -82,8 +169,23 @@ namespace AdunbiKiddies.Controllers
                                                             .OrderBy(s => s);
             return PartialView(categories);
         }
+
         // GET: Items/Details/5
         public async Task<ActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product item = await db.Products.FindAsync(id);
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+            return View(item);
+        }
+
+        public async Task<ActionResult> PrintBarCode(int? id)
         {
             if (id == null)
             {
@@ -101,7 +203,7 @@ namespace AdunbiKiddies.Controllers
         //[Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            ViewBag.CategoriesId = new SelectList(db.Categories, "ID", "Name");
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name").ToList();
             return View();
         }
 
@@ -111,19 +213,35 @@ namespace AdunbiKiddies.Controllers
         //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(Product product)
         {
-            if (ModelState.IsValid)
-            {
-                db.Products.Add(product);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
+            //string name = product.ID.ToString();
+            //string cat = product.CategoriesId.ToString();
+            //string price = product.Price.ToString();
+            //string GeneratedBarcode = "Ad" + name + cat + price;
+            var productCount = db.Products.AsNoTracking().Count();
+            productCount += 1;
+            string generatedBarcode = $"DC Cat{product.CategoryId} item{productCount}";
+            Zen.Barcode.Code128BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.Code128WithChecksum;
+            byte[] generatedImage = ImageTobyteArray(barcode.Draw(generatedBarcode, 50));
 
-            ViewBag.CatagorieId = new SelectList(db.Categories, "ID", "Name", product.CategoriesId);
-            return View(product);
+            Product myProduct = new Product()
+            {
+                CategoryId = product.CategoryId,
+                Name = product.Name,
+                Price = product.Price,
+                InternalImage = product.InternalImage,
+                ItemPictureUrl = product.ItemPictureUrl,
+                Barcode = generatedBarcode,
+                BarcodeImage = generatedImage
+            };
+            db.Products.Add(myProduct);
+            await db.SaveChangesAsync();
+
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", product.CategoryId);
+            return RedirectToAction("Index");
         }
 
         // GET: Items/Edit/5
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -135,28 +253,48 @@ namespace AdunbiKiddies.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoriesId = new SelectList(db.Categories, "ID", "Name", item.CategoriesId);
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", item.CategoryId);
             return View(item);
         }
 
         // POST: Items/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(Product product)
         {
+            //string name = product.ID.ToString();
+            //string cat = product.CategoriesId.ToString();
+            //string price = product.Price.ToString();
+            //string GeneratedBarcode = "Ad" + name + cat + price;
+            //var productCount = db.Products.AsNoTracking().Count();
+            //productCount += 1;
+            //string generatedBarcode = $"DC Cat{product.CategoryId} item{productCount}";
+
+            Zen.Barcode.Code128BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.Code128WithChecksum;
+            byte[] generatedImage = ImageTobyteArray(barcode.Draw(product.Barcode, 50));
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                Product myProduct = await db.Products.FindAsync(product.ID);
+
+                myProduct.CategoryId = product.CategoryId;
+                myProduct.Name = product.Name;
+                myProduct.Price = product.Price;
+                myProduct.InternalImage = product.InternalImage;
+                myProduct.ItemPictureUrl = product.ItemPictureUrl;
+                myProduct.Barcode = product.Barcode;
+                myProduct.BarcodeImage = generatedImage;
+
+                //db.Products.Add(myProduct);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+
+                ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", product.CategoryId);
             }
-            ViewBag.CatagorieId = new SelectList(db.Categories, "ID", "Name", product.CategoriesId);
-            return View(product);
+            return RedirectToAction("Index");
         }
 
         // GET: Items/Delete/5
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -192,9 +330,23 @@ namespace AdunbiKiddies.Controllers
             return File(photoBack, "image/png");
         }
 
+        public async Task<ActionResult> RenderBarcode(int id)
+        {
+            Product item = await db.Products.FindAsync(id);
 
+            byte[] photoBack = item.BarcodeImage;
 
-    
+            return File(photoBack, "image/png");
+        }
+
+        public byte[] ImageTobyteArray(Image imgaeIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                imgaeIn.Save(ms, ImageFormat.Gif);
+                return ms.ToArray();
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {

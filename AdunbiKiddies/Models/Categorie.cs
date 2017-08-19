@@ -8,15 +8,18 @@ using System.ComponentModel;
 
 namespace AdunbiKiddies.Models
 {
-    public class Categories
+    public class Category
     {
         [Key]
-        [DisplayName("Categories ID")]
-        public int ID { get; set; }
+        [DisplayName("Category ID")]
+        public int CategoryId { get; set; }
 
-        [DisplayName("Categories")]
+        public int StoreSectionId { get; set; }
+
+        [DisplayName("Category")]
         public string Name { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
+        public virtual StoreSection StoreSection { get; set; }
     }
 }

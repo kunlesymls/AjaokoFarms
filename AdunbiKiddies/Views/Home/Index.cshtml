@@ -1,12 +1,46 @@
 ﻿<!-- Header -->
 <a class="banner" name="about"></a>
-<div class="intro-header">
-    <div class="container banner">
+@*<div class="intro-header">
+        <div class="container banner">
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="intro-message">
-                    <h1>ADUNBI KIDDIES</h1>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>ADUNBI KIDDIES</h1>
+                        <h3>Providing 24/7 Services Anywhere...<br />Order Your Products Now</h3>
+                        <hr class="intro-divider">
+                        <ul class="list-inline intro-social-buttons">
+                            <li>
+                                <a href="@Url.Action("Index", "Products")" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Order Now</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Login", "Account")" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Login Now</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Chat", "Home")" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Chat Us</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+<div class="container">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+
+            <div class="item active">
+                <img src="~/Images/dc8.gif" alt="New York" style="width:100%;">
+                <div class="carousel-caption">
+                    <h1>DESIGNER'S CHOICE</h1>
                     <h3>Providing 24/7 Services Anywhere...<br />Order Your Products Now</h3>
                     <hr class="intro-divider">
                     <ul class="list-inline intro-social-buttons">
@@ -17,125 +51,64 @@
                             <a href="@Url.Action("Login", "Account")" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Login Now</span></a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Chat", "Home")" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Chat Us</span></a>
+                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Chat Us</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="~/Images/dc2.jpg" alt="New York" style="width:100%;">
+                <div class="carousel-caption">
+                    <h1>DESIGNER'S CHOICE</h1>
+                    <h3>Providing 24/7 Services Anywhere...<br />Order Your Products Now</h3>
+                    <hr class="intro-divider">
+                    <ul class="list-inline intro-social-buttons">
+                        <li>
+                            <a href="@Url.Action("Index", "Products")" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Order Now</span></a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Login", "Account")" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Login Now</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Chat Us</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="~/Images/dc7.gif" alt="New York" style="width:100%;">
+                <div class="carousel-caption">
+                    <h1>DESIGNER'S CHOICE</h1>
+                    <h3>Providing 24/7 Services Anywhere...<br />Order Your Products Now</h3>
+                    <hr class="intro-divider">
+                    <ul class="list-inline intro-social-buttons">
+                        <li>
+                            <a href="@Url.Action("Index", "Products")" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Order Now</span></a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Login", "Account")" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Login Now</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Chat Us</span></a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
 
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
-    <!-- /.container -->
-
 </div>
-<!-- /.intro-header -->
-<!-- Page Content -->
-
-@*<a name="services"></a>
-<div class="content-section-a">
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-5 col-sm-6">
-                <hr class="section-heading-spacer">
-                <div class="clearfix"></div>
-                <h2 class="section-heading">What We Do</h2>
-                <p class="lead">
-                    Katta Medics Retail Pharmacy Store (KMRP) is located in Jos, Plateau State.
-                    The facility matches the ideal picture of a community retail pharmacy store.
-                    We engage in the sale of prescriptions at reduced prices both over the counter and online order.
-                    KMRP operates a 24 hours, 7 days a week pharmaceutical store.
-                </p>
-            </div>
-            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                <img class="img-responsive img-circle" src="~/img/ipad.jpg" alt="">
-            </div>
-        </div>
-
-    </div>
-    <!-- /.container -->
-
-</div>
-<!-- /.content-section-a -->
-
-<div class="content-section-b">
-
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
-                <hr class="section-heading-spacer">
-                <div class="clearfix"></div>
-                <h2 class="section-heading">Our Services</h2>
-                <p class="lead">Kattapharmacy.com aims to give you value for money and first rate customer service. If we do not have the item you require, we will order it for you and have it delivered to your home, the homes of your loved ones or any location that you may instruct. We will ensure your loved one are regularly supplied their medication monthly or quarterly whatever your preference.</p>
-            </div>
-            <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                <img class="img-responsive img-circle" src="~/img/dog.jpg" alt="">
-            </div>
-        </div>
-
-    </div>
-    <!-- /.container -->
-
-</div>
-<!-- /.content-section-b -->
-
-<div class="content-section-a">
-
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-5 col-sm-6">
-                <hr class="section-heading-spacer">
-                <div class="clearfix"></div>
-                <h2 class="section-heading">Shop With Us Now:<br>Excellent Service <a href="@Url.Action("Index", "Items")" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Order Now!!!</span></a></h2>
-                <p class="lead">
-                    We are in retail pharmacy business to retail a wide range of pharmaceuticals for our customers, at the lowest prices they can get anywhere in Jos.
-                    Our employees are well trained and qualified to handle the wide range of customers that we are positioned to serve.
-                </p>
-            </div>
-            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                <img class="img-responsive" src="~/img/phones.jpg" alt="">
-            </div>
-        </div>
-
-    </div>
-    <!-- /.container -->
-
-</div>*@
-<!-- /.content-section-a -->
-
-@*<a name="contact"></a>
-<div class="banner">
-
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-6">
-                <h2>Connect With KattaPharmacy:</h2>
-            </div>
-            <div class="col-lg-6">
-                <ul class="list-inline banner-social-buttons">
-                    <li>
-                        <a href="@Url.Action("Register", "Account")" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Register</span></a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("Chat", "Home")" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Chat Us</span></a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Facebook</span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-    </div>*@
-    <!-- /.container -->
-
-</div>
-<!-- /.banner -->
-<!-- Footer -->
-<!-- jQuery -->
 <script src="js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->

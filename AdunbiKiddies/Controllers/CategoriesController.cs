@@ -1,12 +1,16 @@
-﻿using AdunbiKiddies.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
-using System.Net;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using AdunbiKiddies.Models;
 
 namespace AdunbiKiddies.Controllers
 {
-    //[Authorize(Roles = "Admin")]
     public class CategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -14,7 +18,8 @@ namespace AdunbiKiddies.Controllers
         // GET: Categories
         public async Task<ActionResult> Index()
         {
-            return View(await db.Categories.ToListAsync());
+            var categories = db.Categories.Include(c => c.StoreSection);
+            return View(await categories.ToListAsync());
         }
 
         // GET: Categories/Details/5
@@ -24,37 +29,37 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categories catagorie = await db.Categories.FindAsync(id);
-            if (catagorie == null)
+            Category category = await db.Categories.FindAsync(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(catagorie);
+            return View(category);
         }
 
         // GET: Categories/Create
-        //[Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
+            ViewBag.StoreSectionId = new SelectList(db.StoreSections, "StoreSectionId", "SectionName");
             return View();
         }
 
         // POST: Categories/Create
-        // To protect from over-posting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin")]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Name")] Categories catagorie)
+        public async Task<ActionResult> Create([Bind(Include = "CategoryId,StoreSectionId,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(catagorie);
+                db.Categories.Add(category);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(catagorie);
+            ViewBag.StoreSectionId = new SelectList(db.StoreSections, "StoreSectionId", "SectionName", category.StoreSectionId);
+            return View(category);
         }
 
         // GET: Categories/Edit/5
@@ -64,28 +69,30 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categories catagorie = await db.Categories.FindAsync(id);
-            if (catagorie == null)
+            Category category = await db.Categories.FindAsync(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(catagorie);
+            ViewBag.StoreSectionId = new SelectList(db.StoreSections, "StoreSectionId", "SectionName", category.StoreSectionId);
+            return View(category);
         }
 
         // POST: Categories/Edit/5
-        // To protect from over-posting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Name")] Categories catagorie)
+        public async Task<ActionResult> Edit([Bind(Include = "CategoryId,StoreSectionId,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(catagorie).State = EntityState.Modified;
+                db.Entry(category).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(catagorie);
+            ViewBag.StoreSectionId = new SelectList(db.StoreSections, "StoreSectionId", "SectionName", category.StoreSectionId);
+            return View(category);
         }
 
         // GET: Categories/Delete/5
@@ -95,12 +102,12 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categories catagorie = await db.Categories.FindAsync(id);
-            if (catagorie == null)
+            Category category = await db.Categories.FindAsync(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(catagorie);
+            return View(category);
         }
 
         // POST: Categories/Delete/5
@@ -108,8 +115,8 @@ namespace AdunbiKiddies.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Categories catagorie = await db.Categories.FindAsync(id);
-            db.Categories.Remove(catagorie);
+            Category category = await db.Categories.FindAsync(id);
+            db.Categories.Remove(category);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

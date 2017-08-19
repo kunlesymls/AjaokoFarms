@@ -1,26 +1,35 @@
 ﻿using AdunbiKiddies.Models;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using AdunbiKiddies.SMS_Service;
 
 namespace AdunbiKiddies.Controllers
 {
     [Authorize]
     public class CheckoutController : Controller
     {
-        ApplicationDbContext storeDB = new ApplicationDbContext();
+        private ApplicationDbContext storeDB;
+        private readonly SmsServiceTemp _smsService;
+
+        public CheckoutController()
+        {
+            _smsService = new SmsServiceTemp();
+            storeDB = new ApplicationDbContext();
+        }
+
         //AppConfigurations appConfig = new AppConfigurations();
 
         //public List<String> CreditCardTypes { get { return appConfig.CreditCardType; } }
-
 
         public ActionResult Index()
         {
             return View();
         }
-
 
         //GET: /Checkout/AddressAndPayment
         public ActionResult AddressAndPayment()
@@ -47,8 +56,6 @@ namespace AdunbiKiddies.Controllers
                 sale.SaleDate = DateTime.Now;
                 var currentUserId = User.Identity.GetUserId();
 
-
-
                 //Save Order
                 storeDB.Sales.Add(sale);
                 await storeDB.SaveChangesAsync();
@@ -56,19 +63,14 @@ namespace AdunbiKiddies.Controllers
                 var cart = ShoppingCart.GetCart(this.HttpContext);
                 sale = cart.CreateOrder(sale);
 
-
-
-
                 //ModelState.Clear();
                 //ViewBag.Message = "Thank you for Contacting us ";
 
-
-
                 //CheckoutController.SendOrderMessage(sale.FirstName, "New Order: " + sale.SaleId, sale.ToString(sale));
-
+                string body = "Thanks for patronizing us, We will get in touch with you soon";
+                SendMessage(body, sale.Phone);
                 return RedirectToAction("Complete",
                         new { id = sale.SaleId });
-
             }
             catch
             {
@@ -88,12 +90,42 @@ namespace AdunbiKiddies.Controllers
 
             if (isValid)
             {
-                return View(id);
+                return RedirectToAction("PrintDetails",
+                      new { id = id });
             }
             else
             {
                 return View("Error");
             }
+        }
+
+        public async Task<ActionResult> PrintDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Sale sales = await storeDB.Sales.FindAsync(id);
+            var saleDetails = storeDB.SaleDetails.Where(x => x.SaleId == id);
+
+            sales.SaleDetails = await saleDetails.ToListAsync();
+            if (sales == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(sales);
+        }
+
+        private void SendMessage(string body, string phoneNumber)
+        {
+            Sms sms = new Sms()
+            {
+                Sender = "De Choice",
+                Message = body,
+                Recipient = phoneNumber
+            };
+            string response = _smsService.Send(sms);
         }
 
         //private static RestResponse SendOrderMessage(String toName, String subject, String body, String destination)

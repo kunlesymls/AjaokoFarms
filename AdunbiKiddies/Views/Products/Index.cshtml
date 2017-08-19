@@ -7,7 +7,7 @@
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
-   
+
     $(function () {
         // Document.ready -> link up remove event handler
         $(".AddLink").click(function () {
@@ -37,11 +37,10 @@
         onComplete: function (barcode, qty) {
             validScan = true;
 
-
             $('#scannerInput').val(barcode);
 
         } // main callback function ,
-,
+        ,
         onError: function (string, qty) {
 
             $('#userInput').val($('#userInput').val() + string);
@@ -49,8 +48,6 @@
         }
     });
 </script>
-
-
 
 <!-- Button trigger modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -122,62 +119,52 @@
                                             </div>
                                         </div>
 
-
                                         <input type="submit" class="btn btn-info btn-sm" value="Search" />
                                     </div>
 
                                 }
-
                             </div>
                         </div>
-
-
-
                     </th>
                 </tr>
             </thead>
         </table>
 
-            @foreach (var item in Model)
+        @foreach (var item in Model)
             {
-                <table class="table table-hover">
-                    <tbody>
-                        <tr class="active">
-                            <td>
-                                <div>
-                                    <h3>
-                                        @Html.DisplayFor(modelItem => item.Name)
-                                        <span class="pull-right label label-primary">#@Html.DisplayFor(modelItem => item.Price)</span>
-                                        <h3><span class="lead">Stock(@Html.DisplayFor(modelItem => item.StockQuantity))</span></h3>
-                                    </h3>
-                                    <span class="pull-right"><img src="@Url.Action("RenderImage", new { id = item.ID})" height="60" width="100" class="img-rounded" /></span>
-                                    <h4>
-                                        <a href="#" class="AddLink"
-                                           data-id="@item.ID" data-toggle="modal" data-target="#myModal">
-                                            Add
-                                            to cart
-                                        </a>
+            <table class="table table-hover">
+                <tbody>
+                    <tr class="active">
+                        <td>
+                            <div>
+                                <h3>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                    <span class="pull-right label label-primary">#@Html.DisplayFor(modelItem => item.Price)</span>
+                                    <h3><span class="lead">Stock Remaning ( @Html.DisplayFor(modelItem => item.StockQuantity))</span></h3>
+                                </h3>
+                                <span class="pull-right"><img src="@Url.Action("RenderImage", new { id = item.ID})" height="60" width="100" class="img-rounded" /></span>
+                                <h4>
+                                    <a href="#" class="AddLink"
+                                       data-id="@item.ID" data-toggle="modal" data-target="#myModal">
+                                        Add
+                                        to cart
+                                    </a>
 
-                                        <!--@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = item.ID }, new { htmlAttributes = new { @data_toggle = "modal", @data_target = "#myModal" } })--> |
-                                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                        @if (Request.IsAuthenticated && (User.IsInRole("Admin") || (User.IsInRole("SalesRep"))))
+                                    <!--@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = item.ID }, new { htmlAttributes = new { @data_toggle = "modal", @data_target = "#myModal" } })--> |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                                     {
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                                     }
-                                    </h4>
-                                </div>
-                            </td>
+                                </h4>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-                        </tr>
-
-                    </tbody>
-                </table>
-
-            }
-
-
-
+        }
 
         @*</table>*@
         <br />
@@ -188,4 +175,3 @@
         </div>
     </div>
 </div>
-

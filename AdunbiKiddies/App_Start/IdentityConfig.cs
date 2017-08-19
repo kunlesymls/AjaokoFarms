@@ -1,25 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
+﻿using AdunbiKiddies.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using AdunbiKiddies.Models;
+using System;
+using System.Configuration;
+using System.Net.Mail;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using AdunbiKiddies.SMS_Service;
 
 namespace AdunbiKiddies
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            string schoolName = ConfigurationManager.AppSettings["SchoolName"];
+            string emailsetting = ConfigurationManager.AppSettings["GmailUserName"];
+            MailMessage email = new MailMessage(new MailAddress($"noreply{emailsetting}", $"(Daily Sales for {DateTime.Now.ToShortDateString()}, do not reply)"),
+                new MailAddress(message.Destination));
+
+            email.Subject = message.Subject;
+            email.Body = message.Body;
+
+            email.IsBodyHtml = true;
+
+            using (var mailClient = new EmailSetUpServices())
+            {
+                //In order to use the original from email address, uncomment this line:
+                email.From = new MailAddress(mailClient.UserName, $"(do not reply)@{schoolName}");
+
+                await mailClient.SendMailAsync(email);
+            }
         }
     }
 
@@ -40,7 +55,7 @@ namespace AdunbiKiddies
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
@@ -54,10 +69,10 @@ namespace AdunbiKiddies
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase = false,
             };
 
             // Configure user lockout defaults
@@ -81,7 +96,7 @@ namespace AdunbiKiddies
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;

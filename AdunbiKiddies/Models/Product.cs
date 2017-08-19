@@ -13,22 +13,19 @@ namespace AdunbiKiddies.Models
     {
         //private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
-
         [Key]
         [ScaffoldColumn(false)]
         public int ID { get; set; }
 
         [DisplayName("Categories")]
-        public int CategoriesId { get; set; }
+        public int CategoryId { get; set; }
 
         //[Required(ErrorMessage = "BarCode Input is required")]
-        public string BarcodeInput { get; set; }
+        //public string BarcodeInput { get; set; }
 
         [Required(ErrorMessage = "An Item Name is required")]
         [StringLength(160)]
         public string Name { get; set; }
-
-
 
         [Required(ErrorMessage = "Price is required")]
         [Range(0.01, 999999.99, ErrorMessage = "Price must be between 0.01 and 999999.99")]
@@ -61,7 +58,6 @@ namespace AdunbiKiddies.Models
                 {
                     //logger.Error(ex.Message);
                     //logger.Error(ex.StackTrace);
-
                 }
             }
         }
@@ -72,11 +68,20 @@ namespace AdunbiKiddies.Models
 
         public int? StockQuantity { get; set; }
 
-        //public byte[] BarcodeImage { get; set; }
-        //public string Barcode { get; set; }
+        public byte[] BarcodeImage { get; set; }
+        //public string Username
+        //{
+        //    get
+        //    {
+        //        return string.Format("{0} {1}", this.FirstName, this.LastName);
+        //    }
+        //}
+
+        public string Barcode { get; set; }
+
         //public string ImageUrl { get; set; }
 
-        public virtual Categories Catagorie { get; set; }
+        public virtual Category Catagory { get; set; }
         public virtual List<SaleDetail> OrderDetails { get; set; }
         public virtual Stock Stock { get; set; }
         public virtual ICollection<Supplier> Suppliers { get; set; }

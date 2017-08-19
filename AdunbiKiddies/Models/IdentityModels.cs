@@ -13,6 +13,7 @@ namespace AdunbiKiddies.Models
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -25,7 +26,7 @@ namespace AdunbiKiddies.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("AdunbiDatabase", throwIfV1Schema: false)
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
@@ -36,14 +37,15 @@ namespace AdunbiKiddies.Models
 
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<Categories> Categories { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleDetail> SaleDetails { get; set; }
         public DbSet<Cart> Carts { get; set; }
 
-        public System.Data.Entity.DbSet<AdunbiKiddies.Models.Supplier> Suppliers { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
 
-        public System.Data.Entity.DbSet<AdunbiKiddies.Models.Stock> Stocks { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
 
+        public DbSet<StoreSection> StoreSections { get; set; }
     }
 }

@@ -1,0 +1,52 @@
+﻿@model AdunbiKiddies.Models.Product
+
+@{
+    ViewBag.Title = "PrintBarCode";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+
+<div>
+    <h4>Products</h4>
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
+    <hr />
+    
+   
+
+  <table>
+      <tr>
+          <td><img src="@Url.Action("RenderBarcode", new { id = Model.ID})" height="100" width="100" /></td>
+          <td>
+             @*.....................................................
+          </td>
+           <td><img src="@Url.Action("RenderBarcode", new { id = Model.ID})" height="100" width="100" /></td>*@
+
+      </tr>
+      <tr>
+          <td>.................</td>
+          
+      </tr>
+      <tr>
+          <td><img src="@Url.Action("RenderBarcode", new { id = Model.ID})" height="100" width="100" /></td>
+          <td>
+              @*.....................................................
+          </td>
+          <td><img src="@Url.Action("RenderBarcode", new { id = Model.ID})" height="100" width="100" /></td>*@
+
+      </tr>
+      <tr>
+          <td>.................</td>
+
+      </tr>
+      <tr>
+          <td><img src="@Url.Action("RenderBarcode", new { id = Model.ID})" height="100" width="100" /></td>
+          <td>
+              @*.....................................................    
+          </td>
+          <td><img src="@Url.Action("RenderBarcode", new { id = Model.ID})" height="100" width="100" /></td>*@
+
+      </tr>
+  </table>
+  
+</div>
