@@ -38,7 +38,7 @@ namespace AdunbiKiddies.Controllers
         // GET: Stocks/Create
         public ActionResult Create()
         {
-            ViewBag.Name = new SelectList(db.Products, "ID", "Name");
+            ViewBag.Name = new SelectList(db.Products, "ProductId", "Name");
             ViewBag.StaffName = User.Identity.GetUserName().ToString();
             return View();
         }
@@ -58,7 +58,7 @@ namespace AdunbiKiddies.Controllers
                 //User myUser = myDBContext.Users.SingleOrDefault(user => user.Username == username);
                 //var user = db.Users.Where(c => c.Email.Equals(model.Email)).SingleOrDefault();
                 //Product product = await db.Products.FindAsync(int.Parse(stock.Name));
-                Product product = await db.Products.SingleOrDefaultAsync(s => s.Barcode.Equals(stock.Name));
+                Product product = await db.Products.SingleOrDefaultAsync(s => s.ProductId.Equals(stock.Name));
                 if (product == null)
                 {
                     return HttpNotFound();

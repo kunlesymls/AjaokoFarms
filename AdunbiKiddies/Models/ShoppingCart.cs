@@ -31,14 +31,14 @@ namespace AdunbiKiddies.Models
             // Get the matching cart and item instances
             var cartItem = storeDB.Carts.SingleOrDefault(
                 c => c.CartId == ShoppingCartId
-                && c.ProductId == product.ID);
+                && c.ProductId == product.ProductId);
 
             if (cartItem == null)
             {
                 // Create a new cart item if no cart item exists
                 cartItem = new Cart
                 {
-                    ProductId = product.ID,
+                    ProductId = product.ProductId,
                     CartId = ShoppingCartId,
                     Count = 1,
                     DateCreated = DateTime.Now

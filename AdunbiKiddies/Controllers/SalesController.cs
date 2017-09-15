@@ -1,5 +1,7 @@
 ﻿using AdunbiKiddies.Models;
+using AdunbiKiddies.SMS_Service;
 using Microsoft.AspNet.Identity;
+using OfficeOpenXml;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -13,8 +15,6 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using AdunbiKiddies.SMS_Service;
-using OfficeOpenXml;
 
 namespace AdunbiKiddies.Controllers
 {
@@ -389,7 +389,7 @@ namespace AdunbiKiddies.Controllers
             }
             rows.Append("</table>");
 
-            var items = await db.Products.AsNoTracking().Include(i => i.Catagory).ToListAsync();
+            var items = await db.Products.AsNoTracking().Include(i => i.Category).ToListAsync();
             string itemLeft = "<br/><br ><br >" +
                               $"<strong>List of Product/Items that are less than three in Stock as at {DateTime.Now.ToShortDateString()}</strong>" +
                               "<br > you can find breakup below " +
@@ -406,8 +406,8 @@ namespace AdunbiKiddies.Controllers
             {
                 rows.Append("<tr>" +
                             $"<td>{product.Name}</td>" +
-                            $"<td>{product.Catagory.StoreSection.SectionName}</td>" +
-                            $"<td>{product.Catagory.Name}</td>" +
+                            $"<td>{product.Category.StoreSection.SectionName}</td>" +
+                            $"<td>{product.Category.Name}</td>" +
                             $"<td>{product.StockQuantity}</td>" +
                             "</tr>");
             }
@@ -428,8 +428,8 @@ namespace AdunbiKiddies.Controllers
             {
                 rows.Append("<tr>" +
                             $"<td>{product.Name}</td>" +
-                            $"<td>{product.Catagory.StoreSection.SectionName}</td>" +
-                            $"<td>{product.Catagory.Name}</td>" +
+                            $"<td>{product.Category.StoreSection.SectionName}</td>" +
+                            $"<td>{product.Category.Name}</td>" +
                             $"<td>{product.StockQuantity}</td>" +
                             "</tr>");
             }

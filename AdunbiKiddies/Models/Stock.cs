@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AdunbiKiddies.Models
 {
     public class Stock
     {
-        public int ID { get; set; }
+        public int StockId { get; set; }
 
         [Display(Name = "Product Name")]
+        public int ProductId { get; set; }
         public String Name { get; set; }
 
         [Display(Name = "Quantity")]
@@ -24,6 +24,6 @@ namespace AdunbiKiddies.Models
         [Display(Name = "Staff ID")]
         public string StaffName { get; set; }
 
-        public virtual List<Product> Products { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

@@ -39,22 +39,16 @@ namespace AdunbiKiddies.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var items = from i in db.Products
-                        select i;
+            var items = db.Products.AsNoTracking().Where(x => x.StockQuantity > 3);
 
-            if (!String.IsNullOrEmpty(barString))
-            {
-                items = items.Where(s => s.Barcode.Equals(barString.Trim()));
-            }
-            else if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString))
             {
                 items = items.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper())
-                                       || s.Catagory.Name.ToUpper().Contains(searchString.ToUpper())
-                                       || s.Barcode.Equals(searchString.Trim()));
+                                       || s.Category.Name.ToUpper().Contains(searchString.ToUpper()));
             }
             else if (!String.IsNullOrEmpty(category))
             {
-                items = items.Where(s => s.Catagory.Name.ToUpper().Contains(category.ToUpper()));
+                items = items.Where(s => s.Category.Name.ToUpper().Contains(category.ToUpper()));
             }
             switch (sortOrder)
             {
@@ -72,6 +66,64 @@ namespace AdunbiKiddies.Controllers
 
                 default:  // Name ascending
                     items = items.OrderBy(s => s.Name);
+                    break;
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(items.ToPagedList(pageNumber, pageSize));
+            ;
+
+            //var items = db.Items.Include(i => i.Catagorie);
+            //return View(await items.ToListAsync());
+        }
+
+        public ActionResult AdminIndex(string category, string sortOrder, string currentFilter, string searchString, string barString, int? page)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
+
+            if (searchString != null || barString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var items = db.Products.AsNoTracking().ToList();
+
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                items = items.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper())
+                                         || s.Category.Name.ToUpper().Contains(searchString.ToUpper()))
+                                         .ToList();
+            }
+            else if (!String.IsNullOrEmpty(category))
+            {
+                items = items.Where(s => s.Category.Name.ToUpper().Contains(category.ToUpper())).ToList();
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    items = items.OrderByDescending(s => s.Name).ToList();
+                    break;
+
+                case "Price":
+                    items = items.OrderBy(s => s.Price).ToList();
+                    break;
+
+                case "price_desc":
+                    items = items.OrderByDescending(s => s.Price).ToList();
+                    break;
+
+                default:  // Name ascending
+                    items = items.OrderBy(s => s.Name).ToList();
                     break;
             }
 
@@ -136,16 +188,15 @@ namespace AdunbiKiddies.Controllers
                         decimal price = decimal.Parse(((Excel.Range)range.Cells[row, 4]).Text);
                         string generatedBarcode = $"DC Cat{cat} item{productCount}";
 
-                        Zen.Barcode.Code128BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.Code128WithChecksum;
-                        byte[] generatedImage = ImageTobyteArray(barcode.Draw(generatedBarcode, 50));
+                        //Zen.Barcode.Code128BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.Code128WithChecksum;
+                        //byte[] generatedImage = ImageTobyteArray(barcode.Draw(generatedBarcode, 50));
 
                         Product newProduct = new Product
                         {
                             CategoryId = cat,
                             Name = name.Trim(),
                             Price = price,
-                            Barcode = generatedBarcode.Trim(),
-                            BarcodeImage = generatedImage
+
                         };
                         db.Products.Add(newProduct);
                         await db.SaveChangesAsync();
@@ -213,15 +264,12 @@ namespace AdunbiKiddies.Controllers
         //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(Product product)
         {
-            //string name = product.ID.ToString();
-            //string cat = product.CategoriesId.ToString();
-            //string price = product.Price.ToString();
-            //string GeneratedBarcode = "Ad" + name + cat + price;
+
             var productCount = db.Products.AsNoTracking().Count();
             productCount += 1;
             string generatedBarcode = $"DC Cat{product.CategoryId} item{productCount}";
-            Zen.Barcode.Code128BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.Code128WithChecksum;
-            byte[] generatedImage = ImageTobyteArray(barcode.Draw(generatedBarcode, 50));
+            //Zen.Barcode.Code128BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.Code128WithChecksum;
+            //byte[] generatedImage = ImageTobyteArray(barcode.Draw(generatedBarcode, 50));
 
             Product myProduct = new Product()
             {
@@ -230,13 +278,16 @@ namespace AdunbiKiddies.Controllers
                 Price = product.Price,
                 InternalImage = product.InternalImage,
                 ItemPictureUrl = product.ItemPictureUrl,
-                Barcode = generatedBarcode,
-                BarcodeImage = generatedImage
+
             };
             db.Products.Add(myProduct);
             await db.SaveChangesAsync();
 
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", product.CategoryId);
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("AdminIndex");
+            }
             return RedirectToAction("Index");
         }
 
@@ -272,18 +323,17 @@ namespace AdunbiKiddies.Controllers
             //string generatedBarcode = $"DC Cat{product.CategoryId} item{productCount}";
 
             Zen.Barcode.Code128BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.Code128WithChecksum;
-            byte[] generatedImage = ImageTobyteArray(barcode.Draw(product.Barcode, 50));
+            //byte[] generatedImage = ImageTobyteArray(barcode.Draw(product.Barcode, 50));
             if (ModelState.IsValid)
             {
-                Product myProduct = await db.Products.FindAsync(product.ID);
+                Product myProduct = await db.Products.FindAsync(product.ProductId);
 
                 myProduct.CategoryId = product.CategoryId;
                 myProduct.Name = product.Name;
                 myProduct.Price = product.Price;
                 myProduct.InternalImage = product.InternalImage;
                 myProduct.ItemPictureUrl = product.ItemPictureUrl;
-                myProduct.Barcode = product.Barcode;
-                myProduct.BarcodeImage = generatedImage;
+
 
                 //db.Products.Add(myProduct);
                 await db.SaveChangesAsync();
@@ -330,14 +380,14 @@ namespace AdunbiKiddies.Controllers
             return File(photoBack, "image/png");
         }
 
-        public async Task<ActionResult> RenderBarcode(int id)
-        {
-            Product item = await db.Products.FindAsync(id);
+        //public async Task<ActionResult> RenderBarcode(int id)
+        //{
+        //    Product item = await db.Products.FindAsync(id);
 
-            byte[] photoBack = item.BarcodeImage;
+        //    byte[] photoBack = item.BarcodeImage;
 
-            return File(photoBack, "image/png");
-        }
+        //    return File(photoBack, "image/png");
+        //}
 
         public byte[] ImageTobyteArray(Image imgaeIn)
         {

@@ -213,12 +213,18 @@
     <Compile Include="Models\AssignSection.cs" />
     <Compile Include="Models\BarCode39.cs" />
     <Compile Include="Models\barcodecs.cs" />
+    <Compile Include="Models\BusinessAddress.cs" />
+    <Compile Include="Models\BusinessDocument.cs" />
+    <Compile Include="Models\BusinessRegistration.cs" />
     <Compile Include="Models\Cart.cs" />
-    <Compile Include="Models\Categorie.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Deposit.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Merchant.cs" />
+    <Compile Include="Models\PartnerShipAgreement.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProfessionalWorker.cs" />
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\SaleDetail.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
@@ -2212,6 +2218,7 @@
     <Content Include="Views\StoreSections\Details.cshtml" />
     <Content Include="Views\StoreSections\Edit.cshtml" />
     <Content Include="Views\StoreSections\Index.cshtml" />
+    <Content Include="Views\Products\AdminIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

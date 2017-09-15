@@ -39,7 +39,6 @@
             </div>
             <div class="modal-body">
                 <p>Would you like to check out or keep shopping?</p>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Continue</button>
@@ -48,10 +47,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 
 <h2>Details</h2>
 
@@ -63,11 +58,11 @@
     </dl>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Catagorie.Name)
+            @Html.DisplayNameFor(model => model.Catagory.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Catagorie.Name)
+            @Html.DisplayFor(model => model.Catagory.Name)
         </dd>
 
         <dt>
@@ -114,18 +109,17 @@
             @Html.DisplayFor(model => model.ItemPictureUrl)
         </dd>
         @*<dt>
-            @Html.DisplayNameFor(model => model.Barcode)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Barcode)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ImageUrl)
-        </dd>*@
-
+                @Html.DisplayNameFor(model => model.Barcode)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Barcode)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ImageUrl)
+            </dd>*@
     </dl>
 </div>
 <p>
@@ -140,6 +134,6 @@
         @Html.ActionLink("Print Bar Code", "PrintBarCode", new { id = Model.ID })
 
     }
-     
+
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -32,7 +32,7 @@ namespace OpenOrderFramework.Controllers
         {
             // Retrieve the item from the database
             var addedItem = storeDB.Products
-                .Single(item => item.ID == id);
+                .Single(item => item.ProductId == id);
 
             // Add it to the shopping cart
             var cart = ShoppingCart.GetCart(this.HttpContext);
@@ -66,7 +66,7 @@ namespace OpenOrderFramework.Controllers
 
             // Get the name of the album to display confirmation
             string itemName = storeDB.Products
-                .Single(item => item.ID == id).Name;
+                .Single(item => item.ProductId == id).Name;
 
             // Remove from cart
             int itemCount = cart.RemoveFromCart(id);

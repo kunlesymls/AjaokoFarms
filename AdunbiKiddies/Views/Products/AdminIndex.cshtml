@@ -1,0 +1,177 @@
+﻿@model PagedList.IPagedList<AdunbiKiddies.Models.Product>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Products";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $(".AddLink").click(function () {
+            // Get the id from the link
+            var recordToAdd = $(this).attr("data-id");
+            if (recordToAdd != '') {
+                // Perform the ajax post
+                $.post("/ShoppingCart/AddToCart", { "id": recordToAdd },
+                    function (data) {
+                        $('#cart-status').text(data.CartCount);
+                    });
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).scannerDetection({
+
+        //https://github.com/kabachello/jQuery-Scanner-Detection
+
+        timeBeforeScanTest: 200, // wait for the next character for upto 200ms
+        avgTimeByChar: 40, // it's not a barcode if a character takes longer than 100ms
+        preventDefault: true,
+
+        endChar: [13],
+        onComplete: function (barcode, qty) {
+            validScan = true;
+
+            $('#scannerInput').val(barcode);
+
+        } // main callback function ,
+        ,
+        onError: function (string, qty) {
+
+            $('#userInput').val($('#userInput').val() + string);
+
+        }
+    });
+</script>
+
+<!-- Button trigger modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div aria-hidden="true" class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>An item was added to your cart.</strong> To check out now simply <a href="#" class="alert-link">click here</a>.
+    </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Confirm check out.</h4>
+            </div>
+            <div class="modal-body">
+                <p>Would you like to check out or keep shopping??</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Continue</button>
+                <button type="submit" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "ShoppingCart")'">Check Out</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        @Html.Action("Menu", "Products")
+    </div>
+    <div class="col-md-8">
+        <p><br /></p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <p>
+                                @Html.ActionLink("Create New", "Create")
+                            </p>
+                        }
+                        <div class="row">
+                            <div class="bs-docs-section">
+
+                                @using (Html.BeginForm("AdminIndex", "Products", FormMethod.Get))
+                                {
+
+                                    <div class="form-horizontal">
+                                        <div class="col-md6">
+
+                                            <div class="form-group">
+                                                <div class="control-label col-md-2">Find Product By Name or Category: </div>
+                                                <div class="col-md-10">
+                                                    @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md6">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-2">Find Product By BarCode Number: </div>
+                                                <div class="col-md-10">
+                                                    <input id="BarcodeInput" name="barString" type="text" autofocus />
+                                                    <br>
+                                                    <div class="test">
+                                                        <input id="scannerInput" type="text" value="barcodescan" autofocus />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <input type="submit" class="btn btn-info btn-sm" value="Search" />
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+
+        @foreach (var item in Model)
+        {
+            <table class="table table-hover">
+                <tbody>
+                    <tr class="active">
+                        <td>
+                            <div>
+                                <h3>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                    <span class="pull-right label label-primary">#@Html.DisplayFor(modelItem => item.Price)</span>
+                                    <h3><span class="lead">Stock Remaning ( @Html.DisplayFor(modelItem => item.StockQuantity))</span></h3>
+                                </h3>
+                                <span class="pull-right"><img src="@Url.Action("RenderImage", new { id = item.ID})" height="60" width="100" class="img-rounded" /></span>
+                                <h4>
+                                    <a href="#" class="AddLink"
+                                       data-id="@item.ID" data-toggle="modal" data-target="#myModal">
+                                        Add
+                                        to cart
+                                    </a>
+
+                                    <!--@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = item.ID }, new { htmlAttributes = new { @data_toggle = "modal", @data_target = "#myModal" } })--> |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                                    {
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                    }
+                                </h4>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        }
+
+        @*</table>*@
+        <br />
+        <div class="btn-group pull-right">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+    </div>
+</div>

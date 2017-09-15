@@ -8,28 +8,48 @@ using System.Web;
 
 namespace AdunbiKiddies.Models
 {
-    //[Bind(Exclude = "ID")]
+
     public class Product
     {
-        //private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        public int ProductId { get; set; }
 
-        [Key]
-        [ScaffoldColumn(false)]
-        public int ID { get; set; }
+        public string MerchantId { get; set; }
 
-        [DisplayName("Categories")]
+        [DisplayName("Category Name")]
         public int CategoryId { get; set; }
 
-        //[Required(ErrorMessage = "BarCode Input is required")]
-        //public string BarcodeInput { get; set; }
-
-        [Required(ErrorMessage = "An Item Name is required")]
-        [StringLength(160)]
+        [Required(ErrorMessage = "An Product Name is required")]
+        [StringLength(300)]
         public string Name { get; set; }
 
+        [Display(Name = "Alternative/General Name")]
+        [StringLength(200)]
+        public string AlternativeName { get; set; }
+
+
         [Required(ErrorMessage = "Price is required")]
-        [Range(0.01, 999999.99, ErrorMessage = "Price must be between 0.01 and 999999.99")]
         public decimal Price { get; set; }
+
+        [Required(ErrorMessage = "A Product Description is required")]
+        [Display(Name = "Product Description")]
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
+
+        public decimal ProductDiscount { get; set; }
+
+        public decimal DiscountPrice
+        {
+            get
+            {
+                decimal calculatedPrice = (ProductDiscount / 100) * Price;
+                decimal discountPrice = Price - calculatedPrice;
+                return discountPrice;
+            }
+            set { }
+        }
+
+        public string IsApproved { get; set; }
+        public int? StockQuantity { get; set; }
 
         public byte[] InternalImage { get; set; }
 
@@ -56,34 +76,18 @@ namespace AdunbiKiddies.Models
                 }
                 catch (Exception ex)
                 {
-                    //logger.Error(ex.Message);
-                    //logger.Error(ex.StackTrace);
+                    var message = ex.Message;
                 }
             }
         }
 
-        [DisplayName("Item Picture URL")]
+        [DisplayName("Product Picture URL")]
         [StringLength(1024)]
         public string ItemPictureUrl { get; set; }
+        public virtual Merchant Merchant { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual List<SaleDetail> SaleDetails { get; set; }
+        public virtual ICollection<Stock> Stocks { get; set; }
 
-        public int? StockQuantity { get; set; }
-
-        public byte[] BarcodeImage { get; set; }
-        //public string Username
-        //{
-        //    get
-        //    {
-        //        return string.Format("{0} {1}", this.FirstName, this.LastName);
-        //    }
-        //}
-
-        public string Barcode { get; set; }
-
-        //public string ImageUrl { get; set; }
-
-        public virtual Category Catagory { get; set; }
-        public virtual List<SaleDetail> OrderDetails { get; set; }
-        public virtual Stock Stock { get; set; }
-        public virtual ICollection<Supplier> Suppliers { get; set; }
     }
 }
