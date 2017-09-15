@@ -14,7 +14,7 @@ namespace AdunbiKiddies.Controllers
 {
     public class AnalyticsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private AjaoOkoDb db = new AjaoOkoDb();
         AnalyticsViewModel vm = new AnalyticsViewModel();
 
         // GET: Analytics

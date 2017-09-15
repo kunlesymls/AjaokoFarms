@@ -9,7 +9,7 @@ namespace OpenOrderFramework.Controllers
     public class ShoppingCartController : Controller
     {
 
-        ApplicationDbContext storeDB = new ApplicationDbContext();
+        AjaoOkoDb storeDB = new AjaoOkoDb();
         //
         // GET: /ShoppingCart/
         public ActionResult Index()

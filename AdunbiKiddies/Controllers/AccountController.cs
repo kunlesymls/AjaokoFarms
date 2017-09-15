@@ -14,7 +14,7 @@ namespace AdunbiKiddies.Controllers
     //[Authorize]
     public class AccountController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private AjaoOkoDb db = new AjaoOkoDb();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 

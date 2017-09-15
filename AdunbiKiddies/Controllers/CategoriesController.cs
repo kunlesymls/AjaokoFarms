@@ -1,24 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using AdunbiKiddies.Models;
 using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using AdunbiKiddies.Models;
 
 namespace AdunbiKiddies.Controllers
 {
     public class CategoriesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly AjaoOkoDb _db;
+
+        public CategoriesController()
+        {
+            _db = new AjaoOkoDb();
+        }
 
         // GET: Categories
         public async Task<ActionResult> Index()
         {
-            var categories = db.Categories.Include(c => c.StoreSection);
+            var categories = _db.Categories.Include(c => c.StoreSection);
             return View(await categories.ToListAsync());
         }
 
@@ -29,7 +29,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = await db.Categories.FindAsync(id);
+            Category category = await _db.Categories.FindAsync(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -40,7 +40,7 @@ namespace AdunbiKiddies.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-            ViewBag.StoreSectionId = new SelectList(db.StoreSections, "StoreSectionId", "SectionName");
+            ViewBag.StoreSectionId = new SelectList(_db.StoreSections, "StoreSectionId", "SectionName");
             return View();
         }
 
@@ -53,12 +53,12 @@ namespace AdunbiKiddies.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
-                await db.SaveChangesAsync();
+                _db.Categories.Add(category);
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StoreSectionId = new SelectList(db.StoreSections, "StoreSectionId", "SectionName", category.StoreSectionId);
+            ViewBag.StoreSectionId = new SelectList(_db.StoreSections, "StoreSectionId", "SectionName", category.StoreSectionId);
             return View(category);
         }
 
@@ -69,12 +69,12 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = await db.Categories.FindAsync(id);
+            Category category = await _db.Categories.FindAsync(id);
             if (category == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.StoreSectionId = new SelectList(db.StoreSections, "StoreSectionId", "SectionName", category.StoreSectionId);
+            ViewBag.StoreSectionId = new SelectList(_db.StoreSections, "StoreSectionId", "SectionName", category.StoreSectionId);
             return View(category);
         }
 
@@ -87,11 +87,11 @@ namespace AdunbiKiddies.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _db.Entry(category).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.StoreSectionId = new SelectList(db.StoreSections, "StoreSectionId", "SectionName", category.StoreSectionId);
+            ViewBag.StoreSectionId = new SelectList(_db.StoreSections, "StoreSectionId", "SectionName", category.StoreSectionId);
             return View(category);
         }
 
@@ -102,7 +102,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = await db.Categories.FindAsync(id);
+            Category category = await _db.Categories.FindAsync(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -115,9 +115,9 @@ namespace AdunbiKiddies.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Category category = await db.Categories.FindAsync(id);
-            db.Categories.Remove(category);
-            await db.SaveChangesAsync();
+            Category category = await _db.Categories.FindAsync(id);
+            _db.Categories.Remove(category);
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -125,7 +125,7 @@ namespace AdunbiKiddies.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

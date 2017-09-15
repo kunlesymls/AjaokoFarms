@@ -13,7 +13,7 @@ namespace AdunbiKiddies.Controllers
 {
     public class StoreSectionsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private AjaoOkoDb db = new AjaoOkoDb();
 
         // GET: StoreSections
         public async Task<ActionResult> Index()

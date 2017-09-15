@@ -7,7 +7,7 @@ namespace AdunbiKiddies.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<AdunbiKiddies.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<AdunbiKiddies.Models.AjaoOkoDb>
     {
         public Configuration()
         {
@@ -15,7 +15,7 @@ namespace AdunbiKiddies.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(AdunbiKiddies.Models.ApplicationDbContext context)
+        protected override void Seed(AdunbiKiddies.Models.AjaoOkoDb context)
         {
             if (!context.Roles.Any(r => r.Name == "Admin"))
             {

@@ -21,7 +21,7 @@ namespace AdunbiKiddies.Controllers
     [Authorize]
     public class SalesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private AjaoOkoDb db = new AjaoOkoDb();
 
         // GET: Sales
         public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)

@@ -13,13 +13,13 @@ namespace AdunbiKiddies.Controllers
     [Authorize]
     public class CheckoutController : Controller
     {
-        private ApplicationDbContext storeDB;
+        private AjaoOkoDb storeDB;
         private readonly SmsServiceTemp _smsService;
 
         public CheckoutController()
         {
             _smsService = new SmsServiceTemp();
-            storeDB = new ApplicationDbContext();
+            storeDB = new AjaoOkoDb();
         }
 
         //AppConfigurations appConfig = new AppConfigurations();

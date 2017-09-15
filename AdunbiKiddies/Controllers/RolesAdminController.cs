@@ -8,11 +8,11 @@ namespace AdunbiKiddies.Controllers
     //[Authorize(Roles = "Admin")]
     public class RolesAdminController : Controller
     {
-        ApplicationDbContext db;
+        AjaoOkoDb db;
 
         public RolesAdminController()
         {
-            db = new ApplicationDbContext();
+            db = new AjaoOkoDb();
         }
 
 

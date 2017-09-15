@@ -10,7 +10,7 @@ namespace AdunbiKiddies.Controllers
     [Authorize(Roles = "Admin, Stock Manager")]
     public class StocksController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private AjaoOkoDb db = new AjaoOkoDb();
 
         // GET: Stocks
         public async Task<ActionResult> Index(string val1, string val2)

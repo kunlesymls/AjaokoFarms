@@ -9,7 +9,7 @@ namespace AdunbiKiddies.Controllers
     [Authorize]
     public class SuppliersController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private AjaoOkoDb db = new AjaoOkoDb();
 
         // GET: Suppliers
         public async Task<ActionResult> Index()

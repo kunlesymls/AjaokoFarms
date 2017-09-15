@@ -23,16 +23,16 @@ namespace AdunbiKiddies.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class AjaoOkoDb : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
+        public AjaoOkoDb()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
-        public static ApplicationDbContext Create()
+        public static AjaoOkoDb Create()
         {
-            return new ApplicationDbContext();
+            return new AjaoOkoDb();
         }
 
         public DbSet<Product> Products { get; set; }
@@ -41,11 +41,9 @@ namespace AdunbiKiddies.Models
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleDetail> SaleDetails { get; set; }
         public DbSet<Cart> Carts { get; set; }
-
         public DbSet<Supplier> Suppliers { get; set; }
-
         public DbSet<Stock> Stocks { get; set; }
-
         public DbSet<StoreSection> StoreSections { get; set; }
+        public DbSet<Merchant> Merchants { get; set; }
     }
 }

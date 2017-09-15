@@ -9,7 +9,7 @@ namespace AdunbiKiddies.Models
 {
     public partial class ShoppingCart
     {
-        ApplicationDbContext storeDB = new ApplicationDbContext();
+        AjaoOkoDb storeDB = new AjaoOkoDb();
         string ShoppingCartId { get; set; }
         public const string CartSessionKey = "CartId";
 

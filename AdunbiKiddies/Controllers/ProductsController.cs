@@ -19,7 +19,7 @@ namespace AdunbiKiddies.Controllers
     //[Authorize]
     public class ProductsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private AjaoOkoDb db = new AjaoOkoDb();
 
         // GET: Items
         public ActionResult Index(string category, string sortOrder, string currentFilter, string searchString, string barString, int? page)

@@ -142,20 +142,20 @@
                                     <span class="pull-right label label-primary">#@Html.DisplayFor(modelItem => item.Price)</span>
                                     <h3><span class="lead">Stock Remaning ( @Html.DisplayFor(modelItem => item.StockQuantity))</span></h3>
                                 </h3>
-                                <span class="pull-right"><img src="@Url.Action("RenderImage", new { id = item.ID})" height="60" width="100" class="img-rounded" /></span>
+                                <span class="pull-right"><img src="@Url.Action("RenderImage", new { id = item.ProductId})" height="60" width="100" class="img-rounded" /></span>
                                 <h4>
                                     <a href="#" class="AddLink"
-                                       data-id="@item.ID" data-toggle="modal" data-target="#myModal">
+                                       data-id="@item.ProductId" data-toggle="modal" data-target="#myModal">
                                         Add
                                         to cart
                                     </a>
 
-                                    <!--@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = item.ID }, new { htmlAttributes = new { @data_toggle = "modal", @data_target = "#myModal" } })--> |
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                    <!--@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = item.ProductId }, new { htmlAttributes = new { @data_toggle = "modal", @data_target = "#myModal" } })--> |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
                                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                                     {
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductId })
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
                                     }
                                 </h4>
                             </div>
