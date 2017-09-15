@@ -30,20 +30,24 @@ namespace AdunbiKiddies.Models
         [Required(ErrorMessage = "Price is required")]
         public decimal Price { get; set; }
 
-        [Required(ErrorMessage = "A Product Description is required")]
+        //[Required(ErrorMessage = "A Product Description is required")]
         [Display(Name = "Product Description")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        public decimal ProductDiscount { get; set; }
+        public decimal? ProductDiscount { get; set; }
 
         public decimal DiscountPrice
         {
             get
             {
-                decimal calculatedPrice = (ProductDiscount / 100) * Price;
-                decimal discountPrice = Price - calculatedPrice;
-                return discountPrice;
+                if (ProductDiscount != null)
+                {
+                    decimal calculatedPrice = ((decimal)ProductDiscount / 100) * Price;
+                    decimal discountPrice = Price - calculatedPrice;
+                    return discountPrice;
+                }
+                return 0;
             }
             set { }
         }

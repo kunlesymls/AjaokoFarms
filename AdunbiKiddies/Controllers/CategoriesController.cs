@@ -6,14 +6,9 @@ using System.Web.Mvc;
 
 namespace AdunbiKiddies.Controllers
 {
-    public class CategoriesController : Controller
+    public class CategoriesController : BaseController
     {
-        private readonly AjaoOkoDb _db;
 
-        public CategoriesController()
-        {
-            _db = new AjaoOkoDb();
-        }
 
         // GET: Categories
         public async Task<ActionResult> Index()

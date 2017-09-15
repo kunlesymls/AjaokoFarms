@@ -197,6 +197,7 @@
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MerchantsController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
@@ -212,6 +213,14 @@
     <Compile Include="Migrations\201709151743398_Professional.cs" />
     <Compile Include="Migrations\201709151743398_Professional.Designer.cs">
       <DependentUpon>201709151743398_Professional.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709152013054_ProductDiscount.cs" />
+    <Compile Include="Migrations\201709152013054_ProductDiscount.Designer.cs">
+      <DependentUpon>201709152013054_ProductDiscount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709152016239_NonrequiredforProductDesc.cs" />
+    <Compile Include="Migrations\201709152016239_NonrequiredforProductDesc.Designer.cs">
+      <DependentUpon>201709152016239_NonrequiredforProductDesc.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2228,6 +2237,13 @@
     <Content Include="Views\StoreSections\Edit.cshtml" />
     <Content Include="Views\StoreSections\Index.cshtml" />
     <Content Include="Views\Products\AdminIndex.cshtml" />
+    <Content Include="Views\Merchants\Create.cshtml" />
+    <Content Include="Views\Merchants\Delete.cshtml" />
+    <Content Include="Views\Merchants\Details.cshtml" />
+    <Content Include="Views\Merchants\Edit.cshtml" />
+    <Content Include="Views\Merchants\Index.cshtml" />
+    <Content Include="Views\Account\RegisterMerchant.cshtml" />
+    <Content Include="Views\Account\Registration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2248,6 +2264,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709151743398_Professional.resx">
       <DependentUpon>201709151743398_Professional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709152013054_ProductDiscount.resx">
+      <DependentUpon>201709152013054_ProductDiscount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709152016239_NonrequiredforProductDesc.resx">
+      <DependentUpon>201709152016239_NonrequiredforProductDesc.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

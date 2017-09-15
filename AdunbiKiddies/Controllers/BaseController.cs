@@ -35,7 +35,7 @@ namespace AdunbiKiddies.Controllers
 
             if (merchant != null)
             {
-                model.Alias = merchant.MiddleName;
+                model.Alias = merchant.FullName;
                 model.PerfereedName = merchant.PreferedStoreName;
                 model.MerchantId = merchant.MerchantId;
                 //ViewBag.ImageId = school.SchoolId;

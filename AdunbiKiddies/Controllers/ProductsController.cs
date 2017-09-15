@@ -17,10 +17,8 @@ using Excel = Microsoft.Office.Interop.Excel;
 namespace AdunbiKiddies.Controllers
 {
     //[Authorize]
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
-        private AjaoOkoDb db = new AjaoOkoDb();
-
         // GET: Items
         public ActionResult Index(string category, string sortOrder, string currentFilter, string searchString, string barString, int? page)
         {
@@ -39,7 +37,7 @@ namespace AdunbiKiddies.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var items = db.Products.AsNoTracking().Where(x => x.StockQuantity > 3);
+            var items = _db.Products.AsNoTracking().Where(x => x.StockQuantity > 3);
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -74,7 +72,7 @@ namespace AdunbiKiddies.Controllers
             return View(items.ToPagedList(pageNumber, pageSize));
             ;
 
-            //var items = db.Items.Include(i => i.Catagorie);
+            //var items = _db.Items.Include(i => i.Catagorie);
             //return View(await items.ToListAsync());
         }
 
@@ -95,7 +93,7 @@ namespace AdunbiKiddies.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var items = db.Products.AsNoTracking().ToList();
+            var items = _db.Products.AsNoTracking().Where(x => x.MerchantId.Equals(merchantId)).ToList();
 
 
             if (!String.IsNullOrEmpty(searchString))
@@ -132,26 +130,26 @@ namespace AdunbiKiddies.Controllers
             return View(items.ToPagedList(pageNumber, pageSize));
             ;
 
-            //var items = db.Items.Include(i => i.Catagorie);
+            //var items = _db.Items.Include(i => i.Catagorie);
             //return View(await items.ToListAsync());
         }
 
         public async Task<ActionResult> ItemLeft()
         {
-            var items = from i in db.Products
+            var items = from i in _db.Products
                         select i;
 
             items = items.Where(s => s.StockQuantity.Value <= 3);
 
             return View(await items.ToListAsync());
 
-            //var items = db.Items.Include(i => i.Catagorie);
+            //var items = _db.Items.Include(i => i.Catagorie);
             //return View(await items.ToListAsync());
         }
 
         public ActionResult UploadProducts()
         {
-            //ViewBag.CourseName = new SelectList(db.Courses, "CourseName", "CourseName");
+            //ViewBag.CourseName = new SelectList(_db.Courses, "CourseName", "CourseName");
             return View();
         }
 
@@ -180,7 +178,7 @@ namespace AdunbiKiddies.Controllers
 
                     for (int row = 2; row <= range.Rows.Count; row++)
                     {
-                        var productCount = db.Products.AsNoTracking().Count();
+                        var productCount = _db.Products.AsNoTracking().Count();
                         productCount += 1;
                         int id = int.Parse(((Excel.Range)range.Cells[row, 1]).Text);
                         int cat = int.Parse(((Excel.Range)range.Cells[row, 2]).Text);
@@ -198,8 +196,8 @@ namespace AdunbiKiddies.Controllers
                             Price = price,
 
                         };
-                        db.Products.Add(newProduct);
-                        await db.SaveChangesAsync();
+                        _db.Products.Add(newProduct);
+                        await _db.SaveChangesAsync();
                     }
                     workbook.Close(0);
                     application.Quit();
@@ -216,7 +214,7 @@ namespace AdunbiKiddies.Controllers
 
         public PartialViewResult Menu()
         {
-            IEnumerable<string> categories = db.Categories.Select(s => s.Name)
+            IEnumerable<string> categories = _db.Categories.Select(s => s.Name)
                                                             .OrderBy(s => s);
             return PartialView(categories);
         }
@@ -228,7 +226,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product item = await db.Products.FindAsync(id);
+            Product item = await _db.Products.FindAsync(id);
             if (item == null)
             {
                 return HttpNotFound();
@@ -242,7 +240,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product item = await db.Products.FindAsync(id);
+            Product item = await _db.Products.FindAsync(id);
             if (item == null)
             {
                 return HttpNotFound();
@@ -254,7 +252,7 @@ namespace AdunbiKiddies.Controllers
         //[Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name").ToList();
+            ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name").ToList();
             return View();
         }
 
@@ -265,7 +263,7 @@ namespace AdunbiKiddies.Controllers
         public async Task<ActionResult> Create(Product product)
         {
 
-            var productCount = db.Products.AsNoTracking().Count();
+            var productCount = _db.Products.AsNoTracking().Count();
             productCount += 1;
             string generatedBarcode = $"DC Cat{product.CategoryId} item{productCount}";
             //Zen.Barcode.Code128BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.Code128WithChecksum;
@@ -278,12 +276,13 @@ namespace AdunbiKiddies.Controllers
                 Price = product.Price,
                 InternalImage = product.InternalImage,
                 ItemPictureUrl = product.ItemPictureUrl,
+                MerchantId = merchantId
 
             };
-            db.Products.Add(myProduct);
-            await db.SaveChangesAsync();
+            _db.Products.Add(myProduct);
+            await _db.SaveChangesAsync();
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", product.CategoryId);
+            ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name", product.CategoryId);
             if (User.IsInRole("Admin"))
             {
                 return RedirectToAction("AdminIndex");
@@ -299,12 +298,12 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product item = await db.Products.FindAsync(id);
+            Product item = await _db.Products.FindAsync(id);
             if (item == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", item.CategoryId);
+            ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name", item.CategoryId);
             return View(item);
         }
 
@@ -318,7 +317,7 @@ namespace AdunbiKiddies.Controllers
             //string cat = product.CategoriesId.ToString();
             //string price = product.Price.ToString();
             //string GeneratedBarcode = "Ad" + name + cat + price;
-            //var productCount = db.Products.AsNoTracking().Count();
+            //var productCount = _db.Products.AsNoTracking().Count();
             //productCount += 1;
             //string generatedBarcode = $"DC Cat{product.CategoryId} item{productCount}";
 
@@ -326,19 +325,19 @@ namespace AdunbiKiddies.Controllers
             //byte[] generatedImage = ImageTobyteArray(barcode.Draw(product.Barcode, 50));
             if (ModelState.IsValid)
             {
-                Product myProduct = await db.Products.FindAsync(product.ProductId);
+                Product myProduct = await _db.Products.FindAsync(product.ProductId);
 
                 myProduct.CategoryId = product.CategoryId;
                 myProduct.Name = product.Name;
                 myProduct.Price = product.Price;
                 myProduct.InternalImage = product.InternalImage;
                 myProduct.ItemPictureUrl = product.ItemPictureUrl;
+                myProduct.MerchantId = merchantId;
 
+                //_db.Products.Add(myProduct);
+                await _db.SaveChangesAsync();
 
-                //db.Products.Add(myProduct);
-                await db.SaveChangesAsync();
-
-                ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", product.CategoryId);
+                ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name", product.CategoryId);
             }
             return RedirectToAction("Index");
         }
@@ -351,7 +350,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product item = await db.Products.FindAsync(id);
+            Product item = await _db.Products.FindAsync(id);
             if (item == null)
             {
                 return HttpNotFound();
@@ -365,15 +364,15 @@ namespace AdunbiKiddies.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Product item = await db.Products.FindAsync(id);
-            db.Products.Remove(item);
-            await db.SaveChangesAsync();
+            Product item = await _db.Products.FindAsync(id);
+            _db.Products.Remove(item);
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        public async Task<ActionResult> RenderImage(int id)
+        public async Task<ActionResult> RenderImage(int ProductId)
         {
-            Product item = await db.Products.FindAsync(id);
+            Product item = await _db.Products.FindAsync(ProductId);
 
             byte[] photoBack = item.InternalImage;
 
@@ -382,7 +381,7 @@ namespace AdunbiKiddies.Controllers
 
         //public async Task<ActionResult> RenderBarcode(int id)
         //{
-        //    Product item = await db.Products.FindAsync(id);
+        //    Product item = await _db.Products.FindAsync(id);
 
         //    byte[] photoBack = item.BarcodeImage;
 
@@ -402,7 +401,7 @@ namespace AdunbiKiddies.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

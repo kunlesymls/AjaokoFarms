@@ -1,7 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using AdunbiKiddies.ViewModels
+@{
+    BaseViewModel Model = (BaseViewModel)ViewBag.LayoutViewModel;
+
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>@ViewBag.Title - Designer's Choice</title>
+    <title>@ViewBag.Title - Ajaoko Farm</title>
 
     <!-- BEGIN META -->
     <meta charset="utf-8">
@@ -40,8 +46,8 @@
 
                             @*<img class="img-circle" src="~/Images/k1.jpg" />*@
                             @*<img src="~/Images/adunbilogo.png" />*@
-                            <img class="img-responsive" src="~/Images/DcLogo1 (1).jpg" />
-                            @*<span class="text-lg text-bold text-primary"><strong>Adunbi Kiddies</strong> </span>*@
+                            @*<img class="img-responsive" src="~/Images/DcLogo1 (1).jpg" />*@
+                            <span class="text-lg text-bold text-primary"><strong>@Model.Alias</strong> </span>
                         </a>
                     </div>
                 </li>

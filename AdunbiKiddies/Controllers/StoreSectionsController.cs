@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using AdunbiKiddies.Models;
 using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using AdunbiKiddies.Models;
 
 namespace AdunbiKiddies.Controllers
 {
-    public class StoreSectionsController : Controller
+    public class StoreSectionsController : BaseController
     {
-        private AjaoOkoDb db = new AjaoOkoDb();
-
         // GET: StoreSections
         public async Task<ActionResult> Index()
         {
-            return View(await db.StoreSections.ToListAsync());
+            return View(await _db.StoreSections.ToListAsync());
         }
 
         // GET: StoreSections/Details/5
@@ -28,7 +21,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StoreSection storeSection = await db.StoreSections.FindAsync(id);
+            StoreSection storeSection = await _db.StoreSections.FindAsync(id);
             if (storeSection == null)
             {
                 return HttpNotFound();
@@ -51,8 +44,8 @@ namespace AdunbiKiddies.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.StoreSections.Add(storeSection);
-                await db.SaveChangesAsync();
+                _db.StoreSections.Add(storeSection);
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +59,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StoreSection storeSection = await db.StoreSections.FindAsync(id);
+            StoreSection storeSection = await _db.StoreSections.FindAsync(id);
             if (storeSection == null)
             {
                 return HttpNotFound();
@@ -83,8 +76,8 @@ namespace AdunbiKiddies.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(storeSection).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _db.Entry(storeSection).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(storeSection);
@@ -97,7 +90,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StoreSection storeSection = await db.StoreSections.FindAsync(id);
+            StoreSection storeSection = await _db.StoreSections.FindAsync(id);
             if (storeSection == null)
             {
                 return HttpNotFound();
@@ -110,9 +103,9 @@ namespace AdunbiKiddies.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            StoreSection storeSection = await db.StoreSections.FindAsync(id);
-            db.StoreSections.Remove(storeSection);
-            await db.SaveChangesAsync();
+            StoreSection storeSection = await _db.StoreSections.FindAsync(id);
+            _db.StoreSections.Remove(storeSection);
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -120,7 +113,7 @@ namespace AdunbiKiddies.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

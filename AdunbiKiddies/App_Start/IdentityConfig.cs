@@ -1,4 +1,5 @@
 ﻿using AdunbiKiddies.Models;
+using AdunbiKiddies.SMS_Service;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -9,7 +10,6 @@ using System.Configuration;
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using AdunbiKiddies.SMS_Service;
 
 namespace AdunbiKiddies
 {
@@ -18,9 +18,10 @@ namespace AdunbiKiddies
         public async Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            string schoolName = ConfigurationManager.AppSettings["SchoolName"];
+            // string schoolName = ConfigurationManager.AppSettings["SchoolName"];
+            string schoolName = "AJAOKO";
             string emailsetting = ConfigurationManager.AppSettings["GmailUserName"];
-            MailMessage email = new MailMessage(new MailAddress($"noreply{emailsetting}", $"(Daily Sales for {DateTime.Now.ToShortDateString()}, do not reply)"),
+            MailMessage email = new MailMessage(new MailAddress($"noreply{emailsetting}", $"(AJAOKO{DateTime.Now.ToShortDateString()}, do not reply)"),
                 new MailAddress(message.Destination));
 
             email.Subject = message.Subject;

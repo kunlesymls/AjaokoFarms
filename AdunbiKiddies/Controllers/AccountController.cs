@@ -14,17 +14,19 @@ namespace AdunbiKiddies.Controllers
     //[Authorize]
     public class AccountController : Controller
     {
-        private AjaoOkoDb db = new AjaoOkoDb();
+        private readonly AjaoOkoDb _db;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public AccountController()
         {
+            _db = new AjaoOkoDb();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
+            _db = new AjaoOkoDb();
             SignInManager = signInManager;
         }
 
@@ -116,6 +118,61 @@ namespace AdunbiKiddies.Controllers
             }
         }
 
+        //GET: Account/RegisterMerchant
+        public ActionResult RegisterMerchant()
+        {
+            return View();
+        }
+
+        // POST: /Account/RegisterMerchant
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterMerchant(RegisterMerchantVm model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = model.Username,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    MiddleName = model.MiddleName,
+                    LastName = model.LastName,
+
+                };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    var merchant = new Merchant
+                    {
+                        MerchantId = user.Id,
+                        FirstName = model.FirstName,
+                        MiddleName = model.MiddleName,
+                        LastName = model.LastName,
+                        Email = model.Email
+                    };
+                    _db.Merchants.Add(merchant);
+                    await _db.SaveChangesAsync();
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                    //For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    //Assign Role to user Here 
+                    await this.UserManager.AddToRoleAsync(user.Id, "Admin");
+                    return RedirectToAction("Registration", "Account");
+                }
+
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -139,7 +196,7 @@ namespace AdunbiKiddies.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var user = db.Users.Where(c => c.Email.Equals(model.Email)).SingleOrDefault(); //Where db is an application instance
+            var user = _db.Users.SingleOrDefault(c => c.Email.Equals(model.Email)); //Where db is an application instance
             var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -206,7 +263,7 @@ namespace AdunbiKiddies.Controllers
         //[Authorize(Roles = "Admin")]
         public ActionResult Register()
         {
-            ViewBag.Name = new SelectList(db.Roles.ToList(), "Name", "Name");
+            ViewBag.Name = new SelectList(_db.Roles.ToList(), "Name", "Name");
             return View();
         }
 
@@ -250,6 +307,12 @@ namespace AdunbiKiddies.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+
+        public ActionResult Registration()
+        {
+            return View();
         }
 
         //
@@ -561,5 +624,7 @@ namespace AdunbiKiddies.Controllers
             }
         }
         #endregion
+
+
     }
 }
