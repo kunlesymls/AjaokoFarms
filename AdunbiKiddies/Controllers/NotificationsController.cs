@@ -8,7 +8,7 @@ using AdunbiKiddies.SMS_Service;
 
 namespace AdunbiKiddies.Controllers
 {
-    public class NotificationsController : Controller
+    public class NotificationsController : BaseController
     {
         private readonly SmsServiceTemp _smsService;
 

@@ -19,9 +19,9 @@ using System.Web.Mvc;
 namespace AdunbiKiddies.Controllers
 {
     [Authorize]
-    public class SalesController : Controller
+    public class SalesController : BaseController
     {
-        private AjaoOkoDb db = new AjaoOkoDb();
+       
 
         // GET: Sales
         public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
@@ -46,14 +46,14 @@ namespace AdunbiKiddies.Controllers
 
             if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
-                sales = await db.Sales.ToListAsync();
+                sales = await _db.Sales.ToListAsync();
             }
             else
             {
-                sales = db.Sales.Where(s => s.SalesRepName.Equals(checkName));
+                sales = _db.Sales.Where(s => s.SalesRepName.Equals(checkName));
             }
 
-            //var sales = from o in db.Sales
+            //var sales = from o in _db.Sales
             //            select o;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -84,7 +84,7 @@ namespace AdunbiKiddies.Controllers
             int pageNumber = (page ?? 1);
             return View(sales.ToPagedList(pageNumber, pageSize));
 
-            //return View(await db.Orders.ToListAsync());
+            //return View(await _db.Orders.ToListAsync());
         }
 
         public async Task<ActionResult> DailySales(string sortOrder, string currentFilter, DailySales dailysales, int? page)
@@ -115,14 +115,14 @@ namespace AdunbiKiddies.Controllers
 
             if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
-                sales = await db.Sales.AsNoTracking().ToListAsync();
+                sales = await _db.Sales.AsNoTracking().ToListAsync();
             }
             else
             {
-                sales = db.Sales.AsNoTracking().Where(s => s.SalesRepName.Equals(checkName));
+                sales = _db.Sales.AsNoTracking().Where(s => s.SalesRepName.Equals(checkName));
             }
 
-            //var sales = from o in db.Sales
+            //var sales = from o in _db.Sales
             //            select o;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -158,7 +158,7 @@ namespace AdunbiKiddies.Controllers
             int pageNumber = (page ?? 1);
             return View(sales.ToPagedList(pageNumber, pageSize));
 
-            //return View(await db.Orders.ToListAsync());
+            //return View(await _db.Orders.ToListAsync());
         }
 
         public ActionResult DailyDate()
@@ -173,8 +173,8 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sale sales = await db.Sales.FindAsync(id);
-            var saleDetails = db.SaleDetails.Where(x => x.SaleId == id);
+            Sale sales = await _db.Sales.FindAsync(id);
+            var saleDetails = _db.SaleDetails.Where(x => x.SaleId == id);
 
             sales.SaleDetails = await saleDetails.ToListAsync();
             if (sales == null)
@@ -201,8 +201,8 @@ namespace AdunbiKiddies.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Sales.Add(sale);
-                await db.SaveChangesAsync();
+                _db.Sales.Add(sale);
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             ViewBag.SalesRepName = User.Identity.GetUserName();
@@ -220,7 +220,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sale sales = await db.Sales.FindAsync(id);
+            Sale sales = await _db.Sales.FindAsync(id);
             ViewBag.SalesRepName = User.Identity.GetUserName();
             DateTime datetime = new DateTime();
             datetime = DateTime.Now.Date;
@@ -240,8 +240,8 @@ namespace AdunbiKiddies.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sale).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _db.Entry(sale).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             ViewBag.SalesRepName = User.Identity.GetUserName();
@@ -259,7 +259,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sale sales = await db.Sales.FindAsync(id);
+            Sale sales = await _db.Sales.FindAsync(id);
             if (sales == null)
             {
                 return HttpNotFound();
@@ -273,20 +273,20 @@ namespace AdunbiKiddies.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Sale sales = await db.Sales.FindAsync(id);
-            db.Sales.Remove(sales);
-            await db.SaveChangesAsync();
+            Sale sales = await _db.Sales.FindAsync(id);
+            _db.Sales.Remove(sales);
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
         public async Task DownloadDailyReport()
         {
-            //var facilityList = Db.Communications.AsNoTracking().ToList();
+            //var facilityList = _db.Communications.AsNoTracking().ToList();
             string productBuilder = String.Empty;
             string quantityBuilder = String.Empty;
             string repName = User.Identity.GetUserName();
 
-            var dailySales = await db.Sales.AsNoTracking().Include(i => i.SaleDetails)
+            var dailySales = await _db.Sales.AsNoTracking().Include(i => i.SaleDetails)
                 .Where(x => x.SaleDate.Year == DateTime.Now.Year
                             && x.SaleDate.Month == DateTime.Now.Month
                             && x.SaleDate.Day == DateTime.Now.Day)
@@ -346,7 +346,7 @@ namespace AdunbiKiddies.Controllers
             decimal total = 0;
 
             var emailVm = new EmailVm();
-            var dailySales = await db.Sales.AsNoTracking().Include(i => i.SaleDetails)
+            var dailySales = await _db.Sales.AsNoTracking().Include(i => i.SaleDetails)
                 .Where(x => x.SaleDate.Year == DateTime.Now.Year
                             && x.SaleDate.Month == DateTime.Now.Month
                             && x.SaleDate.Day == DateTime.Now.Day)
@@ -389,7 +389,7 @@ namespace AdunbiKiddies.Controllers
             }
             rows.Append("</table>");
 
-            var items = await db.Products.AsNoTracking().Include(i => i.Category).ToListAsync();
+            var items = await _db.Products.AsNoTracking().Include(i => i.Category).ToListAsync();
             string itemLeft = "<br/><br ><br >" +
                               $"<strong>List of Product/Items that are less than three in Stock as at {DateTime.Now.ToShortDateString()}</strong>" +
                               "<br > you can find breakup below " +
@@ -469,7 +469,7 @@ namespace AdunbiKiddies.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

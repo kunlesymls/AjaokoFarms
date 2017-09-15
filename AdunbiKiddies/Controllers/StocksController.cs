@@ -10,14 +10,14 @@ namespace AdunbiKiddies.Controllers
     [Authorize(Roles = "Admin, Stock Manager")]
     public class StocksController : Controller
     {
-        private AjaoOkoDb db = new AjaoOkoDb();
+        private AjaoOkoDb _db = new AjaoOkoDb();
 
         // GET: Stocks
         public async Task<ActionResult> Index(string val1, string val2)
         {
             ViewBag.Message1 = val1;
             ViewBag.Message2 = val2;
-            return View(await db.Stocks.ToListAsync());
+            return View(await _db.Stocks.ToListAsync());
         }
 
         // GET: Stocks/Details/5
@@ -27,7 +27,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stock stock = await db.Stocks.FindAsync(id);
+            Stock stock = await _db.Stocks.FindAsync(id);
             if (stock == null)
             {
                 return HttpNotFound();
@@ -38,7 +38,7 @@ namespace AdunbiKiddies.Controllers
         // GET: Stocks/Create
         public ActionResult Create()
         {
-            ViewBag.Name = new SelectList(db.Products, "ProductId", "Name");
+            ViewBag.Name = new SelectList(_db.Products, "ProductId", "Name");
             ViewBag.StaffName = User.Identity.GetUserName().ToString();
             return View();
         }
@@ -54,11 +54,11 @@ namespace AdunbiKiddies.Controllers
             string messag2 = "";
             if (ModelState.IsValid)
             {
-                db.Stocks.Add(stock);
+                _db.Stocks.Add(stock);
                 //User myUser = myDBContext.Users.SingleOrDefault(user => user.Username == username);
-                //var user = db.Users.Where(c => c.Email.Equals(model.Email)).SingleOrDefault();
-                //Product product = await db.Products.FindAsync(int.Parse(stock.Name));
-                Product product = await db.Products.SingleOrDefaultAsync(s => s.ProductId.Equals(stock.Name));
+                //var user = _db.Users.Where(c => c.Email.Equals(model.Email)).SingleOrDefault();
+                //Product product = await _db.Products.FindAsync(int.Parse(stock.Name));
+                Product product = await _db.Products.SingleOrDefaultAsync(s => s.ProductId.Equals(stock.Name));
                 if (product == null)
                 {
                     return HttpNotFound();
@@ -94,8 +94,8 @@ namespace AdunbiKiddies.Controllers
                 else
                 {
                     messag1 = "Successfully Updated";
-                    db.Entry(product).State = EntityState.Modified;
-                    await db.SaveChangesAsync();
+                    _db.Entry(product).State = EntityState.Modified;
+                    await _db.SaveChangesAsync();
                     return RedirectToAction("Index", new { val1 = messag1 });
                 }
 
@@ -113,7 +113,7 @@ namespace AdunbiKiddies.Controllers
         //    {
         //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         //    }
-        //    Stock stock = await db.Stocks.FindAsync(id);
+        //    Stock stock = await _db.Stocks.FindAsync(id);
         //    if (stock == null)
         //    {
         //        return HttpNotFound();
@@ -130,8 +130,8 @@ namespace AdunbiKiddies.Controllers
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        db.Entry(stock).State = EntityState.Modified;
-        //        await db.SaveChangesAsync();
+        //        _db.Entry(stock).State = EntityState.Modified;
+        //        await _db.SaveChangesAsync();
         //        return RedirectToAction("Index");
         //    }
         //    return View(stock);
@@ -144,7 +144,7 @@ namespace AdunbiKiddies.Controllers
         //    {
         //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         //    }
-        //    Stock stock = await db.Stocks.FindAsync(id);
+        //    Stock stock = await _db.Stocks.FindAsync(id);
         //    if (stock == null)
         //    {
         //        return HttpNotFound();
@@ -157,9 +157,9 @@ namespace AdunbiKiddies.Controllers
         //[ValidateAntiForgeryToken]
         //public async Task<ActionResult> DeleteConfirmed(int id)
         //{
-        //    Stock stock = await db.Stocks.FindAsync(id);
-        //    db.Stocks.Remove(stock);
-        //    await db.SaveChangesAsync();
+        //    Stock stock = await _db.Stocks.FindAsync(id);
+        //    _db.Stocks.Remove(stock);
+        //    await _db.SaveChangesAsync();
         //    return RedirectToAction("Index");
         //}
 
@@ -167,7 +167,7 @@ namespace AdunbiKiddies.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

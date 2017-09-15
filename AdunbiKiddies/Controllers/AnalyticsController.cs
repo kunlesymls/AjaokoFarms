@@ -12,15 +12,15 @@ using AdunbiKiddies.ViewModels;
 
 namespace AdunbiKiddies.Controllers
 {
-    public class AnalyticsController : Controller
+    public class AnalyticsController : BaseController
     {
-        private AjaoOkoDb db = new AjaoOkoDb();
+        private AjaoOkoDb _db = new AjaoOkoDb();
         AnalyticsViewModel vm = new AnalyticsViewModel();
 
         // GET: Analytics
         public async Task<ActionResult> Index()
         {
-            var data = (from sales in db.Sales
+            var data = (from sales in _db.Sales
                        group sales by sales.SaleDate into dateGroup
                        select new SaleDateGroup()
                        {
@@ -28,7 +28,7 @@ namespace AdunbiKiddies.Controllers
                             SaleCount = dateGroup.Count()
                        }).Take(10);
 
-            var allData = (from sales in db.Sales
+            var allData = (from sales in _db.Sales
                         group sales by sales.SaleDate into dateGroup
                         select new SaleDateGroup()
                         {
@@ -41,7 +41,7 @@ namespace AdunbiKiddies.Controllers
             vm.SaleDataForToday = await allData.ToListAsync();
 
             // Commenting out LINQ to show how to do the same thing in SQL.
-            //IQueryable<EnrollmentDateGroup> = from student in db.Students
+            //IQueryable<EnrollmentDateGroup> = from student in _db.Students
             //           group student by student.EnrollmentDate into dateGroup
             //           select new EnrollmentDateGroup()
             //           {
@@ -54,7 +54,7 @@ namespace AdunbiKiddies.Controllers
             //    + "FROM Person "
             //    + "WHERE Discriminator = 'Student' "
             //    + "GROUP BY EnrollmentDate";
-            //IEnumerable<Order> data = db.Database.SqlQuery<Order>(query);
+            //IEnumerable<Order> data = _db.Database.SqlQuery<Order>(query);
 
 
             return View(vm);
@@ -67,7 +67,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sale sale = await db.Sales.FindAsync(id);
+            Sale sale = await _db.Sales.FindAsync(id);
             if (sale == null)
             {
                 return HttpNotFound();
@@ -88,8 +88,8 @@ namespace AdunbiKiddies.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Sales.Add(sale);
-                await db.SaveChangesAsync();
+                _db.Sales.Add(sale);
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -103,7 +103,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sale sale = await db.Sales.FindAsync(id);
+            Sale sale = await _db.Sales.FindAsync(id);
             if (sale == null)
             {
                 return HttpNotFound();
@@ -118,8 +118,8 @@ namespace AdunbiKiddies.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sale).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _db.Entry(sale).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(sale);
@@ -132,7 +132,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sale order = await db.Sales.FindAsync(id);
+            Sale order = await _db.Sales.FindAsync(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -145,9 +145,9 @@ namespace AdunbiKiddies.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Sale sale = await db.Sales.FindAsync(id);
-            db.Sales.Remove(sale);
-            await db.SaveChangesAsync();
+            Sale sale = await _db.Sales.FindAsync(id);
+            _db.Sales.Remove(sale);
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -161,7 +161,7 @@ namespace AdunbiKiddies.Controllers
 
         private List<SaleDateGroup> GetData()
         {
-            var allData = (from sales in db.Sales
+            var allData = (from sales in _db.Sales
                            group sales by sales.SaleDate into dateGroup
                            select new SaleDateGroup()
                            {
@@ -186,7 +186,7 @@ namespace AdunbiKiddies.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

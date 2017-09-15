@@ -11,7 +11,7 @@ using AdunbiKiddies.SMS_Service;
 namespace AdunbiKiddies.Controllers
 {
     [Authorize]
-    public class CheckoutController : Controller
+    public class CheckoutController : BaseController
     {
         private AjaoOkoDb storeDB;
         private readonly SmsServiceTemp _smsService;

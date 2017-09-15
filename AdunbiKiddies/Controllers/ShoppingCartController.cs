@@ -3,13 +3,11 @@ using AdunbiKiddies.ViewModel;
 using System.Linq;
 using System.Web.Mvc;
 
-namespace OpenOrderFramework.Controllers
+namespace AdunbiKiddies.Controllers
 {
     [Authorize]
-    public class ShoppingCartController : Controller
+    public class ShoppingCartController : BaseController
     {
-
-        AjaoOkoDb storeDB = new AjaoOkoDb();
         //
         // GET: /ShoppingCart/
         public ActionResult Index()
@@ -31,7 +29,7 @@ namespace OpenOrderFramework.Controllers
         public ActionResult AddToCart(int id)
         {
             // Retrieve the item from the database
-            var addedItem = storeDB.Products
+            var addedItem = _db.Products
                 .Single(item => item.ProductId == id);
 
             // Add it to the shopping cart
@@ -65,7 +63,7 @@ namespace OpenOrderFramework.Controllers
             // Get the name of the item to display confirmation
 
             // Get the name of the album to display confirmation
-            string itemName = storeDB.Products
+            string itemName = _db.Products
                 .Single(item => item.ProductId == id).Name;
 
             // Remove from cart

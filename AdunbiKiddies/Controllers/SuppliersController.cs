@@ -9,12 +9,12 @@ namespace AdunbiKiddies.Controllers
     [Authorize]
     public class SuppliersController : Controller
     {
-        private AjaoOkoDb db = new AjaoOkoDb();
+        private AjaoOkoDb _db = new AjaoOkoDb();
 
         // GET: Suppliers
         public async Task<ActionResult> Index()
         {
-            return View(await db.Suppliers.ToListAsync());
+            return View(await _db.Suppliers.ToListAsync());
         }
 
         // GET: Suppliers/Details/5
@@ -24,7 +24,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Supplier supplier = await db.Suppliers.FindAsync(id);
+            Supplier supplier = await _db.Suppliers.FindAsync(id);
             if (supplier == null)
             {
                 return HttpNotFound();
@@ -35,7 +35,7 @@ namespace AdunbiKiddies.Controllers
         // GET: Suppliers/Create
         public ActionResult Create()
         {
-            ViewBag.Products = new MultiSelectList(db.Products, "ID", "Name");
+            ViewBag.Products = new MultiSelectList(_db.Products, "ID", "Name");
             return View();
         }
 
@@ -50,14 +50,14 @@ namespace AdunbiKiddies.Controllers
             {
                 foreach (var ID in products)
                 {
-                    Product product = db.Products.Find(ID);
+                    Product product = _db.Products.Find(ID);
                     supplier.Products.Add(product);
                 }
             }
-            db.Suppliers.Add(supplier);
-            await db.SaveChangesAsync();
+            _db.Suppliers.Add(supplier);
+            await _db.SaveChangesAsync();
 
-            return View("Index", db.Suppliers);
+            return View("Index", _db.Suppliers);
         }
 
         // GET: Suppliers/Edit/5
@@ -67,7 +67,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Supplier supplier = await db.Suppliers.FindAsync(id);
+            Supplier supplier = await _db.Suppliers.FindAsync(id);
             if (supplier == null)
             {
                 return HttpNotFound();
@@ -84,8 +84,8 @@ namespace AdunbiKiddies.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(supplier).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _db.Entry(supplier).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(supplier);
@@ -98,7 +98,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Supplier supplier = await db.Suppliers.FindAsync(id);
+            Supplier supplier = await _db.Suppliers.FindAsync(id);
             if (supplier == null)
             {
                 return HttpNotFound();
@@ -111,9 +111,9 @@ namespace AdunbiKiddies.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Supplier supplier = await db.Suppliers.FindAsync(id);
-            db.Suppliers.Remove(supplier);
-            await db.SaveChangesAsync();
+            Supplier supplier = await _db.Suppliers.FindAsync(id);
+            _db.Suppliers.Remove(supplier);
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -121,7 +121,7 @@ namespace AdunbiKiddies.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

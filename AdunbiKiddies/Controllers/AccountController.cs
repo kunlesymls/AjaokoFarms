@@ -12,7 +12,7 @@ using System.Web.Mvc;
 namespace AdunbiKiddies.Controllers
 {
     //[Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly AjaoOkoDb _db;
         private ApplicationSignInManager _signInManager;
@@ -196,7 +196,7 @@ namespace AdunbiKiddies.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var user = _db.Users.SingleOrDefault(c => c.Email.Equals(model.Email)); //Where db is an application instance
+            var user = _db.Users.SingleOrDefault(c => c.Email.Equals(model.Email)); //Where _db is an application instance
             var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {

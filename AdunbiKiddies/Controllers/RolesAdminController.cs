@@ -6,13 +6,13 @@ using System.Web.Mvc;
 namespace AdunbiKiddies.Controllers
 {
     //[Authorize(Roles = "Admin")]
-    public class RolesAdminController : Controller
+    public class RolesAdminController : BaseController
     {
-        AjaoOkoDb db;
+        AjaoOkoDb _db;
 
         public RolesAdminController()
         {
-            db = new AjaoOkoDb();
+            _db = new AjaoOkoDb();
         }
 
 
@@ -23,7 +23,7 @@ namespace AdunbiKiddies.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            var Roles = db.Roles.ToList();
+            var Roles = _db.Roles.ToList();
             return View(Roles);
         }
 
@@ -45,8 +45,8 @@ namespace AdunbiKiddies.Controllers
         [HttpPost]
         public ActionResult Create(IdentityRole Role)
         {
-            db.Roles.Add(Role);
-            db.SaveChanges();
+            _db.Roles.Add(Role);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
     }
