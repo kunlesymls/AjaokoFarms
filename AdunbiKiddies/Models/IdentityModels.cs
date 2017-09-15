@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using OpenOrderFramework.Models;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -45,5 +46,6 @@ namespace AdunbiKiddies.Models
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<StoreSection> StoreSections { get; set; }
         public DbSet<Merchant> Merchants { get; set; }
+        public DbSet<ProfessionalWorker> ProfessionalWorkers { get; set; }
     }
 }

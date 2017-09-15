@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using AdunbiKiddies.Models;
+using System.Collections.Generic;
 
 namespace OpenOrderFramework.Models
 {
-    public class ProfessionalWorker
+    public class ProfessionalWorker : Person
     {
         public string ProfessionalWorkerId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string MiddleName { get; set; }
-        public string CompanyName { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Email { get; set; }
+        public string HighestQualification { get; set; }
         public virtual ICollection<ProfessionalPayment> ProfessionalPayments { get; set; }
+        public virtual ICollection<ProfessionalAddress> ProfessionalAddresses { get; set; }
+        public virtual ICollection<ProfessionalDocument> ProfessionalDocuments { get; set; }
     }
 
     public class ProfessionalPayment
@@ -20,6 +18,27 @@ namespace OpenOrderFramework.Models
         public string ProfessionalWorkerId { get; set; }
         public decimal Amount { get; set; }
         public decimal AmountPaid { get; set; }
+        public virtual ProfessionalWorker ProfessionalWorker { get; set; }
+    }
+
+    public class ProfessionalQualification
+    {
+        public int ProfessionalQualificationId { get; set; }
+        public string ProfessionalWorkerId { get; set; }
+
+        public string WorkingExperince { get; set; }
+        public string ProjectDescription { get; set; }
+        public string ShortBio { get; set; }
+        public virtual ProfessionalWorker ProfessionalWorker { get; set; }
+
+    }
+
+    public class ProfessionalDocument
+    {
+        public int ProfessionalDocumentId { get; set; }
+        public string ProfessionalWorkerId { get; set; }
+        public string FileName { get; set; }
+        public string FileLocation { get; set; }
         public virtual ProfessionalWorker ProfessionalWorker { get; set; }
     }
 }
