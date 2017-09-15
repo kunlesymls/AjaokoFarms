@@ -1,7 +1,7 @@
-using System.Linq;
 using AdunbiKiddies.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Linq;
 
 namespace AdunbiKiddies.Migrations
 {
@@ -11,7 +11,7 @@ namespace AdunbiKiddies.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
             AutomaticMigrationDataLossAllowed = true;
         }
 
@@ -26,32 +26,32 @@ namespace AdunbiKiddies.Migrations
                 manager.Create(role);
             }
 
-            if (!context.Roles.Any(r => r.Name == "StockManager"))
+            if (!context.Roles.Any(r => r.Name == "SuperAdmin"))
             {
                 var store = new RoleStore<IdentityRole>(context);
                 var manager = new RoleManager<IdentityRole>(store);
-                var role = new IdentityRole { Name = "StockManager" };
+                var role = new IdentityRole { Name = "SuperAdmin" };
 
                 manager.Create(role);
             }
 
-            if (!context.Roles.Any(r => r.Name == "SalesRep"))
+            if (!context.Roles.Any(r => r.Name == "Professional"))
             {
                 var store = new RoleStore<IdentityRole>(context);
                 var manager = new RoleManager<IdentityRole>(store);
-                var role = new IdentityRole { Name = "SalesRep" };
+                var role = new IdentityRole { Name = "Professional" };
 
                 manager.Create(role);
             }
 
-            if (!context.Users.Any(u => u.UserName == "Admin@gmail.com"))
+            if (!context.Users.Any(u => u.UserName == "SuperAdmin@ajaoko.com"))
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = "Admin@gmail.com", Email = "Admin@gmail.com", EmailConfirmed = true };
+                var user = new ApplicationUser { UserName = "SuperAdmin@ajaoko.com", Email = "SuperAdmin@ajaoko.com", EmailConfirmed = true };
 
                 manager.Create(user, "admin12345");
-                manager.AddToRole(user.Id, "Admin");
+                manager.AddToRole(user.Id, "SuperAdmin");
             }
             //  This method will be called after migrating to the latest version.
 
