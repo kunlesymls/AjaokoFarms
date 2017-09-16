@@ -28,5 +28,15 @@ namespace AdunbiKiddies.BusinessLogic
             _db?.Dispose();
             GC.SuppressFinalize(this);
         }
+
+        public int ConvertToKobo(int value)
+        {
+            return value * 100;
+        }
+
+        public int ConvertToNaira(int value)
+        {
+            return value / 100;
+        }
     }
 }

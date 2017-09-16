@@ -50,5 +50,7 @@ namespace AdunbiKiddies.Models
 
         public DbSet<PartnerShipAgreement> PartnerShipAgreements { get; set; }
         public DbSet<BankDetail> BankDetails { get; set; }
+
+        public System.Data.Entity.DbSet<OpenOrderFramework.Models.ProfessionalPayment> ProfessionalPayments { get; set; }
     }
 }

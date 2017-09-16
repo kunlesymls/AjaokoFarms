@@ -1,0 +1,47 @@
+﻿@model IEnumerable<OpenOrderFramework.Models.ProfessionalPayment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfessionalWorker.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountPaid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProfessionalWorker.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountPaid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        @*<td>
+        @Html.ActionLink("Edit", "Edit", new { id=item.ProfessionalPaymentId }) |
+        @Html.ActionLink("Details", "Details", new { id=item.ProfessionalPaymentId }) |
+        @Html.ActionLink("Delete", "Delete", new { id=item.ProfessionalPaymentId })
+    </td>*@
+    </tr>
+}
+
+</table>

@@ -161,6 +161,50 @@ namespace AdunbiKiddies.Models
 
     }
 
+    public class RegisterWorkerVm
+    {
+
+        [Display(Name = "First Name")]
+        [Required(ErrorMessage = "Your First name is required")]
+        [StringLength(40, ErrorMessage = "Your First name is too long")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Middle Name")]
+        [Required(ErrorMessage = "Your Middle name is required")]
+        [StringLength(40, ErrorMessage = "Your Middle name is too long")]
+        public string MiddleName { get; set; }
+
+        [Display(Name = "Last Name")]
+        [Required(ErrorMessage = "Your last name is required")]
+        [StringLength(40, ErrorMessage = "Your last name is too long")]
+        public string LastName { get; set; }
+
+        public string Username
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
+    }
+
     public class ResetPasswordViewModel
     {
         [Required]

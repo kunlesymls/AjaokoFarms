@@ -1,4 +1,5 @@
 ﻿using AdunbiKiddies.Models;
+using System;
 using System.Collections.Generic;
 
 namespace OpenOrderFramework.Models
@@ -16,6 +17,21 @@ namespace OpenOrderFramework.Models
     {
         public int ProfessionalPaymentId { get; set; }
         public string ProfessionalWorkerId { get; set; }
+        public DateTime PaymentDateTime { get; set; }
+        public bool IsPayed { get; set; }
+
+        public string Status
+        {
+            get
+            {
+                if (IsPayed)
+                {
+                    return "Payment Confirmed";
+                }
+                return "Payment Not Received";
+            }
+            set { }
+        }
         public decimal Amount { get; set; }
         public decimal AmountPaid { get; set; }
         public virtual ProfessionalWorker ProfessionalWorker { get; set; }

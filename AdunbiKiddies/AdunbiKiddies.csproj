@@ -109,6 +109,9 @@
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PayStack.Net, Version=0.6.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayStack.Net.0.6.6\lib\net45\PayStack.Net.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
       <Private>True</Private>
@@ -170,6 +173,9 @@
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="XtremeIT.Library.Pins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5f275dd942b1b995, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayStack.Net.0.6.6\lib\net45\XtremeIT.Library.Pins.dll</HintPath>
+    </Reference>
     <Reference Include="Zen.Barcode.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b5ae55aa76d2d9de, processorArchitecture=MSIL">
       <HintPath>..\packages\Zen.Barcode.Core.2.0.0\lib\net45\Zen.Barcode.Core.dll</HintPath>
     </Reference>
@@ -211,6 +217,7 @@
     <Compile Include="Controllers\MerchantsController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ProfessionalPaymentsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\SalesController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
@@ -236,6 +243,14 @@
     <Compile Include="Migrations\201709160520515_CustomerDetails.cs" />
     <Compile Include="Migrations\201709160520515_CustomerDetails.Designer.cs">
       <DependentUpon>201709160520515_CustomerDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709160552166_AddingDateProfessionalPayment.cs" />
+    <Compile Include="Migrations\201709160552166_AddingDateProfessionalPayment.Designer.cs">
+      <DependentUpon>201709160552166_AddingDateProfessionalPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709160609219_addedfeildtoworkerpayment.cs" />
+    <Compile Include="Migrations\201709160609219_addedfeildtoworkerpayment.Designer.cs">
+      <DependentUpon>201709160609219_addedfeildtoworkerpayment.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -273,6 +288,7 @@
     <Compile Include="SMS Service\SmsServiceTemp.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\PaymentVm.cs" />
     <Compile Include="ViewModels\SaleDateGroup.cs" />
     <Compile Include="ViewModels\ShoppingCartRemoveViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
@@ -2279,6 +2295,12 @@
     <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
+    <Content Include="Views\Account\RegisterWorker.cshtml" />
+    <Content Include="Views\ProfessionalPayments\Create.cshtml" />
+    <Content Include="Views\ProfessionalPayments\Delete.cshtml" />
+    <Content Include="Views\ProfessionalPayments\Details.cshtml" />
+    <Content Include="Views\ProfessionalPayments\Edit.cshtml" />
+    <Content Include="Views\ProfessionalPayments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2304,6 +2326,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709160520515_CustomerDetails.resx">
       <DependentUpon>201709160520515_CustomerDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709160552166_AddingDateProfessionalPayment.resx">
+      <DependentUpon>201709160552166_AddingDateProfessionalPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709160609219_addedfeildtoworkerpayment.resx">
+      <DependentUpon>201709160609219_addedfeildtoworkerpayment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
