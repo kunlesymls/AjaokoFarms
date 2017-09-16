@@ -40,17 +40,17 @@ namespace AdunbiKiddies.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-            string checkName = User.Identity.GetUserName();
+            string checkName = User.Identity.GetUserId();
 
             IEnumerable<Sale> sales = new List<Sale>();
 
             if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
-                sales = await _db.Sales.ToListAsync();
+                sales = await _db.Sales.Include(i => i.Customer).AsNoTracking().ToListAsync();
             }
             else
             {
-                sales = _db.Sales.Where(s => s.SalesRepName.Equals(checkName));
+                sales = _db.Sales.Include(i => i.Customer).AsNoTracking().Where(s => s.CustomerId.Equals(checkName));
             }
 
             //var sales = from o in _db.Sales
@@ -58,13 +58,13 @@ namespace AdunbiKiddies.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                sales = sales.Where(s => s.FirstName.ToUpper().Contains(searchString.ToUpper())
-                                       || s.LastName.ToUpper().Contains(searchString.ToUpper()));
+                sales = sales.Where(s => s.Customer.FirstName.ToUpper().Contains(searchString.ToUpper())
+                                       || s.Customer.UserName.ToUpper().Contains(searchString.ToUpper()));
             }
             switch (sortOrder)
             {
                 case "name_desc":
-                    sales = sales.OrderByDescending(s => s.FirstName);
+                    sales = sales.OrderByDescending(s => s.Customer.UserName);
                     break;
 
                 case "Price":
@@ -76,7 +76,7 @@ namespace AdunbiKiddies.Controllers
                     break;
 
                 default:  // Name ascending
-                    sales = sales.OrderBy(s => s.FirstName);
+                    sales = sales.OrderBy(s => s.Customer.UserName);
                     break;
             }
 
@@ -108,7 +108,7 @@ namespace AdunbiKiddies.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-            string checkName = User.Identity.GetUserName();
+            string checkName = User.Identity.GetUserId();
             var todayDate = DateTime.Now.ToString("dd/MM/yyyy");
 
             IEnumerable<Sale> sales = new List<Sale>();
@@ -119,7 +119,7 @@ namespace AdunbiKiddies.Controllers
             }
             else
             {
-                sales = _db.Sales.AsNoTracking().Where(s => s.SalesRepName.Equals(checkName));
+                sales = _db.Sales.AsNoTracking().Where(s => s.CustomerId.Equals(checkName));
             }
 
             //var sales = from o in _db.Sales
@@ -138,7 +138,7 @@ namespace AdunbiKiddies.Controllers
             switch (sortOrder)
             {
                 case "name_desc":
-                    sales = sales.OrderByDescending(s => s.FirstName);
+                    sales = sales.OrderByDescending(s => s.Customer.UserName);
                     break;
 
                 case "Price":
@@ -150,7 +150,7 @@ namespace AdunbiKiddies.Controllers
                     break;
 
                 default:  // Name ascending
-                    sales = sales.OrderBy(s => s.FirstName);
+                    sales = sales.OrderBy(s => s.Customer.UserName);
                     break;
             }
 
@@ -284,16 +284,16 @@ namespace AdunbiKiddies.Controllers
             //var facilityList = _db.Communications.AsNoTracking().ToList();
             string productBuilder = String.Empty;
             string quantityBuilder = String.Empty;
-            string repName = User.Identity.GetUserName();
+            string repName = User.Identity.GetUserId();
 
-            var dailySales = await _db.Sales.AsNoTracking().Include(i => i.SaleDetails)
+            var dailySales = await _db.Sales.Include(i => i.SaleDetails).Include(i => i.Customer).AsNoTracking()
                 .Where(x => x.SaleDate.Year == DateTime.Now.Year
                             && x.SaleDate.Month == DateTime.Now.Month
                             && x.SaleDate.Day == DateTime.Now.Day)
                 .OrderBy(o => o.SaleDate).ToListAsync();
             if (Request.IsAuthenticated && User.IsInRole("SalesRep"))
             {
-                dailySales.Where(x => x.SalesRepName.Equals(repName));
+                dailySales.Where(x => x.CustomerId.Equals(repName));
             }
             decimal total = 0;
             char c1 = 'A';
@@ -313,9 +313,9 @@ namespace AdunbiKiddies.Controllers
 
             foreach (Sale sales in dailySales)
             {
-                worksheet.Cells[$"A{rowStart}"].Value = sales.SalesRepName;
-                worksheet.Cells[$"B{rowStart}"].Value = $"{sales.FirstName}  {sales.LastName}";
-                worksheet.Cells[$"C{rowStart}"].Value = sales.Phone;
+                worksheet.Cells[$"A{rowStart}"].Value = sales.Customer.Email;
+                worksheet.Cells[$"B{rowStart}"].Value = $"{sales.Customer.FullName}";
+                worksheet.Cells[$"C{rowStart}"].Value = sales.Customer.PhoneNumber;
                 foreach (var product in sales.SaleDetails.OrderBy(o => o.ProductId))
                 {
                     productBuilder += $"{product.Product.Name}, ";
@@ -346,7 +346,7 @@ namespace AdunbiKiddies.Controllers
             decimal total = 0;
 
             var emailVm = new EmailVm();
-            var dailySales = await _db.Sales.AsNoTracking().Include(i => i.SaleDetails)
+            var dailySales = await _db.Sales.Include(i => i.SaleDetails).Include(i => i.Customer).AsNoTracking()
                 .Where(x => x.SaleDate.Year == DateTime.Now.Year
                             && x.SaleDate.Month == DateTime.Now.Month
                             && x.SaleDate.Day == DateTime.Now.Day)
@@ -375,9 +375,9 @@ namespace AdunbiKiddies.Controllers
                     total += product.Quantity * product.UnitPrice;
                 }
                 rows.Append("<tr>" +
-                            $"<td>{sales.SalesRepName}</td>" +
-                            $"<td>{sales.LastName} {sales.FirstName}</td>" +
-                            $"<td>{sales.Phone}</td>" +
+                            $"<td>{sales.Customer.Email}</td>" +
+                            $"<td>{sales.Customer.FullName}</td>" +
+                            $"<td>{sales.Customer.PhoneNumber}</td>" +
                             $"<td>{productBuilder}</td>" +
                             $"<td>{quantityBuilder}</td>" +
                             $"<td>{total}</td>" +

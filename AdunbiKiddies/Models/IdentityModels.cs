@@ -48,6 +48,7 @@ namespace AdunbiKiddies.Models
         public DbSet<Merchant> Merchants { get; set; }
         public DbSet<ProfessionalWorker> ProfessionalWorkers { get; set; }
 
-        public System.Data.Entity.DbSet<OpenOrderFramework.Models.PartnerShipAgreement> PartnerShipAgreements { get; set; }
+        public DbSet<PartnerShipAgreement> PartnerShipAgreements { get; set; }
+        public DbSet<BankDetail> BankDetails { get; set; }
     }
 }

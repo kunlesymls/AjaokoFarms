@@ -1,4 +1,5 @@
 ﻿using AdunbiKiddies.Models;
+using AdunbiKiddies.SMS_Service;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Data.Entity;
@@ -6,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using AdunbiKiddies.SMS_Service;
 
 namespace AdunbiKiddies.Controllers
 {
@@ -52,7 +52,7 @@ namespace AdunbiKiddies.Controllers
 
             try
             {
-                sale.SalesRepName = User.Identity.Name;
+                sale.CustomerId = User.Identity.GetUserId();
                 sale.SaleDate = DateTime.Now;
                 var currentUserId = User.Identity.GetUserId();
 
@@ -68,7 +68,7 @@ namespace AdunbiKiddies.Controllers
 
                 //CheckoutController.SendOrderMessage(sale.FirstName, "New Order: " + sale.SaleId, sale.ToString(sale));
                 string body = "Thanks for patronizing us, We will get in touch with you soon";
-                SendMessage(body, sale.Phone);
+                SendMessage(body, sale.Customer.PhoneNumber);
                 return RedirectToAction("Complete",
                         new { id = sale.SaleId });
             }
@@ -86,7 +86,7 @@ namespace AdunbiKiddies.Controllers
             // Validate customer owns this order
             bool isValid = storeDB.Sales.Any(
                 o => o.SaleId == id &&
-                o.SalesRepName == User.Identity.Name);
+                o.CustomerId == User.Identity.GetUserId());
 
             if (isValid)
             {
