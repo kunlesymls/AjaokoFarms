@@ -16,7 +16,10 @@ namespace AdunbiKiddies.Models
         public string MerchantId { get; set; }
 
         [DisplayName("Category Name")]
+        [Required(ErrorMessage ="Please select a related category")]
         public int CategoryId { get; set; }
+
+       // public int SubCategoryId { get; set; }
 
         [Required(ErrorMessage = "An Product Name is required")]
         [StringLength(300)]
@@ -53,6 +56,15 @@ namespace AdunbiKiddies.Models
         }
 
         public string IsApproved { get; set; }
+
+        public DateTime DateAdded {
+
+            get {
+                var addednow = DateTime.Now;
+                return addednow;
+                }
+            set { }
+        }
         public int? StockQuantity { get; set; }
 
         public byte[] InternalImage { get; set; }
@@ -90,6 +102,7 @@ namespace AdunbiKiddies.Models
         public string ItemPictureUrl { get; set; }
         public virtual Merchant Merchant { get; set; }
         public virtual Category Category { get; set; }
+       // public virtual SubCategory SubCategory { get; set; }
         public virtual List<SaleDetail> SaleDetails { get; set; }
         public virtual ICollection<Stock> Stocks { get; set; }
 

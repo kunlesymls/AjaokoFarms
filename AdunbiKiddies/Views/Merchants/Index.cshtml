@@ -5,10 +5,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Index</h2>
 
-<table class="table table-responsive">
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
     <tr>
-       
+        <th>
+            @Html.DisplayNameFor(model => model.PartnerShipAgreement.WebisteLink)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PreferedStoreName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsReffered)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BusinessEntry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdCardName)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.RegistrationNo)
         </th>
@@ -30,7 +51,18 @@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
-    
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TownOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StateOfOrigin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nationality)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Passport)
         </th>
@@ -39,7 +71,24 @@
 
 @foreach (var item in Model) {
     <tr>
-    
+        <td>
+            @Html.DisplayFor(modelItem => item.PartnerShipAgreement.WebisteLink)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PreferedStoreName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsReffered)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BusinessEntry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdCardName)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.RegistrationNo)
         </td>
@@ -61,9 +110,20 @@
         <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
-      
         <td>
-            <img src="@Url.Action("RenderImage", new { id = item.MerchantId})" height="60" width="200" class="img-rounded" />
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TownOfBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StateOfOrigin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nationality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Passport)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.MerchantId }) |

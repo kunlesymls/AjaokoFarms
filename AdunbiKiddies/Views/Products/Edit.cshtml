@@ -22,16 +22,16 @@
                 @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            <div class="control-label col-md-2">BarCode Number </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.Barcode, new { htmlAttributes = new { @class = "form-control", @id = "BarcodeInput" } })
-                <br>
-                <div class="test">
-                    <input id="scannerInput" type="text" value="barcodescan" autofocus />
-                </div>
+        @*<div class="form-group">
+        <div class="control-label col-md-2">BarCode Number </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.Barcode, new { htmlAttributes = new { @class = "form-control", @id = "BarcodeInput" } })
+            <br>
+            <div class="test">
+                <input id="scannerInput" type="text" value="barcodescan" autofocus />
             </div>
         </div>
+    </div>*@
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-6">

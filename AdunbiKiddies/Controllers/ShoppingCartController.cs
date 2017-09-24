@@ -9,6 +9,11 @@ namespace AdunbiKiddies.Controllers
     public class ShoppingCartController : BaseController
     {
         //
+         public  ShoppingCartController()
+        {
+
+        }
+       
         // GET: /ShoppingCart/
         public ActionResult Index()
         {

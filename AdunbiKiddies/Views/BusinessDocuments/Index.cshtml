@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AdunbiKiddies.Models.BusinessDocument>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BusinessRegistration.MerchantId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Document)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BusinessRegistration.MerchantId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Document)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BusinessDocumentId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BusinessDocumentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BusinessDocumentId })
+        </td>
+    </tr>
+}
+
+</table>

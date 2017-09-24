@@ -1,0 +1,96 @@
+﻿@model IEnumerable<AdunbiKiddies.Models.Product>
+
+
+
+@{
+
+    Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
+}
+
+@{ 
+    var result = Model.OrderBy(r => r.DateAdded);
+    int displayNo = 8;
+
+}
+<div class="container">
+    <div class="shoes-grid">
+        <a href="#">
+            <div class="wrap-in">
+                <div class="wmuSlider example1 slide-grid">
+                    <div class="wmuSliderWrapper">
+
+                    </div>
+        </a>
+        <ul class="wmuSliderPagination">
+            <li><a href="#" class="">0</a></li>
+            <li><a href="#" class="">1</a></li>
+            <li><a href="#" class="">2</a></li>
+        </ul>
+        <script src="~/Template/assets/js/jquery.wmuSlider.js"></script>
+        <script>
+            $('.example1').wmuSlider();
+        </script>
+    </div>
+</div>
+
+<div class="products">
+    <h5 class="latest-product">Lowest Prices</h5>
+    @*<a href="@Url.Action("Item", "Home")"></a>*@
+</div>
+<div class="shoes-grid-left row">
+
+    @foreach (var item in Model)
+    {
+        if (displayNo % 2 == 0)
+        {
+
+            <a href="@Url.Action("Item", "Home", new { id = item.ProductId })">
+                <div class="col-md-5 con-sed-grid" style="">
+
+                    <div class=" elit-grid ">
+                        <h4>@item.Name</h4>
+                        <label>@item.Price</label>
+                        <p>@item.Description </p>
+                        <p>@item.Category.Name</p>
+                        <span class="on-get">GET NOW</span>
+                    </div>
+                    <img class="img-responsive shoe-left" src=@item.ItemPictureUrl alt=@item.Name height="163" width="160" />
+                    <div class="clearfix"> </div>
+
+                </div>
+            </a>
+            displayNo++;
+        }
+
+        else
+        {
+            <a href="@Url.Action("Item", "Home", new { id = item.ProductId })">
+                <div class="col-md-5 con-sed-grid  sed-left-top" style="">
+
+                    <div class="elit-grid">
+                        <h4>@item.Name</h4>
+                        <label>@item.Price</label>
+                        <p>@item.Description </p>
+                        <p>@item.Category.Name</p>
+                        <span class="on-get">GET NOW</span>
+                    </div>
+                    <img class="img-responsive shoe-left" src=@item.ItemPictureUrl alt=@item.Name height="163" width="160" />
+                    <div class="clearfix"> </div>
+
+                </div>
+            </a>
+            displayNo++;
+        }
+
+
+    }
+
+</div>
+
+
+
+
+<div class="clearfix"> </div>
+
+@Scripts.Render("~/Template/assets/css")
+@Scripts.Render("~/Templates/assets/js")

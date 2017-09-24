@@ -1,23 +1,28 @@
-﻿using AdunbiKiddies.Models;
-using Microsoft.AspNet.Identity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
-using System.Net;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using AdunbiKiddies.Models;
 
 namespace AdunbiKiddies.Controllers
 {
     public class MerchantsController : BaseController
     {
+       // private AjaoOko_db _db = new AjaoOko_db();
 
-        // GET: Merchants
+        // GET: MerchantsTest
         public async Task<ActionResult> Index()
         {
             var merchants = _db.Merchants.Include(m => m.PartnerShipAgreement);
             return View(await merchants.ToListAsync());
         }
 
-        // GET: Merchants/Details/5
+        // GET: MerchantsTest/Details/5
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)
@@ -32,29 +37,53 @@ namespace AdunbiKiddies.Controllers
             return View(merchant);
         }
 
+        // GET: MerchantsTest/Create
+        public ActionResult Create()
+        {
+            ViewBag.MerchantId = new SelectList(_db.PartnerShipAgreements, "MerchantId", "WebisteLink");
+            return View();
+        }
 
+        // POST: MerchantsTest/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create([Bind(Include = "MerchantId,CompanyName,PreferedStoreName,IsReffered,BusinessEntry,IdCardName,RegistrationNo,IsVerified,FirstName,MiddleName,LastName,Gender,Email,PhoneNumber,TownOfBirth,StateOfOrigin,Nationality,Passport")] Merchant merchant)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Merchants.Add(merchant);
+                await _db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
 
-        // GET: Merchants/Edit/5
+            ViewBag.MerchantId = new SelectList(_db.PartnerShipAgreements, "MerchantId", "WebisteLink", merchant.MerchantId);
+            return View(merchant);
+        }
+
+        // GET: MerchantsTest/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
             {
-                id = User.Identity.GetUserId();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Merchant merchant = await _db.Merchants.FindAsync(id);
             if (merchant == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.MerchantId = new SelectList(_db.PartnerShipAgreements, "MerchantId", "WebisteLink", merchant.MerchantId);
             return View(merchant);
         }
 
-        // POST: Merchants/Edit/5
+        // POST: MerchantsTest/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Merchant merchant)
+        public async Task<ActionResult> Edit([Bind(Include = "MerchantId,CompanyName,PreferedStoreName,IsReffered,BusinessEntry,IdCardName,RegistrationNo,IsVerified,FirstName,MiddleName,LastName,Gender,Email,PhoneNumber,TownOfBirth,StateOfOrigin,Nationality,Passport")] Merchant merchant)
         {
             if (ModelState.IsValid)
             {
@@ -62,10 +91,11 @@ namespace AdunbiKiddies.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewBag.MerchantId = new SelectList(_db.PartnerShipAgreements, "MerchantId", "WebisteLink", merchant.MerchantId);
             return View(merchant);
         }
 
-        // GET: Merchants/Delete/5
+        // GET: MerchantsTest/Delete/5
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
@@ -80,7 +110,7 @@ namespace AdunbiKiddies.Controllers
             return View(merchant);
         }
 
-        // POST: Merchants/Delete/5
+        // POST: MerchantsTest/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
@@ -99,7 +129,6 @@ namespace AdunbiKiddies.Controllers
 
             return File(photoBack, "image/png");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

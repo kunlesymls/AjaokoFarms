@@ -8,13 +8,13 @@ namespace AdunbiKiddies.Controllers
 {
     public class CategoriesController : BaseController
     {
-
-
         // GET: Categories
         public async Task<ActionResult> Index()
         {
             var categories = _db.Categories.Include(c => c.StoreSection);
             return View(await categories.ToListAsync());
+
+
         }
 
         // GET: Categories/Details/5

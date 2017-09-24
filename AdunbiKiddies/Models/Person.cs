@@ -35,9 +35,11 @@ namespace AdunbiKiddies.Models
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
+        [ScaffoldColumn(false)]
         [Display(Name = "Full Name")]
         public string UserName => LastName + " " + FirstName;
 
+        [ScaffoldColumn(false)]
         [Display(Name = "Full Name")]
         public string FullName => LastName + " " + FirstName + " " + MiddleName;
 

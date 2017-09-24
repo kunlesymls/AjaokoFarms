@@ -1,0 +1,90 @@
+﻿@using AdunbiKiddies.Models;
+@using AdunbiKiddies.Models.Repository;
+
+@{
+    var category = new Repository<Category>();
+
+    var categorys = category.GetAll();
+
+}
+<div class="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="latter">
+                <h6>NEWS-LETTER</h6>
+                <div class="sub-left-right">
+                    <form>
+                        <input type="text" value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter email here';}" />
+                        <input type="submit" value="SUBSCRIBE" />
+                    </form>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="latter-right">
+                <p>FOLLOW US</p>
+                <ul class="face-in-to">
+                    <li><a href="Twitter.com"><span> </span></a></li>
+                    <li><a href="Facebook.com"><span class="facebook-in"> </span></a></li>
+                    <div class="clearfix"> </div>
+                </ul>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+
+        <div class="container">
+            <div class="footer-bottom-cate">
+
+                <h6>CATEGORIES</h6>
+
+                @foreach (var item in categorys)
+                {
+                    var categoryName = item.Name;
+                                           
+                       <ul>
+                        <li><a href="#">@categoryName</a></li>
+                    </ul>
+                }
+            </div>
+
+            <div class="footer-bottom-cate bottom-grid-cat">
+                <h6>OTHER SERVICES</h6>
+                <ul>
+                    <li><a href="#">Training</a></li>
+                    <li><a href="#">Workforce Recruitment</a></li>
+                    <li><a href="#">Farmers Support Services</a></li>
+                    <li><a href="#">Agro Resource Center</a></li>
+                    <li><a href="#">Input Sourcing</a></li>
+                    <li><a href="#">Farm Land Lease & Equipment Rentals</a></li>
+                    <li><a href="#">Commodo sit</a></li>
+                </ul>
+            </div>
+            <div class="footer-bottom-cate">
+                <h6>CONTACT AJAOKO FARMS</h6>
+                <ul>
+                    <li><a href="#">No 1,Old Bukuru Rd, </a></li>
+                    <li><a href="#">Off Yakubu Gowon Way,</a></li>
+                    <li><a href="#">Opp. Building  Materials,</a></li>
+                    <li><a href="#">Jos South</a></li>
+                    <li><a href="#">+234 8</a></li>
+                    <li><a href="#">Info@ajaoko.com.ng</a></li>
+                    
+                </ul>
+            </div>
+            <div class="footer-bottom-cate cate-bottom">
+                <h6>jOIN US ON</h6>
+                <ul >
+                    <li><span class="glyphicon twitter-typeahead">Twitter</span> @@ajaoko_official</li>
+                    <li><span class="glyphicon facebook-in">Facebook</span></li>
+                    <li><span class="glyphicon fa-youtube-square">Youtube</span></li>
+                    <li><span class="glyphicon fa-skype">Skype</span> nicholasalfa1</li>
+                    <li class="phone">PH : AjaOkoFarms No</li>
+                    <li class="temp"> <p class="footer-class">Design by <a href="w3layout.com" target="_blank">Ajileye Joe/Ogbosuka Chris</a> </p></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>

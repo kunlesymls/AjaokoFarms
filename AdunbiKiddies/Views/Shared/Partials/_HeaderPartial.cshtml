@@ -1,0 +1,94 @@
+﻿@using AdunbiKiddies.ViewModels
+@model SearchProductViewModel
+
+<div class="header">
+    <div class="top-header">
+        <div class="container">
+            <div class="top-header-left">
+                <ul class="support nav navbar-nav" style="font-weight: bold; color:black; font-family: Tahoma" onmouseover="color:red">
+
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Be a Merchant", "Create", "Merchants")</li>
+                    <li>@Html.ActionLink("Be a Professional", "Index", "ProfessionalWorkers")</li>
+                    <li>@Html.ActionLink("Contact US", "Create", "Contacts")</li>
+                    <li>@Html.ActionLink("About US", "About", "Home")</li>
+
+                </ul>
+
+                <div class="clearfix"> </div>
+            </div>
+            <div class="top-header-right">
+                <div class="down-top">
+                    <select class="in-drop">
+                        <option value="English" class="in-of">English</option>
+                        @*<option value="Japanese" class="in-of">Japanese</option>
+                            <option value="French" class="in-of">French</option>
+                            <option value="German" class="in-of">German</option>*@
+                    </select>
+                </div>
+                <div class="down-top top-down">
+                    <select class="in-drop">
+
+                        <option value="Dollar" class="in-of">Naira</option>
+                        @*<option value="Yen" class="in-of">Yen</option>
+                            <option value="Euro" class="in-of">Euro</option>*@
+                    </select>
+                </div>
+                <!---->
+                <div class="clearfix"> </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <div class="bottom-header">
+        <div class="container">
+            <div class="header-bottom-left">
+                <div class="logo">
+                    <a href="#"><img src="~/Template/assets/images/logo.png" alt="AjaOko Farms" /></a>
+                </div>
+                @*@using (Html.BeginForm("SearchProduct", "ProductSearchs", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+                {
+                    <div class="search">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                         <span>
+                                @Html.TextBoxFor(m => m.SearchTerm)
+                                <input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="searchTerm">
+                            </span>        
+                                <span>
+                                    <input type="submit" value="Search" class="btn btn-default" name="SearchTerm" />
+                                </span>
+                            </div>
+                        }*@
+
+                <div class="search">
+                    @*@using (Html.BeginForm("SearchProduct", "ProductSearchs", FormMethod.Post))
+                    {*@
+                    <form action="@Url.Action("SearchProduct","ProductSearchs", new { id="txtSearch"})" method="get">
+                        <input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="txtSearch">
+                        @*@Html.TextBoxFor(m=>m.SearchTerm ,new { @class="input"})*@
+                      
+                        <input type="submit" value="SEARCH" name="submit">
+
+                    @*}*@
+                        </form>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+
+                        @Html.Partial("~/Views/Shared/_LoginPartialFrontend.cshtml")
+            @*<div class="header-bottom-right">
+                @* use the loginpartial view
+                <div class="account"><a href="@Url.Action("Login","Account")"><span> </span>YOUR ACCOUNT</a></div>
+                <ul class="login">
+                    <li><a href="login.html"><span> </span>LOGIN</a></li> |
+                    <li><a href="@Url.Action("Register","Account")"> SIGNUP</a></li>
+                </ul>
+
+                <div class="cart"><a href="@Url.Action("Index","ShoppingCart")"><span> </span>CART</a></div>
+                <div class="clearfix"> </div>
+            </div>*@
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>

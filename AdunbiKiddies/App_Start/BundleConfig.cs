@@ -26,6 +26,18 @@ namespace AdunbiKiddies
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Template/css").Include(
+                    "~/css/etalage.css",
+                    "~/css/form.css",
+                    "~/css/style.css"
+                    ));
+
+            bundles.Add(new StyleBundle("~/Template/js").Include(
+                   "~/js/jquery.etalage.min.js",
+                   "~/js/jquery.flexisel.js",
+                   "~/js/jquery.wmuSlider.js"
+                   ));
         }
     }
 }

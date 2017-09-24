@@ -1,0 +1,69 @@
+﻿@model IEnumerable<AdunbiKiddies.Models.Product>
+
+
+@{
+    ViewBag.Title = "Search Product Result";
+    Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
+}
+
+
+@Html.Partial("~/Views/Shared/Partials/_PageUpper.cshtml")
+
+
+
+@Html.Partial("~/Views/Shared/Partials/_PageLower.cshtml")
+
+@*Put any of desired single page content here*@
+
+<h2 style="color:green; font-weight:bold; font-family:Gabriola"> @ViewBag.Title</h2>
+
+@ViewBag.Message;
+@ViewBag.SearchResult = "Successful";
+
+<tr>
+<th>
+    @Html.DisplayNameFor(model => model.Category.Name)
+</th>
+<th>
+    @Html.DisplayNameFor(model => model.Merchant.CompanyName)
+</th>
+<th>
+    @Html.DisplayNameFor(model => model.Name)
+</th>
+<th>
+    @Html.DisplayNameFor(model => model.AlternativeName)
+</th>
+<th>
+    @Html.DisplayNameFor(model => model.Price)
+</th>
+<th>
+    @Html.DisplayNameFor(model => model.Description)
+</th>
+</tr>
+
+@foreach (var item in Model)
+{
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Category.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Merchant.CompanyName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AlternativeName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+</tr>
+}
+
+    @Scripts.Render("~/Template/assets/css")
+    @Scripts.Render("~/Templates/assets/js")

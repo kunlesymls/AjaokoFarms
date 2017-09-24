@@ -1,0 +1,77 @@
+﻿@using AdunbiKiddies.Models;
+@using AdunbiKiddies.Controllers;
+@using AdunbiKiddies.Models.Repository;
+
+@{
+    var category = new CategoryRepo();
+    var store = new StoreSectionRepo();
+
+    var categorys = category.GetAll();
+    var stores = store.GetAll();
+
+}
+<div class="sub-cate">
+    <div class="top-nav rsidebar span_1_of_left">
+        <h3 class="cate">CATEGORIES</h3>
+        <ul class="menu">
+
+            @foreach (var item in stores)
+            {
+                var storeid = item.StoreSectionId;
+                var storesName = item.SectionName;
+                storesName.ToString();
+
+                // var SC = categorys.Select(c => c.StoreSectionId);
+
+                var sc2 = categorys.Where(c => c.StoreSectionId == storeid);
+
+                <li class="item1">
+                    <a href="#">@storesName<img class="arrow-img" src="~/Template/assets/images/arrow1.png" alt="" /> </a>
+                    <ul class="cute">
+
+
+
+                        @foreach (var cat in sc2)
+                        {
+
+                            <li class="subitem1"><a href="@Url.Action("Item", "Home", new { id = cat.CategoryId })"> @cat.Name </a></li>
+                        }
+
+
+
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+    <!--initiate accordion-->
+    <script type="text/javascript">
+        $(function () {
+            var menu_ul = $('.menu > li > ul'),
+                   menu_a = $('.menu > li > a');
+            menu_ul.hide();
+            menu_a.click(function (e) {
+                e.preventDefault();
+                if (!$(this).hasClass('active')) {
+                    menu_a.removeClass('active');
+                    menu_ul.filter(':visible').slideUp('normal');
+                    $(this).addClass('active').next().stop(true, true).slideDown('normal');
+                } else {
+                    $(this).removeClass('active');
+                    $(this).next().stop(true, true).slideUp('normal');
+                }
+            });
+
+        });
+    </script>
+    <div class=" chain-grid menu-chain">
+        <a href="single.html"><img class="img-responsive" src="~/Template/assets/images/farm-technology.jpg" alt="Loading..." /></a>
+        <div class="grid-chain-bottom chain-watch " style="color:forestgreen">
+            <h4 style="color:forestgreen"> <strong><span class="text-medium">AjaOko: Farming </span><span>Virtualized </span></strong></h4>
+            <h4 style="color:black"><span>Be a Buyer</span></h4>
+            <h4 style="color:indianred"><span>Be a Merchant</span></h4>
+            <h4 style="color:forestgreen">Provide professional service</h4>
+        </div>
+    </div>
+    @*<a class="view-all all-product" href="#">AJAOKO FARMS...<span> </span></a>*@
+</div>

@@ -1,0 +1,47 @@
+﻿@Model<AdunbiKiddies.Models.Contact>
+
+@{ 
+    Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
+}
+
+
+@Html.Partial("~/Views/Shared/Partials/_PageUpper.cshtml")
+
+
+
+@Html.Partial("~/Views/Shared/Partials/_PageLower.cshtml")
+
+@*Put any of desired single page content here*@
+    <div class="reservation_top">
+        <div class="contact_right">
+            <h2><strong><span style="color:limegreen">Reach</span> <span style="color:salmon">US</span> </strong></h2>
+            <h5><strong> We will respond to you shortly.</strong></h5>
+            <div class="contact-form" id="Contact-Form">
+                @*<form method="post" action="contact-post.html">
+                    <input type="text" class="textbox" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
+                    <input type="text" class="textbox" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
+                    <textarea value="Message" onfocus="this.value= '';" onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea>
+                    <input type="submit" value="Send">
+                    <div class="clearfix"> </div>
+                </form>*@
+                @Html.Partial("~/Views/Shared/_Contact.cshtml")
+                <address class="address">
+                    <p>No 1,Old Bukuru Rd, <br>Off Yakubu Gowon Way, Opp. Building Materials,
+Jos South</p>
+                    <dl>
+                        <dt> </dt>
+                        <dd>Phone US:<span> +234 </span></dd>
+                        <dd>TWITTER:<span> @@ajaoko_official</span></dd>
+                        <dd>SKYPE: <span>nicholasalfa1</span></dd>
+                        <dd>E-mail:&nbsp; <a href="mailto@support@Ajaoko.com">support@@Ajaoko.com</a></dd>
+                    </dl>
+                </address>
+            </div>
+        </div>
+    </div>
+
+
+@Scripts.Render("~/Template/assets/css")
+@Scripts.Render("~/Templates/assets/js")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jquery")

@@ -1,0 +1,75 @@
+﻿@model OpenOrderFramework.Models.PartnerShipAgreement
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PartnerShipAgreement</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Merchant.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Merchant.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CanDropProduct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CanDropProduct)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CanStockProduct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CanStockProduct)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsSellingElsewhere)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsSellingElsewhere)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WebisteLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WebisteLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductList)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductList)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MerchantId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

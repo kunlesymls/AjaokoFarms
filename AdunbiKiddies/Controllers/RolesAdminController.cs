@@ -8,12 +8,12 @@ namespace AdunbiKiddies.Controllers
     //[Authorize(Roles = "Admin")]
     public class RolesAdminController : BaseController
     {
-        AjaoOkoDb _db;
+       // AjaoOkoDb _db;
 
-        public RolesAdminController()
-        {
-            _db = new AjaoOkoDb();
-        }
+        //public RolesAdminController()
+        //{
+        //    _db = new AjaoOkoDb();
+        //}
 
 
 

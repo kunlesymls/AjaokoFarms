@@ -110,7 +110,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PayStack.Net, Version=0.6.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PayStack.Net.0.6.6\lib\net45\PayStack.Net.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\PayStack.Net.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
@@ -173,9 +174,6 @@
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="XtremeIT.Library.Pins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5f275dd942b1b995, processorArchitecture=MSIL">
-      <HintPath>..\packages\PayStack.Net.0.6.6\lib\net45\XtremeIT.Library.Pins.dll</HintPath>
-    </Reference>
     <Reference Include="Zen.Barcode.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b5ae55aa76d2d9de, processorArchitecture=MSIL">
       <HintPath>..\packages\Zen.Barcode.Core.2.0.0\lib\net45\Zen.Barcode.Core.dll</HintPath>
     </Reference>
@@ -209,17 +207,27 @@
     <Compile Include="BusinessLogic\QueryManager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\BankDetailsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BusinessAddressesController.cs" />
+    <Compile Include="Controllers\BusinessDocumentsController.cs" />
+    <Compile Include="Controllers\BusinessRegistrationsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MerchantsOldController.cs" />
     <Compile Include="Controllers\MerchantsController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
+    <Compile Include="Controllers\PartnerShipAgreementsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ProductSearchsController.cs" />
     <Compile Include="Controllers\ProfessionalPaymentsController.cs" />
+    <Compile Include="Controllers\ProfessionalWorkersController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\SalesController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StocksController.cs" />
     <Compile Include="Controllers\StoreSectionsController.cs" />
@@ -240,17 +248,37 @@
     <Compile Include="Migrations\201709152016239_NonrequiredforProductDesc.Designer.cs">
       <DependentUpon>201709152016239_NonrequiredforProductDesc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709160520515_CustomerDetails.cs" />
-    <Compile Include="Migrations\201709160520515_CustomerDetails.Designer.cs">
-      <DependentUpon>201709160520515_CustomerDetails.cs</DependentUpon>
+    <Compile Include="Migrations\201709152147152_initial.cs" />
+    <Compile Include="Migrations\201709152147152_initial.Designer.cs">
+      <DependentUpon>201709152147152_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709160552166_AddingDateProfessionalPayment.cs" />
-    <Compile Include="Migrations\201709160552166_AddingDateProfessionalPayment.Designer.cs">
-      <DependentUpon>201709160552166_AddingDateProfessionalPayment.cs</DependentUpon>
+    <Compile Include="Migrations\201709180353577_removedSubcategory.cs" />
+    <Compile Include="Migrations\201709180353577_removedSubcategory.Designer.cs">
+      <DependentUpon>201709180353577_removedSubcategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709160609219_addedfeildtoworkerpayment.cs" />
-    <Compile Include="Migrations\201709160609219_addedfeildtoworkerpayment.Designer.cs">
-      <DependentUpon>201709160609219_addedfeildtoworkerpayment.cs</DependentUpon>
+    <Compile Include="Migrations\201709211530282_dataanotation.cs" />
+    <Compile Include="Migrations\201709211530282_dataanotation.Designer.cs">
+      <DependentUpon>201709211530282_dataanotation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709221707408_addedcontactmodel.cs" />
+    <Compile Include="Migrations\201709221707408_addedcontactmodel.Designer.cs">
+      <DependentUpon>201709221707408_addedcontactmodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709231403303_ProductDateAddedProperty.cs" />
+    <Compile Include="Migrations\201709231403303_ProductDateAddedProperty.Designer.cs">
+      <DependentUpon>201709231403303_ProductDateAddedProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709240252094_merchantidDisplayName.cs" />
+    <Compile Include="Migrations\201709240252094_merchantidDisplayName.Designer.cs">
+      <DependentUpon>201709240252094_merchantidDisplayName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709240309192_MerchantProductDataanotations.cs" />
+    <Compile Include="Migrations\201709240309192_MerchantProductDataanotations.Designer.cs">
+      <DependentUpon>201709240309192_MerchantProductDataanotations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709241729104_afterUI.cs" />
+    <Compile Include="Migrations\201709241729104_afterUI.Designer.cs">
+      <DependentUpon>201709241729104_afterUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -264,6 +292,7 @@
     <Compile Include="Models\BusinessRegistration.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Deposit.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -272,6 +301,9 @@
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProfessionalWorker.cs" />
+    <Compile Include="Models\Repositories\CategoryRepo.cs" />
+    <Compile Include="Models\Repositories\ContactRepo.cs" />
+    <Compile Include="Models\Repositories\Repository.cs" />
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\SaleDetail.cs" />
     <Compile Include="Models\ShippingDetail.cs" />
@@ -290,6 +322,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\PaymentVm.cs" />
     <Compile Include="ViewModels\SaleDateGroup.cs" />
+    <Compile Include="ViewModels\SearchProductViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCartRemoveViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
     <Compile Include="ViewModels\SupplierViewModel.cs" />
@@ -2191,6 +2224,80 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <None Include="Template\contact.cshtml" />
+    <None Include="Template\index.cshtml" />
+    <None Include="Template\login.cshtml" />
+    <None Include="Template\product.cshtml" />
+    <None Include="Template\register.cshtml" />
+    <None Include="Template\single.cshtml" />
+    <Content Include="Template\assets\css\bootstrap.css" />
+    <Content Include="Template\assets\css\etalage.css" />
+    <Content Include="Template\assets\css\FontsUsed.css" />
+    <Content Include="Template\assets\css\form.css" />
+    <Content Include="Template\assets\css\style.css" />
+    <Content Include="Template\assets\images\a-star.png" />
+    <Content Include="Template\assets\images\Ajaoko_LogoInitial.png" />
+    <Content Include="Template\assets\images\Ajaoko_Logo.png" />
+    <Content Include="Template\assets\images\arrow1.png" />
+    <Content Include="Template\assets\images\arrow2.png" />
+    <Content Include="Template\assets\images\avatar.png" />
+    <Content Include="Template\assets\images\b-arrow.png" />
+    <Content Include="Template\assets\images\ba.jpg" />
+    <Content Include="Template\assets\images\baa.jpg" />
+    <Content Include="Template\assets\images\bag.jpg" />
+    <Content Include="Template\assets\images\bag1.jpg" />
+    <Content Include="Template\assets\images\bo.jpg" />
+    <Content Include="Template\assets\images\bott.jpg" />
+    <Content Include="Template\assets\images\bottle.jpg" />
+    <Content Include="Template\assets\images\ch.jpg" />
+    <Content Include="Template\assets\images\facebook.png" />
+    <Content Include="Template\assets\images\farm-technology.jpg" />
+    <Content Include="Template\assets\images\gpluse.png" />
+    <Content Include="Template\assets\images\heypesticide_hero.jpg" />
+    <Content Include="Template\assets\images\img-sprite.png" />
+    <Content Include="Template\assets\images\label_new.png" />
+    <Content Include="Template\assets\images\logo.png" />
+    <Content Include="Template\assets\images\organic farming.jpg" />
+    <Content Include="Template\assets\images\pi.jpg" />
+    <Content Include="Template\assets\images\pi1.jpg" />
+    <Content Include="Template\assets\images\pi2.jpg" />
+    <Content Include="Template\assets\images\pi3.jpg" />
+    <Content Include="Template\assets\images\pi4.jpg" />
+    <Content Include="Template\assets\images\pic.jpg" />
+    <Content Include="Template\assets\images\pic1.jpg" />
+    <Content Include="Template\assets\images\pic10.jpg" />
+    <Content Include="Template\assets\images\pic11.jpg" />
+    <Content Include="Template\assets\images\pic12.jpg" />
+    <Content Include="Template\assets\images\pic13.jpg" />
+    <Content Include="Template\assets\images\pic2.jpg" />
+    <Content Include="Template\assets\images\pic3.jpg" />
+    <Content Include="Template\assets\images\pic4.jpg" />
+    <Content Include="Template\assets\images\pic5.jpg" />
+    <Content Include="Template\assets\images\pic6.jpg" />
+    <Content Include="Template\assets\images\pic7.jpg" />
+    <Content Include="Template\assets\images\pic8.jpg" />
+    <Content Include="Template\assets\images\review.png" />
+    <Content Include="Template\assets\images\rss.png" />
+    <Content Include="Template\assets\images\rtr4ebbm-e1453843764413.jpg" />
+    <Content Include="Template\assets\images\s1.jpg" />
+    <Content Include="Template\assets\images\s2.jpg" />
+    <Content Include="Template\assets\images\s3.jpg" />
+    <Content Include="Template\assets\images\s4.jpg" />
+    <Content Include="Template\assets\images\sh.jpg" />
+    <Content Include="Template\assets\images\si1.jpg" />
+    <Content Include="Template\assets\images\si2.jpg" />
+    <Content Include="Template\assets\images\si3.jpg" />
+    <Content Include="Template\assets\images\si4.jpg" />
+    <Content Include="Template\assets\images\star.png" />
+    <Content Include="Template\assets\images\tick1.png" />
+    <Content Include="Template\assets\images\twitter.png" />
+    <Content Include="Template\assets\images\wa.jpg" />
+    <Content Include="Template\assets\images\wat.jpg" />
+    <Content Include="Template\assets\images\zoom.png" />
+    <Content Include="Template\assets\js\jquery.etalage.min.js" />
+    <Content Include="Template\assets\js\jquery.flexisel.js" />
+    <Content Include="Template\assets\js\jquery.min.js" />
+    <Content Include="Template\assets\js\jquery.wmuSlider.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2205,7 +2312,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -2226,7 +2332,7 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_LoginPartialFrontend.cshtml" />
     <Content Include="Views\Categories\Create.cshtml" />
     <Content Include="Views\Categories\Delete.cshtml" />
     <Content Include="Views\Categories\Details.cshtml" />
@@ -2286,27 +2392,83 @@
     <Content Include="Views\StoreSections\Edit.cshtml" />
     <Content Include="Views\StoreSections\Index.cshtml" />
     <Content Include="Views\Products\AdminIndex.cshtml" />
+    <Content Include="Views\MerchantsOld\Create.cshtml" />
+    <Content Include="Views\MerchantsOld\Delete.cshtml" />
+    <Content Include="Views\MerchantsOld\Details.cshtml" />
+    <Content Include="Views\MerchantsOld\Edit.cshtml" />
+    <Content Include="Views\MerchantsOld\Index.cshtml" />
+    <Content Include="Views\Account\RegisterMerchant.cshtml" />
+    <Content Include="Views\Account\Registration.cshtml" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.2.1.min.map" />
+    <Content Include="Views\Shared\_LayoutBigStore.cshtml" />
+    <Content Include="Views\Shared\Partials\_HeaderPartial.cshtml" />
+    <Content Include="Views\Shared\Partials\_FooterPartial.cshtml" />
+    <Content Include="Views\Shared\Partials\_SubCategoryPartial.cshtml" />
+    <Content Include="Views\Home\Index1.cshtml" />
+    <Content Include="Views\Shared\Partials\_CategoryPartial.cshtml" />
+    <Content Include="Views\Home\Item.cshtml" />
+    <Content Include="Views\ProfessionalWorkers\Create.cshtml" />
+    <Content Include="Views\ProfessionalWorkers\Delete.cshtml" />
+    <Content Include="Views\ProfessionalWorkers\Details.cshtml" />
+    <Content Include="Views\ProfessionalWorkers\Edit.cshtml" />
+    <Content Include="Views\ProfessionalWorkers\Index.cshtml" />
+    <Content Include="Views\Shared\Partials\_PageUpper.cshtml" />
+    <Content Include="Views\Shared\Partials\_PageLower.cshtml" />
+    <Content Include="Views\Shared\Partials\_PageBannerSlide.cshtml" />
     <Content Include="Views\Merchants\Create.cshtml" />
     <Content Include="Views\Merchants\Delete.cshtml" />
     <Content Include="Views\Merchants\Details.cshtml" />
     <Content Include="Views\Merchants\Edit.cshtml" />
     <Content Include="Views\Merchants\Index.cshtml" />
-    <Content Include="Views\Account\RegisterMerchant.cshtml" />
-    <Content Include="Views\Account\Registration.cshtml" />
-    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.2.1.min.map" />
-    <Content Include="Views\Account\RegisterWorker.cshtml" />
+    <Content Include="Views\Home\SearchProduct.cshtml" />
+    <Content Include="Views\Contacts\Create.cshtml" />
+    <Content Include="Views\Shared\_Contact.cshtml" />
+    <Content Include="Template\UsetheIndexPictureSlider.cshtml" />
+    <Content Include="Views\ProductSearchs\SearchProduct.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\ProfessionalPayments\Create.cshtml" />
     <Content Include="Views\ProfessionalPayments\Delete.cshtml" />
     <Content Include="Views\ProfessionalPayments\Details.cshtml" />
     <Content Include="Views\ProfessionalPayments\Edit.cshtml" />
     <Content Include="Views\ProfessionalPayments\Index.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Account\RegisterWorker.cshtml" />
+    <Content Include="Views\BankDetails\Create.cshtml" />
+    <Content Include="Views\BankDetails\Delete.cshtml" />
+    <Content Include="Views\BankDetails\Details.cshtml" />
+    <Content Include="Views\BankDetails\Edit.cshtml" />
+    <Content Include="Views\BankDetails\Index.cshtml" />
+    <Content Include="Views\BusinessRegistrations\Create.cshtml" />
+    <Content Include="Views\BusinessRegistrations\Delete.cshtml" />
+    <Content Include="Views\BusinessRegistrations\Details.cshtml" />
+    <Content Include="Views\BusinessRegistrations\Edit.cshtml" />
+    <Content Include="Views\BusinessRegistrations\Index.cshtml" />
+    <Content Include="Views\BusinessAddresses\Create.cshtml" />
+    <Content Include="Views\BusinessAddresses\Delete.cshtml" />
+    <Content Include="Views\BusinessAddresses\Details.cshtml" />
+    <Content Include="Views\BusinessAddresses\Edit.cshtml" />
+    <Content Include="Views\BusinessAddresses\Index.cshtml" />
+    <Content Include="Views\PartnerShipAgreements\Create.cshtml" />
+    <Content Include="Views\PartnerShipAgreements\Delete.cshtml" />
+    <Content Include="Views\PartnerShipAgreements\Details.cshtml" />
+    <Content Include="Views\PartnerShipAgreements\Edit.cshtml" />
+    <Content Include="Views\PartnerShipAgreements\Index.cshtml" />
+    <Content Include="Views\BusinessDocuments\Create.cshtml" />
+    <Content Include="Views\BusinessDocuments\Delete.cshtml" />
+    <Content Include="Views\BusinessDocuments\Details.cshtml" />
+    <Content Include="Views\BusinessDocuments\Edit.cshtml" />
+    <Content Include="Views\BusinessDocuments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\js\core\cache\" />
     <Folder Include="Content\ExcelUploadedFile\" />
+    <Folder Include="Template\ContactForm\css\" />
+    <Folder Include="Template\ContactForm\fonts\" />
+    <Folder Include="Template\ContactForm\images\" />
     <Folder Include="Views\Notifications\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -2324,14 +2486,29 @@
     <EmbeddedResource Include="Migrations\201709152016239_NonrequiredforProductDesc.resx">
       <DependentUpon>201709152016239_NonrequiredforProductDesc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709160520515_CustomerDetails.resx">
-      <DependentUpon>201709160520515_CustomerDetails.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709152147152_initial.resx">
+      <DependentUpon>201709152147152_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709160552166_AddingDateProfessionalPayment.resx">
-      <DependentUpon>201709160552166_AddingDateProfessionalPayment.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709180353577_removedSubcategory.resx">
+      <DependentUpon>201709180353577_removedSubcategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709160609219_addedfeildtoworkerpayment.resx">
-      <DependentUpon>201709160609219_addedfeildtoworkerpayment.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709211530282_dataanotation.resx">
+      <DependentUpon>201709211530282_dataanotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709221707408_addedcontactmodel.resx">
+      <DependentUpon>201709221707408_addedcontactmodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709231403303_ProductDateAddedProperty.resx">
+      <DependentUpon>201709231403303_ProductDateAddedProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709240252094_merchantidDisplayName.resx">
+      <DependentUpon>201709240252094_merchantidDisplayName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709240309192_MerchantProductDataanotations.resx">
+      <DependentUpon>201709240309192_MerchantProductDataanotations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709241729104_afterUI.resx">
+      <DependentUpon>201709241729104_afterUI.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

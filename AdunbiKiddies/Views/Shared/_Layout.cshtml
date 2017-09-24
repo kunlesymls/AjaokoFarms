@@ -12,8 +12,8 @@
     <!-- BEGIN META -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="your,keywords">
-    <meta name="description" content="Short explanation about this website">
+    <meta name="keywords" content="Farm produce,Farm produce sales, Merchant Farmers, in Jos, in Plateau State, in Nigeria,Are you famer and you want to get or lease a farm land?,Farming differently in jos,">
+    <meta name="description" content="Sell your farm produce in plateau">
     <!-- END META -->
     <!-- BEGIN STYLESHEETS -->
     <link href="~/Content/landing-page.css" rel="stylesheet" />
@@ -34,214 +34,221 @@
 
 
 <body class="menubar-hoverable header-fixed menubar-pin ">
-<!-- BEGIN HEADER-->
-<header id="header">
-    <div class="headerbar">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="headerbar-left">
-            <ul class="header-nav header-nav-options">
-                <li class="header-nav-brand">
-                    <div class="brand-holder">
-                        <a href="@Url.Action("Index", "Home")">
+    <!-- BEGIN HEADER-->
+    <header id="header">
+        <div class="headerbar">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="headerbar-left">
+                <ul class="header-nav header-nav-options">
+                    <li class="header-nav-brand">
+                        <div class="brand-holder">
+                            <a href="@Url.Action("Index", "Home")">
 
-                            @*<img class="img-circle" src="~/Images/k1.jpg" />*@
-                            @*<img src="~/Images/adunbilogo.png" />*@
-                            @*<img class="img-responsive" src="~/Images/DcLogo1 (1).jpg" />*@
-                            <span class="text-lg text-bold text-primary"><strong>@Model.Alias</strong> </span>
+                                @*<img class="img-circle" src="~/Images/k1.jpg" />*@
+
+                                <span class="text-lg text-bold text-primary"><img src="~/Template/assets/images/logo.png" alt="AJAOKO FARMS" /></span>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+                            <i class="fa fa-bars"></i>
                         </a>
-                    </div>
-                </li>
-                <li>
-                    <a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
-                        <i class="fa fa-bars"></i>
-                    </a>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="">
+                @*<ul class="header-nav header-nav-options">
+                        <li><a href="#"><strong>Services</strong></a></li>
+                    </ul>*@
+                <ul class="header-nav header-nav-options">
+                    @Html.Partial("_LoginPartial")
+                </ul><!--end .header-nav-options -->
+                <!--end .header-nav-options -->
+            </div><!--end #header-navbar-collapse -->
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="headerbar-right">
-            @*<ul class="header-nav header-nav-options">
-                            <li><a href="#"><strong>Services</strong></a></li>
-                        </ul>*@
-            <ul class="header-nav header-nav-options">
-                @Html.Partial("_LoginPartial")
-            </ul><!--end .header-nav-options -->
-            <!--end .header-nav-options -->
-        </div><!--end #header-navbar-collapse -->
-    </div>
-</header>
-<!-- END HEADER-->
-@if (Request.IsAuthenticated && User.IsInRole("SuperAdmin"))
-{
+    </header>
+    <!-- END HEADER-->
+    @if (Request.IsAuthenticated && User.IsInRole("SuperAdmin"))
+    {
 
     <!-- BEGIN BASE-->
-    <div id="base">
+        <div id="base">
 
-        <!-- BEGIN OFFCANVAS LEFT -->
-        <div class="offcanvas">
-        </div><!--end .offcanvas-->
-        <!-- END OFFCANVAS LEFT -->
-        <!-- BEGIN CONTENT-->
-        <div id="content">
+            <!-- BEGIN OFFCANVAS LEFT -->
+            <div class="offcanvas">
+            </div><!--end .offcanvas-->
+            <!-- END OFFCANVAS LEFT -->
+            <!-- BEGIN CONTENT-->
+            <div id="content">
 
-            <!-- BEGIN BLANK SECTION -->
-            <section>
-                <div class="section-body">
-                    @RenderBody()
+                <!-- BEGIN BLANK SECTION -->
+                <section>
+                    <div class="section-body">
+                        @RenderBody()
 
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div class="menubar-foot-panel">
+                        <br />
+                        <br />
+                        <br />
+                        <div class="menubar-foot-panel">
 
-                        <span class="opacity-75">
-                            &copy;DESIGNER'S CHOICE @DateTime.Now.Year All rights reserved.
-                        </span>
+                            <span class="opacity-75">
+                                &copy;AJAOKO FARMS @DateTime.Now.Year All rights reserved.
+                            </span>
 
-                        <span class="opacity-75">Designed by Ayokunle</span>
+                            <span class="opacity-75">Designed by Joe kunle & Ogbosuka Chris</span>
+                        </div>
+                        <hr />
                     </div>
-                    <hr/>
+                </section>
+
+                <!-- BEGIN BLANK SECTION -->
+            </div><!--end #content-->
+            <!-- END CONTENT -->
+            <!-- BEGIN MENUBAR-->
+            <div id="menubar" class="menubar-inverse ">
+                <div class="menubar-fixed-panel">
+                    <div>
+                        <a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </div>
+                    <div class="expanded">
+                        <a href="#">
+                            <span class="text-lg text-bold text-primary ">AJAOKO FARMS)</span>
+                        </a>
+                    </div>
                 </div>
-            </section>
 
-            <!-- BEGIN BLANK SECTION -->
-        </div><!--end #content-->
-        <!-- END CONTENT -->
-        <!-- BEGIN MENUBAR-->
-        <div id="menubar" class="menubar-inverse ">
-            <div class="menubar-fixed-panel">
-                <div>
-                    <a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
-                        <i class="fa fa-bars"></i>
-                    </a>
-                </div>
-                <div class="expanded">
-                    <a href="#">
-                        <span class="text-lg text-bold text-primary ">DESIGNER'S CHOICE)</span>
-                    </a>
-                </div>
-            </div>
+                <div class="menubar-scroll-panel">
 
-            <div class="menubar-scroll-panel">
+                    <!-- BEGIN MAIN MENU -->
+                    <ul id="main-menu" class="gui-controls">
 
-                <!-- BEGIN MAIN MENU -->
-                <ul id="main-menu" class="gui-controls">
+                        <!-- BEGIN DASHBOARD -->
+                        <li>
+                            <a href="@Url.Action("Index", "Home")">
+                                <div class="gui-icon">
+                                    <i class="md md-home"></i>
+                                </div>
+                                <span class="title">SuperAdmin Dashboard</span>
+                            </a>
+                        </li><!--end /menu-li -->
+                        <!-- END DASHBOARD -->
+                        <!-- BEGIN PRODUCTS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Products</span>
+                            </a>
+                            <!--start submenu -->""
+                            <ul>
+                                <li><a href="@Url.Action("AdminIndex", "Products")">Search</a></li>
+                                <li>
+                                    <a class="page-scroll" href="@Url.Action("Create", "Products")">Create</a>
+                                </li>
+                                <li>
+                                    <a class="page-scroll" href="@Url.Action("UploadProducts", "Products")">Upload Products</a>
+                                </li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN CATEGORIES -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Category</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("Index", "Categories")">Search</a></li>
+                                <li><a href="@Url.Action("Create", "Categories")">Create</a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN STOCKS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Stocks</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("Index", "Stocks")">View Stock</a></li>
+                                <li><a href="@Url.Action("Create", "Stocks")">Add to Stock</a></li>
+                                <li><a href="@Url.Action("ItemLeft", "Products")">Item Left in Stock</a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN SALES -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Sales</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
 
-                    <!-- BEGIN DASHBOARD -->
-                    <li>
-                        <a href="@Url.Action("Index", "Home")">
-                            <div class="gui-icon"><i class="md md-home"></i>
-                            </div>
-                            <span class="title">SuperAdmin Dashboard</span>
-                        </a>
-                    </li><!--end /menu-li -->
-                    <!-- END DASHBOARD -->
-                    <!-- BEGIN PRODUCTS -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Products</span>
-                        </a>
-                        <!--start submenu -->""
-                        <ul>
-                            <li><a href="@Url.Action("AdminIndex", "Products")">Search</a></li>
-                            <li>
-                                <a class="page-scroll" href="@Url.Action("Create", "Products")">Create</a>
-                            </li>
-                            <li>
-                                <a class="page-scroll" href="@Url.Action("UploadProducts", "Products")">Upload Products</a>
-                            </li>
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                    <!-- BEGIN CATEGORIES -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Category</span>
-                        </a>
-                        <!--start submenu -->
-                        <ul>
-                            <li><a href="@Url.Action("Index", "Categories")">Search</a></li>
-                            <li><a href="@Url.Action("Create", "Categories")">Create</a></li>
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                    <!-- BEGIN STOCKS -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Stocks</span>
-                        </a>
-                        <!--start submenu -->
-                        <ul>
-                            <li><a href="@Url.Action("Index", "Stocks")">View Stock</a></li>
-                            <li><a href="@Url.Action("Create", "Stocks")">Add to Stock</a></li>
-                            <li><a href="@Url.Action("ItemLeft", "Products")">Item Left in Stock</a></li>
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                    <!-- BEGIN SALES -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Sales</span>
-                        </a>
-                        <!--start submenu -->
-                        <ul>
-
-                            <li><a href="@Url.Action("Index", "Sales")">Search</a></li>
-                            <li><a href="@Url.Action("DailySales", "Sales")">Daily Sales</a></li>
-                            @*<li><a href="@Url.Action("Create", "Account")">Add User</a></li>
+                                <li><a href="@Url.Action("Index", "Sales")">Search</a></li>
+                                <li><a href="@Url.Action("DailySales", "Sales")">Daily Sales</a></li>
+                                @*<li><a href="@Url.Action("Create", "Account")">Add User</a></li>
                                     <li>
                                         <a class="page-scroll" href="@Url.Action("Index", "Posts")">NEWS</a>
                                     </li>*@
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                    <!-- BEGIN ANALYTICS -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Analytics</span>
-                        </a>
-                        <!--start submenu -->
-                        <ul>
-                            <li><a href="@Url.Action("Index", "Analytics")">Statistics</a></li> s
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                    <!-- BEGIN SUPPLIERS -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Suppliers</span>
-                        </a>
-                        <!--start submenu -->
-                        <ul>
-                            <li><a href="@Url.Action("Index", "Suppliers")">Search Supplier</a></li>
-                            <li><a href="@Url.Action("Create", "Suppliers")">Add Supplier</a></li>
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                    <!-- BEGIN ROLES -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">User Role</span>
-                        </a>
-                        <!--start submenu -->
-                        <ul>
-                            <li><a href="@Url.Action("Index", "Account")">Search Users</a></li>
-                            <li>@Html.ActionLink("Register Users", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</li>
-                            <li><a href="@Url.Action("Index", "RolesAdmin")">View User Roles</a></li>
-                            <li><a href="@Url.Action("Create", "RolesAdmin")">Add User Role</a></li>
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                </ul><!--end .main-menu -->
-                <!-- END MAIN MENU -->
-                @*<div class="menubar-foot-panel">
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN ANALYTICS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Analytics</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("Index", "Analytics")">Statistics</a></li> s
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN SUPPLIERS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Suppliers</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("Index", "Suppliers")">Search Supplier</a></li>
+                                <li><a href="@Url.Action("Create", "Suppliers")">Add Supplier</a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN ROLES -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">User Role</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("Index", "Account")">Search Users</a></li>
+                                <li>@Html.ActionLink("Register Users", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                                <li><a href="@Url.Action("Index", "RolesAdmin")">View User Roles</a></li>
+                                <li><a href="@Url.Action("Create", "RolesAdmin")">Add User Role</a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                    </ul><!--end .main-menu -->
+                    <!-- END MAIN MENU -->
+                    @*<div class="menubar-foot-panel">
 
                             <span class="opacity-75">
                                 &copy; @DateTime.Now.Year All rights reserved.
@@ -249,183 +256,199 @@
 
                             <span class="opacity-75">Designed by Joseph</span>
                         </div>*@
-            </div><!--end .menubar-scroll-panel-->
-        </div><!--end #menubar-->
-        <!-- END MENUBAR -->
-    </div><!--end #base-->
+                </div><!--end .menubar-scroll-panel-->
+            </div><!--end #menubar-->
+            <!-- END MENUBAR -->
+        </div><!--end #base-->
     <!-- END BASE -->
-}
-else if (Request.IsAuthenticated && User.IsInRole("Admin"))
-{
+    }
+    else if (Request.IsAuthenticated && User.IsInRole("Admin"))
+    {
 
     <!-- BEGIN BASE-->
-    <div id="base">
+        <div id="base">
 
-        <!-- BEGIN OFFCANVAS LEFT -->
-        <div class="offcanvas">
-        </div><!--end .offcanvas-->
-        <!-- END OFFCANVAS LEFT -->
-        <!-- BEGIN CONTENT-->
-        <div id="content">
+            <!-- BEGIN OFFCANVAS LEFT -->
+            <div class="offcanvas">
+            </div><!--end .offcanvas-->
+            <!-- END OFFCANVAS LEFT -->
+            <!-- BEGIN CONTENT-->
+            <div id="content">
 
-            <!-- BEGIN BLANK SECTION -->
-            <section>
-                <div class="section-body">
-                    @RenderBody()
+                <!-- BEGIN BLANK SECTION -->
+                <section>
+                    <div class="section-body">
+                        @RenderBody()
 
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div class="menubar-foot-panel">
+                        <br />
+                        <br />
+                        <br />
+                        <div class="menubar-foot-panel">
 
-                        <span class="opacity-75">
-                            &copy;DESIGNER'S CHOICE @DateTime.Now.Year All rights reserved.
-                        </span>
+                            <span class="opacity-75">
+                                &copy;AJAOKO FARMS @DateTime.Now.Year All rights reserved.
+                            </span>
 
-                        <span class="opacity-75">Designed by Ayokunle</span>
+                            <span class="opacity-75">Designed by Joe Ajileye & Ogbosuka Chris</span>
+                        </div>
+                        <hr />
                     </div>
-                    <hr/>
+                </section>
+
+                <!-- BEGIN BLANK SECTION -->
+            </div><!--end #content-->
+            <!-- END CONTENT -->
+            <!-- BEGIN MENUBAR-->
+            <div id="menubar" class="menubar-inverse ">
+                <div class="menubar-fixed-panel">
+                    <div>
+                        <a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </div>
+                    <div class="expanded">
+                        <a href="#">
+                            <span class="text-lg text-bold text-primary ">AJAOKO FARMS)</span>
+                            <img class="img-responsive" height="70" width="200" src="~/Template/assets/images/logo.png" />
+                        </a>
+                    </div>
                 </div>
-            </section>
 
-            <!-- BEGIN BLANK SECTION -->
-        </div><!--end #content-->
-        <!-- END CONTENT -->
-        <!-- BEGIN MENUBAR-->
-        <div id="menubar" class="menubar-inverse ">
-            <div class="menubar-fixed-panel">
-                <div>
-                    <a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
-                        <i class="fa fa-bars"></i>
-                    </a>
-                </div>
-                <div class="expanded">
-                    <a href="#">
-                        <span class="text-lg text-bold text-primary ">DESIGNER'S CHOICE)</span>
-                    </a>
-                </div>
-            </div>
+                <div class="menubar-scroll-panel">
 
-            <div class="menubar-scroll-panel">
+                    <!-- BEGIN MAIN MENU -->
+                    <ul id="main-menu" class="gui-controls">
 
-                <!-- BEGIN MAIN MENU -->
-                <ul id="main-menu" class="gui-controls">
+                        <!-- BEGIN DASHBOARD -->
+                        <li>
+                            <a href="@Url.Action("Index", "Home")">
+                                <div class="gui-icon">
+                                    <i class="md md-home"></i>
+                                </div>
+                                <span class="title">Merchant Dashboard</span>
+                            </a>
+                        </li><!--end /menu-li -->
+                        <!-- END DASHBOARD -->
+                        <!-- BEGIN PROFILE -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">My Profile</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("Edit", "Merchants")">Edit Profile</a></li>
+                                <li><a href="@Url.Action("Details", "Merchants")">View Profile</a></li>
+                                <li><a href="@Url.Action("Create", "BankDetails")">Add Bank Details</a></li>
+                                <li><a href="@Url.Action("AddPhoneNumber", "Manage")">Add PhoneNumber</a></li>
+                                <li><a href="@Url.Action("ChangePassword", "Manage")">Change Password</a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN PORTFOLIO -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Business Portfolio</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("Index", "BankDetails")">Registration</a></li>
+                                <li><a href="@Url.Action("Index", "BusinessAddresses")">Address</a></li>
+                                <li><a href="@Url.Action("Index", "BusinessDocuments")">Document</a></li>
+                                <li><a href="@Url.Action("Index", "PartnerShipAgreements")">Agreement</a></li>
+                             
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN PRODUCTS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Products</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("AdminIndex", "Products")">Search</a></li>
+                                <li>
+                                    <a class="page-scroll" href="@Url.Action("Create", "Products")">Create</a>
+                                </li>
+                                <li>
+                                    <a class="page-scroll" href="@Url.Action("UploadProducts", "Products")">Upload Products</a>
+                                </li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                       
+                        <!-- BEGIN STOCKS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Stocks</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("Index", "Stocks")">View Stock</a></li>
+                                <li><a href="@Url.Action("Create", "Stocks")">Add to Stock</a></li>
+                                <li><a href="@Url.Action("ItemLeft", "Products")">Item Left in Stock</a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN SALES -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Sales</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
 
-                    <!-- BEGIN DASHBOARD -->
-                    <li>
-                        <a href="@Url.Action("Index", "Home")">
-                            <div class="gui-icon"><i class="md md-home"></i>
-                            </div>
-                            <span class="title">Admin Dashboard</span>
-                        </a>
-                    </li><!--end /menu-li -->
-                    <!-- END DASHBOARD -->
-                    <!-- BEGIN PRODUCTS -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Products</span>
-                        </a>
-                        <!--start submenu -->""
-                        <ul>
-                            <li><a href="@Url.Action("AdminIndex", "Products")">Search</a></li>
-                            <li>
-                                <a class="page-scroll" href="@Url.Action("Create", "Products")">Create</a>
-                            </li>
-                            <li>
-                                <a class="page-scroll" href="@Url.Action("UploadProducts", "Products")">Upload Products</a>
-                            </li>
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                    <!-- BEGIN CATEGORIES -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Category</span>
-                        </a>
-                        <!--start submenu -->
-                        <ul>
-                            <li><a href="@Url.Action("Index", "Categories")">Search</a></li>
-                            <li><a href="@Url.Action("Create", "Categories")">Create</a></li>
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                    <!-- BEGIN STOCKS -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Stocks</span>
-                        </a>
-                        <!--start submenu -->
-                        <ul>
-                            <li><a href="@Url.Action("Index", "Stocks")">View Stock</a></li>
-                            <li><a href="@Url.Action("Create", "Stocks")">Add to Stock</a></li>
-                            <li><a href="@Url.Action("ItemLeft", "Products")">Item Left in Stock</a></li>
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                    <!-- BEGIN SALES -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Sales</span>
-                        </a>
-                        <!--start submenu -->
-                        <ul>
-
-                            <li><a href="@Url.Action("Index", "Sales")">Search</a></li>
-                            <li><a href="@Url.Action("DailySales", "Sales")">Daily Sales</a></li>
-                            @*<li><a href="@Url.Action("Create", "Account")">Add User</a></li>
+                                <li><a href="@Url.Action("Index", "Sales")">Search</a></li>
+                                <li><a href="@Url.Action("DailySales", "Sales")">Daily Sales</a></li>
+                                @*<li><a href="@Url.Action("Create", "Account")">Add User</a></li>
                                     <li>
                                         <a class="page-scroll" href="@Url.Action("Index", "Posts")">NEWS</a>
                                     </li>*@
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                    <!-- BEGIN ANALYTICS -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Analytics</span>
-                        </a>
-                        <!--start submenu -->
-                        <ul>
-                            <li><a href="@Url.Action("Index", "Analytics")">Statistics</a></li> s
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                    <!-- BEGIN SUPPLIERS -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Suppliers</span>
-                        </a>
-                        <!--start submenu -->
-                        <ul>
-                            <li><a href="@Url.Action("Index", "Suppliers")">Search Supplier</a></li>
-                            <li><a href="@Url.Action("Create", "Suppliers")">Add Supplier</a></li>
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                    <!-- BEGIN ROLES -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">User Role</span>
-                        </a>
-                        <!--start submenu -->
-                        <ul>
-                            <li><a href="@Url.Action("Index", "Account")">Search Users</a></li>
-                            <li>@Html.ActionLink("Register Users", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</li>
-                            <li><a href="@Url.Action("Index", "RolesAdmin")">View User Roles</a></li>
-                            <li><a href="@Url.Action("Create", "RolesAdmin")">Add User Role</a></li>
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                </ul><!--end .main-menu -->
-                <!-- END MAIN MENU -->
-                @*<div class="menubar-foot-panel">
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN ANALYTICS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Analytics</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("Index", "Analytics")">Statistics</a></li> 
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN SUPPLIERS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Suppliers</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("Index", "Suppliers")">Search Supplier</a></li>
+                                <li><a href="@Url.Action("Create", "Suppliers")">Add Supplier</a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN ROLES -->
+                       
+                    </ul><!--end .main-menu -->
+                    <!-- END MAIN MENU -->
+                    @*<div class="menubar-foot-panel">
 
                             <span class="opacity-75">
                                 &copy; @DateTime.Now.Year All rights reserved.
@@ -433,95 +456,97 @@ else if (Request.IsAuthenticated && User.IsInRole("Admin"))
 
                             <span class="opacity-75">Designed by Joseph</span>
                         </div>*@
-            </div><!--end .menubar-scroll-panel-->
-        </div><!--end #menubar-->
-        <!-- END MENUBAR -->
-    </div><!--end #base-->
+                </div><!--end .menubar-scroll-panel-->
+            </div><!--end #menubar-->
+            <!-- END MENUBAR -->
+        </div><!--end #base-->
     <!-- END BASE -->
-}
-else if (Request.IsAuthenticated && User.IsInRole("Stock Manager"))
-{
-   
+    }
+    else if (Request.IsAuthenticated && User.IsInRole("Professional"))
+    {
+
     <!-- BEGIN BASE-->
-    <div id="base">
+        <div id="base">
 
-        <!-- BEGIN OFFCANVAS LEFT -->
-        <div class="offcanvas">
-        </div><!--end .offcanvas-->
-        <!-- END OFFCANVAS LEFT -->
-        <!-- BEGIN CONTENT-->
-        <div id="content">
+            <!-- BEGIN OFFCANVAS LEFT -->
+            <div class="offcanvas">
+            </div><!--end .offcanvas-->
+            <!-- END OFFCANVAS LEFT -->
+            <!-- BEGIN CONTENT-->
+            <div id="content">
 
-            <!-- BEGIN BLANK SECTION -->
-            <section>
-                <div class="section-body">
-                    @RenderBody()
+                <!-- BEGIN BLANK SECTION -->
+                <section>
+                    <div class="section-body">
+                        @RenderBody()
 
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div class="menubar-foot-panel">
+                        <br />
+                        <br />
+                        <br />
+                        <div class="menubar-foot-panel">
 
-                        <span class="opacity-75">
-                            &copy;DESIGNER'S CHOICE @DateTime.Now.Year All rights reserved.
-                        </span>
+                            <span class="opacity-75">
+                                &copy;AJAOKO FARMS @DateTime.Now.Year All rights reserved.
+                            </span>
 
-                        <span class="opacity-75">Designed by Ayokunle</span>
+                            <span class="opacity-75">Designed by Ajileye Joe & Ogbosuka Chris</span>
+                        </div>
+                        <hr />
                     </div>
-                    <hr/>
-                </div>
-            </section>
+                </section>
 
-            <!-- BEGIN BLANK SECTION -->
-        </div><!--end #content-->
-        <!-- END CONTENT -->
-        <!-- BEGIN MENUBAR-->
-        <div id="menubar" class="menubar-inverse ">
-            <div class="menubar-fixed-panel">
-                <div>
-                    <a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
-                        <i class="fa fa-bars"></i>
-                    </a>
-                </div>
-                <div class="expanded">
-                    <a href="#">
-                        <span class="text-lg text-bold text-primary ">DESIGNER'S CHOICE)</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="menubar-scroll-panel">
-
-                <!-- BEGIN MAIN MENU -->
-                <ul id="main-menu" class="gui-controls">
-
-                    <!-- BEGIN DASHBOARD -->
-                    <li>
-                        <a href="@Url.Action("Index", "Home")">
-                            <div class="gui-icon"><i class="md md-home"></i>
-                            </div>
-                            <span class="title">Admin Dashboard</span>
+                <!-- BEGIN BLANK SECTION -->
+            </div><!--end #content-->
+            <!-- END CONTENT -->
+            <!-- BEGIN MENUBAR-->
+            <div id="menubar" class="menubar-inverse ">
+                <div class="menubar-fixed-panel">
+                    <div>
+                        <a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+                            <i class="fa fa-bars"></i>
                         </a>
-                    </li><!--end /menu-li -->
-                    <!-- END DASHBOARD -->
-                    <!-- BEGIN STOCKS -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Stocks</span>
+                    </div>
+                    <div class="expanded">
+                        <a href="#">
+                            <span class="text-lg text-bold text-primary ">AJAOKO FARM)</span>
                         </a>
-                        <!--start submenu -->
-                        <ul>
-                            <li><a href="@Url.Action("Index", "Stocks")">View Stock</a></li>
-                            <li><a href="@Url.Action("Create", "Stocks")">Add to Stock</a></li>
-                            <li><a href="@Url.Action("ItemLeft", "Products")">Item Left in Stock</a></li>
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                    <!-- BEGIN SALES -->
-                </ul><!--end .main-menu -->
-                <!-- END MAIN MENU -->
-                @*<div class="menubar-foot-panel">
+                    </div>
+                </div>
+
+                <div class="menubar-scroll-panel">
+
+                    <!-- BEGIN MAIN MENU -->
+                    <ul id="main-menu" class="gui-controls">
+
+                        <!-- BEGIN DASHBOARD -->
+                        <li>
+                            <a href="@Url.Action("Index", "Home")">
+                                <div class="gui-icon">
+                                    <i class="md md-home"></i>
+                                </div>
+                                <span class="title">Admin Dashboard</span>
+                            </a>
+                        </li><!--end /menu-li -->
+                        <!-- END DASHBOARD -->
+                        <!-- BEGIN STOCKS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Stocks</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("Index", "Stocks")">View Stock</a></li>
+                                <li><a href="@Url.Action("Create", "Stocks")">Add to Stock</a></li>
+                                <li><a href="@Url.Action("ItemLeft", "Products")">Item Left in Stock</a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN SALES -->
+                    </ul><!--end .main-menu -->
+                    <!-- END MAIN MENU -->
+                    @*<div class="menubar-foot-panel">
 
                             <span class="opacity-75">
                                 &copy; @DateTime.Now.Year All rights reserved.
@@ -529,110 +554,113 @@ else if (Request.IsAuthenticated && User.IsInRole("Stock Manager"))
 
                             <span class="opacity-75">Designed by Joseph</span>
                         </div>*@
-            </div><!--end .menubar-scroll-panel-->
-        </div><!--end #menubar-->
-        <!-- END MENUBAR -->
-    </div><!--end #base-->
+                </div><!--end .menubar-scroll-panel-->
+            </div><!--end #menubar-->
+            <!-- END MENUBAR -->
+        </div><!--end #base-->
     <!-- END BASE -->
-}
-else if (Request.IsAuthenticated && User.IsInRole("SalesRep"))
-{
+    }
+    else if (Request.IsAuthenticated && User.IsInRole("SalesRep"))
+    {
 
     <!-- BEGIN BASE-->
-    <div id="base">
+        <div id="base">
 
-        <!-- BEGIN OFFCANVAS LEFT -->
-        <div class="offcanvas">
-        </div><!--end .offcanvas-->
-        <!-- END OFFCANVAS LEFT -->
-        <!-- BEGIN CONTENT-->
-        <div id="content">
+            <!-- BEGIN OFFCANVAS LEFT -->
+            <div class="offcanvas">
+            </div><!--end .offcanvas-->
+            <!-- END OFFCANVAS LEFT -->
+            <!-- BEGIN CONTENT-->
+            <div id="content">
 
-            <!-- BEGIN BLANK SECTION -->
-            <section>
-                <div class="section-body">
-                    @RenderBody()
+                <!-- BEGIN BLANK SECTION -->
+                <section>
+                    <div class="section-body">
+                        @RenderBody()
 
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div class="menubar-foot-panel">
+                        <br />
+                        <br />
+                        <br />
+                        <div class="menubar-foot-panel">
 
-                        <span class="opacity-75">
-                            &copy;DESIGNER'S CHOICE @DateTime.Now.Year All rights reserved.
-                        </span>
+                            <span class="opacity-75">
+                                &copy;DESIGNER'S CHOICE @DateTime.Now.Year All rights reserved.
+                            </span>
 
-                        <span class="opacity-75">Designed by Ayokunle</span>
+                            <span class="opacity-75">Designed by Ayokunle</span>
+                        </div>
+                        <hr />
                     </div>
-                    <hr/>
-                </div>
-            </section>
+                </section>
 
-            <!-- BEGIN BLANK SECTION -->
-        </div><!--end #content-->
-        <!-- END CONTENT -->
-        <!-- BEGIN MENUBAR-->
-        <div id="menubar" class="menubar-inverse ">
-            <div class="menubar-fixed-panel">
-                <div>
-                    <a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
-                        <i class="fa fa-bars"></i>
-                    </a>
-                </div>
-                <div class="expanded">
-                    <a href="#">
-                        <span class="text-lg text-bold text-primary ">DESIGNER'S CHOICE)</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="menubar-scroll-panel">
-
-                <!-- BEGIN MAIN MENU -->
-                <ul id="main-menu" class="gui-controls">
-
-                    <!-- BEGIN DASHBOARD -->
-                    <li>
-                        <a href="@Url.Action("Index", "Home")">
-                            <div class="gui-icon"><i class="md md-home"></i>
-                            </div>
-                            <span class="title">Saless Dashboard</span>
+                <!-- BEGIN BLANK SECTION -->
+            </div><!--end #content-->
+            <!-- END CONTENT -->
+            <!-- BEGIN MENUBAR-->
+            <div id="menubar" class="menubar-inverse ">
+                <div class="menubar-fixed-panel">
+                    <div>
+                        <a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+                            <i class="fa fa-bars"></i>
                         </a>
-                    </li><!--end /menu-li -->
-                    <!-- END DASHBOARD -->
-                    <!-- BEGIN PRODUCTS -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Products</span>
+                    </div>
+                    <div class="expanded">
+                        <a href="#">
+                            <span class="text-lg text-bold text-primary ">DESIGNER'S CHOICE)</span>
                         </a>
-                        <!--start submenu -->
-                        <ul>
-                            <li><a href="@Url.Action("Index", "Products")">Search</a></li>
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                    <!-- BEGIN SALES -->
-                    <li class="gui-folder">
-                        <a>
-                            <div class="gui-icon"><i class="md md-account-box"></i>
-                            </div>
-                            <span class="title">Sales</span>
-                        </a>
-                        <!--start submenu -->
-                        <ul>
-                            <li><a href="@Url.Action("DailySales", "Sales")">Daily Sales</a></li>
-                            <li><a href="@Url.Action("DownloadDailyReport", "Sales")">Download Daily Sales</a></li>
-                            <li><a href="@Url.Action("NotifyByEmail", "Sales")">Notify Sales</a></li>
-                            @*<li><a href="@Url.Action("Create", "Account")">Add User</a></li>
+                    </div>
+                </div>
+
+                <div class="menubar-scroll-panel">
+
+                    <!-- BEGIN MAIN MENU -->
+                    <ul id="main-menu" class="gui-controls">
+
+                        <!-- BEGIN DASHBOARD -->
+                        <li>
+                            <a href="@Url.Action("Index", "Home")">
+                                <div class="gui-icon">
+                                    <i class="md md-home"></i>
+                                </div>
+                                <span class="title">Saless Dashboard</span>
+                            </a>
+                        </li><!--end /menu-li -->
+                        <!-- END DASHBOARD -->
+                        <!-- BEGIN PRODUCTS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Products</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("Index", "Products")">Search</a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN SALES -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Sales</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("DailySales", "Sales")">Daily Sales</a></li>
+                                <li><a href="@Url.Action("DownloadDailyReport", "Sales")">Download Daily Sales</a></li>
+                                <li><a href="@Url.Action("NotifyByEmail", "Sales")">Notify Sales</a></li>
+                                @*<li><a href="@Url.Action("Create", "Account")">Add User</a></li>
                                     <li>
                                         <a class="page-scroll" href="@Url.Action("Index", "Posts")">NEWS</a>
                                     </li>*@
-                        </ul><!--end /submenu -->
-                    </li><!--end /menu-li -->
-                </ul><!--end .main-menu -->
-                <!-- END MAIN MENU -->
-                @*<div class="menubar-foot-panel">
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                    </ul><!--end .main-menu -->
+                    <!-- END MAIN MENU -->
+                    @*<div class="menubar-foot-panel">
 
                             <span class="opacity-75">
                                 &copy; @DateTime.Now.Year All rights reserved.
@@ -640,68 +668,69 @@ else if (Request.IsAuthenticated && User.IsInRole("SalesRep"))
 
                             <span class="opacity-75">Designed by Joseph</span>
                         </div>*@
-            </div><!--end .menubar-scroll-panel-->
-        </div><!--end #menubar-->
-        <!-- END MENUBAR -->
-    </div><!--end #base-->
+                </div><!--end .menubar-scroll-panel-->
+            </div><!--end #menubar-->
+            <!-- END MENUBAR -->
+        </div><!--end #base-->
     <!-- END BASE -->
-}
-else
-{
+    }
+    else
+    {
 
     <!-- BEGIN CONTENT-->
-    <div id="content">
+        <div id="content">
 
-        <!-- BEGIN BLANK SECTION -->
-        <section>
-            <div class="section-body">
-                @RenderBody()
-                <hr/>
-                <br/>
-                <br/>
-                <div class="menubar-foot-panel">
-
-                    <span class="opacity-75">
-                        &copy;DESIGNER'S CHOICE @DateTime.Now.Year All rights reserved.
-                    </span>
-
-                    <span class="opacity-75">Designed by Ayokunle</span>
+            <!-- BEGIN BLANK SECTION -->
+            <section>
+                <div class="section-body">
+                    @RenderBody()
+                    <hr />
+                    <br />
+                    <br />
+                    <div class="menubar-foot-panel">
+                        <p>
+                            <span class="opacity-75">
+                                &copy;AJAOKO FARMS @DateTime.Now.Year All rights reserved.
+                            </span>
+                        </p>
+                        <p>
+                            <span class="opacity-75">
+                                |Designed by Ajileye Joe, Ogbosuka Chris|
+                            </span>
+                        </p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- BEGIN BLANK SECTION -->
-    </div><!--end #content-->
+            <!-- BEGIN BLANK SECTION -->
+        </div><!--end #content-->
     <!-- END CONTENT -->
 
     <!-- END BASE -->
-}
-<!-- BEGIN JAVASCRIPT -->
-<script src="~/assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
-<script src="~/assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+    }
+    <!-- BEGIN JAVASCRIPT -->
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
 <script src="~/assets/js/libs/bootstrap/bootstrap.min.js"></script>
-<script src="~/assets/js/libs/spin.js/spin.min.js"></script>
-<script src="~/assets/js/libs/autosize/jquery.autosize.min.js"></script>
-<script src="~/assets/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
-<script src="~/assets/js/core/source/App.js"></script>
-<script src="~/assets/js/core/source/AppNavigation.js"></script>
-<script src="~/assets/js/core/source/AppOffcanvas.js"></script>
-<script src="~/assets/js/core/source/AppCard.js"></script>
-<script src="~/assets/js/core/source/AppForm.js"></script>
-<script src="~/assets/js/core/source/AppNavSearch.js"></script>
-<script src="~/assets/js/core/source/AppVendor.js"></script>
+@*<script src="~/assets/js/libs/jquery/jquery-1.11.2.min.js"></script>*@
+<script src="~/assets/js/libs/ckeditor/ckeditor.js"></script>
+<script src="~/assets/js/libs/ckeditor/adapters/jquery.js"></script>
+<script src="~/assets/js/libs/summernote/summernote.min.js"></script>
 <script src="~/assets/js/core/demo/Demo.js"></script>
+<script src="~/assets/js/core/demo/DemoFormEditors.js"></script>
+<script src="~/assets/js/core/source/AppNavigation.js"></script>
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@*@RenderSection("scripts", required: false)*@
-<!-- END JAVASCRIPT -->
-@RenderSection("scripts", required: false)
+<script src="~/assets/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
 
-<script src="~/lcsk/assets/js/jquery.signalR-2.1.1.min.js" type="text/javascript"></script>
-<script src="~/signalr/hubs" type="text/javascript"></script>
-<script src="~/lcsk/chat.js" type="text/javascript"></script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560770f61b38eef5" async="async"></script>
-<script type="text/javascript" src="~/Scripts/twitter.js" async="async"></script>
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
+    @*@RenderSection("scripts", required: false)*@
+    <!-- END JAVASCRIPT -->
+    @RenderSection("scripts", required: false)
+
+    @*<script src="~/lcsk/assets/js/jquery.signalR-2.1.1.min.js" type="text/javascript"></script>
+    <script src="~/signalr/hubs" type="text/javascript"></script>
+    <script src="~/lcsk/chat.js" type="text/javascript"></script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560770f61b38eef5" async="async"></script>
+    <script type="text/javascript" src="~/Scripts/twitter.js" async="async"></script>*@
 </body>
 </html>

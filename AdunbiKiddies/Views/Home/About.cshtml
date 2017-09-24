@@ -1,7 +1,22 @@
-﻿@{
+﻿
+@{
+
+    Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+
+@Html.Partial("~/Views/Shared/Partials/_PageUpper.cshtml")
+
+
+@Html.Partial("~/Views/Shared/Partials/_PageLower.cshtml")
+
+@*Put any of desired single page content here*@
+
+<h2 style="color:green; font-weight:bold; font-family:Gabriola"> @ViewBag.Title</h2>
+<h4> @ViewBag.Messaga</h4>
+
+
+
+
+

@@ -14,7 +14,7 @@ namespace AdunbiKiddies.Controllers
 {
     public class AnalyticsController : BaseController
     {
-        private AjaoOkoDb _db = new AjaoOkoDb();
+       // private AjaoOkoDb _db = new AjaoOkoDb();
         AnalyticsViewModel vm = new AnalyticsViewModel();
 
         // GET: Analytics

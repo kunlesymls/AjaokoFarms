@@ -48,9 +48,17 @@ namespace AdunbiKiddies.Models
         public DbSet<Merchant> Merchants { get; set; }
         public DbSet<ProfessionalWorker> ProfessionalWorkers { get; set; }
 
+        public DbSet<Contact> Contacts { get; set; }
+
         public DbSet<PartnerShipAgreement> PartnerShipAgreements { get; set; }
+        public DbSet<ProfessionalPayment> ProfessionalPayments { get; set; }
+
         public DbSet<BankDetail> BankDetails { get; set; }
 
-        public System.Data.Entity.DbSet<OpenOrderFramework.Models.ProfessionalPayment> ProfessionalPayments { get; set; }
+        public DbSet<BusinessRegistration> BusinessRegistrations { get; set; }
+
+        public DbSet<BusinessAddress> BusinessAddresses { get; set; }
+
+        public System.Data.Entity.DbSet<AdunbiKiddies.Models.BusinessDocument> BusinessDocuments { get; set; }
     }
 }
