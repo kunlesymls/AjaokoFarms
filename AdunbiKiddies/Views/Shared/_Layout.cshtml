@@ -97,7 +97,7 @@
                                 &copy;AJAOKO FARMS @DateTime.Now.Year All rights reserved.
                             </span>
 
-                            <span class="opacity-75">Designed by Joe kunle & Ogbosuka Chris</span>
+                            <span class="opacity-75">Designed by Joe & Chris</span>
                         </div>
                         <hr />
                     </div>
@@ -136,6 +136,41 @@
                             </a>
                         </li><!--end /menu-li -->
                         <!-- END DASHBOARD -->
+                    
+                        <!-- BEGIN MERCHANT -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Merchants</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("AdminIndex", "Products")">View</a></li>
+                                <li>
+                                    <a class="page-scroll" href="@Url.Action("Create", "Products")">Approve</a>
+                                </li>
+                               
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN PROFESSIONAL -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
+                                <span class="title">Professionals</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("AdminIndex", "Products")">View</a></li>
+                                <li>
+                                    <a class="page-scroll" href="@Url.Action("Create", "Products")">Approve</a>
+                                </li>
+                               
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
                         <!-- BEGIN PRODUCTS -->
                         <li class="gui-folder">
                             <a>
@@ -144,14 +179,11 @@
                                 </div>
                                 <span class="title">Products</span>
                             </a>
-                            <!--start submenu -->""
+                            <!--start submenu -->
                             <ul>
-                                <li><a href="@Url.Action("AdminIndex", "Products")">Search</a></li>
+                                <li><a href="@Url.Action("AdminIndex", "Products")">View</a></li>
                                 <li>
-                                    <a class="page-scroll" href="@Url.Action("Create", "Products")">Create</a>
-                                </li>
-                                <li>
-                                    <a class="page-scroll" href="@Url.Action("UploadProducts", "Products")">Upload Products</a>
+                                    <a class="page-scroll" href="@Url.Action("Create", "Products")">Appove</a>
                                 </li>
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
@@ -170,20 +202,7 @@
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
                         <!-- BEGIN STOCKS -->
-                        <li class="gui-folder">
-                            <a>
-                                <div class="gui-icon">
-                                    <i class="md md-account-box"></i>
-                                </div>
-                                <span class="title">Stocks</span>
-                            </a>
-                            <!--start submenu -->
-                            <ul>
-                                <li><a href="@Url.Action("Index", "Stocks")">View Stock</a></li>
-                                <li><a href="@Url.Action("Create", "Stocks")">Add to Stock</a></li>
-                                <li><a href="@Url.Action("ItemLeft", "Products")">Item Left in Stock</a></li>
-                            </ul><!--end /submenu -->
-                        </li><!--end /menu-li -->
+                        
                         <!-- BEGIN SALES -->
                         <li class="gui-folder">
                             <a>
@@ -217,19 +236,7 @@
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
                         <!-- BEGIN SUPPLIERS -->
-                        <li class="gui-folder">
-                            <a>
-                                <div class="gui-icon">
-                                    <i class="md md-account-box"></i>
-                                </div>
-                                <span class="title">Suppliers</span>
-                            </a>
-                            <!--start submenu -->
-                            <ul>
-                                <li><a href="@Url.Action("Index", "Suppliers")">Search Supplier</a></li>
-                                <li><a href="@Url.Action("Create", "Suppliers")">Add Supplier</a></li>
-                            </ul><!--end /submenu -->
-                        </li><!--end /menu-li -->
+                       
                         <!-- BEGIN ROLES -->
                         <li class="gui-folder">
                             <a>
@@ -243,7 +250,6 @@
                                 <li><a href="@Url.Action("Index", "Account")">Search Users</a></li>
                                 <li>@Html.ActionLink("Register Users", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
                                 <li><a href="@Url.Action("Index", "RolesAdmin")">View User Roles</a></li>
-                                <li><a href="@Url.Action("Create", "RolesAdmin")">Add User Role</a></li>
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
                     </ul><!--end .main-menu -->
@@ -289,7 +295,7 @@
                                 &copy;AJAOKO FARMS @DateTime.Now.Year All rights reserved.
                             </span>
 
-                            <span class="opacity-75">Designed by Joe Ajileye & Ogbosuka Chris</span>
+                            <span class="opacity-75">Designed by Joe & Chris</span>
                         </div>
                         <hr />
                     </div>
@@ -356,7 +362,7 @@
                             </a>
                             <!--start submenu -->
                             <ul>
-                                <li><a href="@Url.Action("Index", "BankDetails")">Registration</a></li>
+                                <li><a href="@Url.Action("Index", "BusinessRegistrations")">Registration</a></li>
                                 <li><a href="@Url.Action("Index", "BusinessAddresses")">Address</a></li>
                                 <li><a href="@Url.Action("Index", "BusinessDocuments")">Document</a></li>
                                 <li><a href="@Url.Action("Index", "PartnerShipAgreements")">Agreement</a></li>
@@ -489,7 +495,7 @@
                                 &copy;AJAOKO FARMS @DateTime.Now.Year All rights reserved.
                             </span>
 
-                            <span class="opacity-75">Designed by Ajileye Joe & Ogbosuka Chris</span>
+                            <span class="opacity-75">Designed by Joe & Chris</span>
                         </div>
                         <hr />
                     </div>
@@ -544,120 +550,6 @@
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
                         <!-- BEGIN SALES -->
-                    </ul><!--end .main-menu -->
-                    <!-- END MAIN MENU -->
-                    @*<div class="menubar-foot-panel">
-
-                            <span class="opacity-75">
-                                &copy; @DateTime.Now.Year All rights reserved.
-                            </span>
-
-                            <span class="opacity-75">Designed by Joseph</span>
-                        </div>*@
-                </div><!--end .menubar-scroll-panel-->
-            </div><!--end #menubar-->
-            <!-- END MENUBAR -->
-        </div><!--end #base-->
-    <!-- END BASE -->
-    }
-    else if (Request.IsAuthenticated && User.IsInRole("SalesRep"))
-    {
-
-    <!-- BEGIN BASE-->
-        <div id="base">
-
-            <!-- BEGIN OFFCANVAS LEFT -->
-            <div class="offcanvas">
-            </div><!--end .offcanvas-->
-            <!-- END OFFCANVAS LEFT -->
-            <!-- BEGIN CONTENT-->
-            <div id="content">
-
-                <!-- BEGIN BLANK SECTION -->
-                <section>
-                    <div class="section-body">
-                        @RenderBody()
-
-                        <br />
-                        <br />
-                        <br />
-                        <div class="menubar-foot-panel">
-
-                            <span class="opacity-75">
-                                &copy;DESIGNER'S CHOICE @DateTime.Now.Year All rights reserved.
-                            </span>
-
-                            <span class="opacity-75">Designed by Ayokunle</span>
-                        </div>
-                        <hr />
-                    </div>
-                </section>
-
-                <!-- BEGIN BLANK SECTION -->
-            </div><!--end #content-->
-            <!-- END CONTENT -->
-            <!-- BEGIN MENUBAR-->
-            <div id="menubar" class="menubar-inverse ">
-                <div class="menubar-fixed-panel">
-                    <div>
-                        <a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
-                            <i class="fa fa-bars"></i>
-                        </a>
-                    </div>
-                    <div class="expanded">
-                        <a href="#">
-                            <span class="text-lg text-bold text-primary ">DESIGNER'S CHOICE)</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="menubar-scroll-panel">
-
-                    <!-- BEGIN MAIN MENU -->
-                    <ul id="main-menu" class="gui-controls">
-
-                        <!-- BEGIN DASHBOARD -->
-                        <li>
-                            <a href="@Url.Action("Index", "Home")">
-                                <div class="gui-icon">
-                                    <i class="md md-home"></i>
-                                </div>
-                                <span class="title">Saless Dashboard</span>
-                            </a>
-                        </li><!--end /menu-li -->
-                        <!-- END DASHBOARD -->
-                        <!-- BEGIN PRODUCTS -->
-                        <li class="gui-folder">
-                            <a>
-                                <div class="gui-icon">
-                                    <i class="md md-account-box"></i>
-                                </div>
-                                <span class="title">Products</span>
-                            </a>
-                            <!--start submenu -->
-                            <ul>
-                                <li><a href="@Url.Action("Index", "Products")">Search</a></li>
-                            </ul><!--end /submenu -->
-                        </li><!--end /menu-li -->
-                        <!-- BEGIN SALES -->
-                        <li class="gui-folder">
-                            <a>
-                                <div class="gui-icon">
-                                    <i class="md md-account-box"></i>
-                                </div>
-                                <span class="title">Sales</span>
-                            </a>
-                            <!--start submenu -->
-                            <ul>
-                                <li><a href="@Url.Action("DailySales", "Sales")">Daily Sales</a></li>
-                                <li><a href="@Url.Action("DownloadDailyReport", "Sales")">Download Daily Sales</a></li>
-                                <li><a href="@Url.Action("NotifyByEmail", "Sales")">Notify Sales</a></li>
-                                @*<li><a href="@Url.Action("Create", "Account")">Add User</a></li>
-                                    <li>
-                                        <a class="page-scroll" href="@Url.Action("Index", "Posts")">NEWS</a>
-                                    </li>*@
-                            </ul><!--end /submenu -->
-                        </li><!--end /menu-li -->
                     </ul><!--end .main-menu -->
                     <!-- END MAIN MENU -->
                     @*<div class="menubar-foot-panel">

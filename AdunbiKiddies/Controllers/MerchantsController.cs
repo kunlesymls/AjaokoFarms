@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using AdunbiKiddies.Models;
+using Microsoft.AspNet.Identity;
 using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using AdunbiKiddies.Models;
 
 namespace AdunbiKiddies.Controllers
 {
     public class MerchantsController : BaseController
     {
-       // private AjaoOko_db _db = new AjaoOko_db();
+        // private AjaoOko_db _db = new AjaoOko_db();
 
         // GET: MerchantsTest
         public async Task<ActionResult> Index()
@@ -27,7 +23,7 @@ namespace AdunbiKiddies.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                id = User.Identity.GetUserId();
             }
             Merchant merchant = await _db.Merchants.FindAsync(id);
             if (merchant == null)
@@ -67,7 +63,7 @@ namespace AdunbiKiddies.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                id = User.Identity.GetUserId();
             }
             Merchant merchant = await _db.Merchants.FindAsync(id);
             if (merchant == null)

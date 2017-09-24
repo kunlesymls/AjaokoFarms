@@ -44,7 +44,32 @@ namespace AdunbiKiddies
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your SMS service here to send a text message.
-            return Task.FromResult(0);
+            var _smsService = new SmsServiceTemp();
+
+            string body = message.Body;
+            string destination = message.Destination;
+            var sms = new Sms()
+            {
+                Sender = "AJAOKO",
+                Message = body,
+                Recipient = destination
+            };
+            bool isSuccess = false;
+            string errMsg = null;
+            string response = _smsService.Send(sms); //Send sms
+
+            string code = _smsService.GetResponseMessage(response, out isSuccess, out errMsg);
+
+            if (!isSuccess)
+            {
+                isSuccess = false;
+            }
+            else
+            {
+                isSuccess = true;
+            }
+
+            return Task.FromResult(true);
         }
     }
 

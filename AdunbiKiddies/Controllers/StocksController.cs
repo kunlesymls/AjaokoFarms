@@ -1,5 +1,6 @@
 ﻿using AdunbiKiddies.Models;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
@@ -38,7 +39,7 @@ namespace AdunbiKiddies.Controllers
         // GET: Stocks/Create
         public ActionResult Create()
         {
-            ViewBag.Name = new SelectList(_db.Products, "ProductId", "Name");
+            ViewBag.ProductId = new SelectList(_db.Products, "ProductId", "Name");
             ViewBag.StaffName = User.Identity.GetUserName().ToString();
             return View();
         }
@@ -48,12 +49,13 @@ namespace AdunbiKiddies.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Name,Quantity,Date,StaffName,Status")] Stock stock)
+        public async Task<ActionResult> Create(Stock stock)
         {
             string messag1 = "";
             string messag2 = "";
             if (ModelState.IsValid)
             {
+                stock.Date = DateTime.Now;
                 _db.Stocks.Add(stock);
                 //User myUser = myDBContext.Users.SingleOrDefault(user => user.Username == username);
                 //var user = _db.Users.Where(c => c.Email.Equals(model.Email)).SingleOrDefault();

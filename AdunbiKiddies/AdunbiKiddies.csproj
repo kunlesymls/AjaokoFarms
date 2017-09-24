@@ -221,6 +221,7 @@
     <Compile Include="Controllers\MerchantsController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\PartnerShipAgreementsController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProductSearchsController.cs" />
     <Compile Include="Controllers\ProfessionalPaymentsController.cs" />
@@ -2459,6 +2460,12 @@
     <Content Include="Views\BusinessDocuments\Details.cshtml" />
     <Content Include="Views\BusinessDocuments\Edit.cshtml" />
     <Content Include="Views\BusinessDocuments\Index.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Account\RegisterProfessional.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

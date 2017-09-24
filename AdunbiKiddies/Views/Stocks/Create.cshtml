@@ -15,36 +15,36 @@
         <h4>Stock</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        @*<div class="form-group">
             <div class="control-label col-md-2">Product BarCode</div>
-            <div class="col-md-10">
+            <div class="col-md-5">
                 <input id="BarcodeInput" name="Name" type="text" autofocus />
                 <br>
                 <div class="test">
                     <input id="scannerInput" type="text" value="barcodescan" autofocus />
                 </div>
             </div>
+        </div>*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductId, "ProductId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.DropDownList("ProductId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+            </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-5">
                 @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-            </div>
-        </div>
+   
 
         <div class="form-group">
             @Html.LabelFor(model => model.StaffName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-5">
                 @Html.Editor("StaffName", (string)(ViewBag.StaffName), new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
                 @Html.ValidationMessageFor(model => model.StaffName, "", new { @class = "text-danger" })
             </div>
@@ -52,14 +52,14 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-5">
                 @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-2 col-md-5">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
@@ -70,7 +70,7 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-1.5.2.min.js"></script>
 <script type="text/javascript">
     $(document).scannerDetection({
 
