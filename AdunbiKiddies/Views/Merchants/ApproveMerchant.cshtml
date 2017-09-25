@@ -1,31 +1,35 @@
 ﻿@model IEnumerable<AdunbiKiddies.Models.Merchant>
 
 @{
-    ViewBag.Title = "Merchant Index";
+    ViewBag.Title = "Approve Merchant";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>
-    <strong>
-        <br />
-        <span style="color: green">List Of </span> <span style="color: red">Merchants</span>
+<h2> <strong >
+        <br/>
+        <span style="color: green">Approve</span> <span style="color: red">Merchant</span>
     </strong>
-    <br />
+    <br/>
 </h2>
 
 <p>
-    &nbsp;
+    @*@Html.ActionLink("Create New", "Create")*@ 
 </p>
 <table class="table">
-    <tr class="table-bordered" style="color: #82c158; font-weight: bold; border-bottom: 1px solid red ">
-        
+    <tr style="margin: 5px">
+        <th>@*style="border-color:red"*@
+            @Html.DisplayNameFor(model => model.IsVerified)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.FullName)
         </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.MiddleName)
+        </th>
         <th>
-            @Html.DisplayNameFor(model => model.CompanyName)
-        </th> 
-        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.Gender)
         </th>
         <th>
@@ -33,41 +37,33 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.PartnerShipAgreement.WebisteLink)
         </th>
-
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
         @*<th>
             @Html.DisplayNameFor(model => model.PreferedStoreName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsReffered)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BusinessEntry)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdCardName)
         </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.IsReffered)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.BusinessEntry)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.IdCardName)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.RegistrationNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsVerified)
-        </th>
-        
-        @*<th>
-            @Html.DisplayNameFor(model => model.MiddleName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
         </th>*@
-        
+
         @*<th>
             @Html.DisplayNameFor(model => model.TownOfBirth)
-        </th>
-        <th>
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.StateOfOrigin)
         </th>
         <th>
@@ -80,15 +76,21 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr class="autosize">
-        
+    <tr style="margin-bottom: 5px">
+        <td>
+            @Html.DisplayFor(modelItem => item.IsVerified)
+        </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.FullName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompanyName)
-        </td>
-        <td>
+        @*<td>
+        @Html.DisplayFor(modelItem => item.MiddleName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastName)
+    </td>*@
+        @*<td>
             @Html.DisplayFor(modelItem => item.Gender)
         </td>
         <td>
@@ -96,11 +98,13 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.PartnerShipAgreement.WebisteLink)
         </td>
-        
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
         @*<td>
             @Html.DisplayFor(modelItem => item.PreferedStoreName)
         </td>
@@ -109,24 +113,14 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.BusinessEntry)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdCardName)
         </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.IdCardName)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.RegistrationNo)
-        </td>
-        <td class="checkbox-danger error">
-            @Html.DisplayFor(modelItem => item.IsVerified)
-        </td>
-
-        @*<td>
-            @Html.DisplayFor(modelItem => item.MiddleName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
         </td>*@
-        
+
         @*<td>
             @Html.DisplayFor(modelItem => item.TownOfBirth)
         </td>
@@ -141,16 +135,12 @@
         </td>
         <td>
             <button class="btn btn-sm" style="color: Black; border-color: green">
-                @Html.ActionLink("Details", "Details", new {id = item.MerchantId})
-
+                @Html.ActionLink("Approve Merchant", "ApproveMerchant", new {id = item.MerchantId})
             </button>
 
-            <button class="btn btn-sm" style="color: Black; border-color: red">
-                @Html.ActionLink("Delete", "Delete", new {id = item.MerchantId})
-            </button>
+
         </td>
     </tr>
 }
 
 </table>
-

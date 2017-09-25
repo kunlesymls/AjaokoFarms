@@ -2406,7 +2406,7 @@
     <Content Include="Views\Shared\Partials\_HeaderPartial.cshtml" />
     <Content Include="Views\Shared\Partials\_FooterPartial.cshtml" />
     <Content Include="Views\Shared\Partials\_SubCategoryPartial.cshtml" />
-    <Content Include="Views\Home\Index1.cshtml" />
+    <Content Include="Views\Home\Landing.cshtml" />
     <Content Include="Views\Shared\Partials\_CategoryPartial.cshtml" />
     <Content Include="Views\Home\Item.cshtml" />
     <Content Include="Views\ProfessionalWorkers\Create.cshtml" />
@@ -2466,6 +2466,11 @@
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Account\RegisterProfessional.cshtml" />
+    <Content Include="Views\Merchants\ApproveMerchant.cshtml" />
+    <Content Include="Views\ProfessionalWorkers\Approve.cshtml" />
+    <Content Include="Views\Product\Approve.cshtml" />
+    <Content Include="Views\Product\ProductsView.cshtml" />
+    <Content Include="Views\ProfessionalWorkers\ProWorkerView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

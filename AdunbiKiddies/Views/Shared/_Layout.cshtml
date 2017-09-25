@@ -42,7 +42,7 @@
                 <ul class="header-nav header-nav-options">
                     <li class="header-nav-brand">
                         <div class="brand-holder">
-                            <a href="@Url.Action("Index", "Home")">
+                            <a href="#")">
 
                                 @*<img class="img-circle" src="~/Images/k1.jpg" />*@
 
@@ -128,7 +128,7 @@
 
                         <!-- BEGIN DASHBOARD -->
                         <li>
-                            <a href="@Url.Action("Index", "Home")">
+                            <a href="#">
                                 <div class="gui-icon">
                                     <i class="md md-home"></i>
                                 </div>
@@ -147,9 +147,9 @@
                             </a>
                             <!--start submenu -->
                             <ul>
-                                <li><a href="@Url.Action("AdminIndex", "Products")">View</a></li>
+                                <li><a href="@Url.Action("Index", "Merchants")">View</a></li>
                                 <li>
-                                    <a class="page-scroll" href="@Url.Action("Create", "Products")">Approve</a>
+                                    <a class="page-scroll" href="@Url.Action("ApproveMerchant", "Merchants")">Approve</a>
                                 </li>
                                
                             </ul><!--end /submenu -->
@@ -164,9 +164,9 @@
                             </a>
                             <!--start submenu -->
                             <ul>
-                                <li><a href="@Url.Action("AdminIndex", "Products")">View</a></li>
+                                <li><a href="@Url.Action("Index", "ProfessionalWorkers")">View</a></li>
                                 <li>
-                                    <a class="page-scroll" href="@Url.Action("Create", "Products")">Approve</a>
+                                    <a class="page-scroll" href="@Url.Action("Approve", "ProfessionalWorkers")">Approve</a>
                                 </li>
                                
                             </ul><!--end /submenu -->
@@ -181,9 +181,9 @@
                             </a>
                             <!--start submenu -->
                             <ul>
-                                <li><a href="@Url.Action("AdminIndex", "Products")">View</a></li>
+                                <li><a href="@Url.Action("ProductsView", "Product")">View</a></li>
                                 <li>
-                                    <a class="page-scroll" href="@Url.Action("Create", "Products")">Appove</a>
+                                    <a class="page-scroll" href="@Url.Action("Approve", "Product")">Approve</a>
                                 </li>
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
@@ -193,15 +193,30 @@
                                 <div class="gui-icon">
                                     <i class="md md-account-box"></i>
                                 </div>
+                                <span class="title">Store-Section</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("Index", "StoreSections")">View</a></li>
+                                <li><a href="@Url.Action("Create", "StoreSections")">Create</a></li>    
+
+                               
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
+                        <!-- BEGIN STORESECTIONS -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon">
+                                    <i class="md md-account-box"></i>
+                                </div>
                                 <span class="title">Category</span>
                             </a>
                             <!--start submenu -->
                             <ul>
-                                <li><a href="@Url.Action("Index", "Categories")">Search</a></li>
+                                <li><a href="@Url.Action("Index", "Categories")">View</a></li>
                                 <li><a href="@Url.Action("Create", "Categories")">Create</a></li>
                             </ul><!--end /submenu -->
-                        </li><!--end /menu-li -->
-                        <!-- BEGIN STOCKS -->
+                        </li>
                         
                         <!-- BEGIN SALES -->
                         <li class="gui-folder">

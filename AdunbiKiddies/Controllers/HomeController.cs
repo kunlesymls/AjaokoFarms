@@ -1,7 +1,7 @@
-﻿using AdunbiKiddies.Models.Repository;
-using System.Web.Mvc;
-using AdunbiKiddies.Models;
+﻿using AdunbiKiddies.Models;
+using AdunbiKiddies.Models.Repository;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace AdunbiKiddies.Controllers
 {
@@ -13,6 +13,11 @@ namespace AdunbiKiddies.Controllers
 
         //For view testing 
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Landing()
         {
             return View();
         }
@@ -46,7 +51,7 @@ namespace AdunbiKiddies.Controllers
             //return RedirectToAction("Index");
         }
 
-       
+
 
         public ActionResult About()
         {

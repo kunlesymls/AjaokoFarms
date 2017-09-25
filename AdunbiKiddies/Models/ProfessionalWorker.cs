@@ -1,6 +1,7 @@
 ﻿using AdunbiKiddies.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace OpenOrderFramework.Models
 {
@@ -8,6 +9,7 @@ namespace OpenOrderFramework.Models
     {
         public string ProfessionalWorkerId { get; set; }
         public string HighestQualification { get; set; }
+        public bool IsVerified { get; set; }
         public virtual ICollection<ProfessionalPayment> ProfessionalPayments { get; set; }
         public virtual ICollection<ProfessionalAddress> ProfessionalAddresses { get; set; }
         public virtual ICollection<ProfessionalDocument> ProfessionalDocuments { get; set; }

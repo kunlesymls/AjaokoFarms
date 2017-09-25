@@ -1,24 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using OpenOrderFramework.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using AdunbiKiddies.Models;
-using OpenOrderFramework.Models;
 
 namespace AdunbiKiddies.Controllers
 {
     public class ProfessionalWorkersController : BaseController
     {
-      //  private AjaoOko_db _db = new AjaoOko_db();
+        //  private AjaoOko_db _db = new AjaoOko_db();
 
         // GET: ProfessionalWorkers
         public ActionResult Index()
         {
             return View(_db.ProfessionalWorkers.ToList());
+        }
+        public ActionResult ProWorkerView()
+        {
+            return View(_db.ProfessionalWorkers.ToList());
+        }
+
+        public async Task<ActionResult> Approve()
+        {
+            ViewBag.Message = "";
+            return View(await _db.ProfessionalWorkers.Where(m => m.IsVerified == false).ToListAsync());
+
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Approve(int id)
+        {
+            ProfessionalWorker pWorker = await _db.ProfessionalWorkers.FindAsync(id);
+            if (pWorker == null)
+            {
+                ViewBag.Message = "Please select a Merchant";
+                return View();
+            }
+            //_db.Merchants.Attach(merchant);
+
+            pWorker.IsVerified = true;
+            _db.Entry(pWorker).Property(x => x.IsVerified).IsModified = true;
+
+            _db.SaveChanges();
+
+            ViewBag.Message = "Merchant Approval successful";
+            return View();
         }
 
         // GET: ProfessionalWorkers/Details/5
@@ -79,7 +107,7 @@ namespace AdunbiKiddies.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProfessionalWorkerId,HighestQualification,FirstName,MiddleName,LastName,Gender,Email,PhoneNumber,TownOfBirth,StateOfOrigin,Nationality,Passport")] ProfessionalWorker professionalWorker)
+        public ActionResult Edit(ProfessionalWorker professionalWorker)
         {
             if (ModelState.IsValid)
             {

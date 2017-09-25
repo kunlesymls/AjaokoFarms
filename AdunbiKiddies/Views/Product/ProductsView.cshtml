@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AdunbiKiddies.Models.Product>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ProductsView";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,26 +12,29 @@
     </strong>
     <br />
 </h2>
+
+
 <table class="table">
-    <tr>
+    <tr style="margin: 5px">
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Category.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Merchant.CompanyName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
+
+        @*<th>
             @Html.DisplayNameFor(model => model.AlternativeName)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Price)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Description)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.ProductDiscount)
         </th>
@@ -44,7 +47,7 @@
         <th>
             @Html.DisplayNameFor(model => model.DateAdded)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.StockQuantity)
         </th>
         <th>
@@ -52,30 +55,31 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ItemPictureUrl)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Category.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Merchant.CompanyName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
+
+        @*<td>
             @Html.DisplayFor(modelItem => item.AlternativeName)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Price)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Description)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.ProductDiscount)
         </td>
@@ -88,7 +92,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.DateAdded)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.StockQuantity)
         </td>
         <td>
@@ -96,11 +100,11 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ItemPictureUrl)
-        </td>
+        </td>*@
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
+
+            @*@Html.ActionLink("Details", "Details", new { id=item.ProductId }) |*@
+            @Html.ActionLink("Delete", "Delete", new {id = item.ProductId})
         </td>
     </tr>
 }

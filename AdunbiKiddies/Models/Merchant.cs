@@ -1,7 +1,6 @@
 ﻿using OpenOrderFramework.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 
 namespace AdunbiKiddies.Models
 {
@@ -25,7 +24,7 @@ namespace AdunbiKiddies.Models
         [DisplayName("Company Registration Number")]
         public string RegistrationNo { get; set; }
 
-        [ScaffoldColumn(false)]
+
         public bool IsVerified { get; set; }
 
 

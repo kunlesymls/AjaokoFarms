@@ -1,6 +1,7 @@
 ﻿using AdunbiKiddies.Models;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -16,6 +17,36 @@ namespace AdunbiKiddies.Controllers
         {
             var merchants = _db.Merchants.Include(m => m.PartnerShipAgreement);
             return View(await merchants.ToListAsync());
+        }
+
+        //public async Task<ActionResult> ViewMerchants()
+        //{
+        //    return View(await _db.Merchants.ToListAsync());
+        //}
+
+        public async Task<ActionResult> ApproveMerchant()
+        {
+            ViewBag.Message = "";
+            return View(await _db.Merchants.Where(m => m.IsVerified == false).ToListAsync());
+
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ApproveMerchant(int id)
+        {
+            Merchant merchant = await _db.Merchants.FindAsync(id);
+            if (merchant == null)
+            {
+                ViewBag.Message = "Please select a Merchant";
+                return View();
+            }
+            merchant.IsVerified = true;
+            //_db.Merchants.Attach(merchant);
+            _db.Entry(merchant).Property(x => x.IsVerified).IsModified = true;
+            _db.SaveChanges();
+
+            ViewBag.Message = "Merchant Approval successful";
+            return View();
         }
 
         // GET: MerchantsTest/Details/5

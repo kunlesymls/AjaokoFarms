@@ -1,5 +1,6 @@
 ﻿using AdunbiKiddies.Models;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -14,6 +15,41 @@ namespace AdunbiKiddies.Controllers
         {
             var products = _db.Products.Include(p => p.Category).Include(p => p.Merchant);
             return View(await products.ToListAsync());
+        }
+
+        public async Task<ActionResult> ProductsView()
+        {
+            var products = _db.Products.Include(p => p.Category).Include(p => p.Merchant);
+            return View(await products.ToListAsync());
+        }
+
+
+
+        public async Task<ActionResult> Approve()
+        {
+            ViewBag.Message = "";
+            return View(await _db.Products.Where(m => m.IsApproved == false).ToListAsync());
+
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Approve(int id)
+        {
+            Product product = await _db.Products.FindAsync(id);
+            if (product == null)
+            {
+                ViewBag.Message = "Please select a Merchant";
+                return View();
+            }
+            //_db.Merchants.Attach(merchant);
+
+            product.IsApproved = true;
+            _db.Entry(product).Property(x => x.IsApproved).IsModified = true;
+
+            _db.SaveChanges();
+
+            ViewBag.Message = "Merchant Approval successful";
+            return View();
         }
 
         // GET: Product/Details/5
