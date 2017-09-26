@@ -1,49 +1,81 @@
-﻿@model IEnumerable<string>
-
+﻿
+@model IEnumerable<AdunbiKiddies.Models.StoreSection>
 <div class="well">
-    <table class="table">
+    <table class="table table-responsive">
         <thead>
             <tr>
                 <th>
-                <a href="@Url.Action("Index", "Products",
-                new
-                {
-                    category = "",
-                    page = 1
-
-                }
-                )">All Category</a>
+                    <a href="@Url.Action("Index", "Products",
+                             new
+                             {
+                                 category = "",
+                                 page = 1
+                             }
+                             )">All Category</a>
                 </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var link in Model)
             {
-                @*@Html.RouteLink(link, new
-                    {
-                        controller = "Items",
-                        action = "Index",
-                        category = link,
-                        page = 1
-                    },
-                        new {@class = "btn btn-block btn-default btn-lg"}
-                    )*@
-
-                <tr class="success">
+                <tr>
                     <td>
-                        <a href="@Url.Action("Index", "Products",
-                new
-                {
-                    category = link,
-                    page = 1
+                    <ul class="menu">
+                        <li class="item1">
+                            <a href="#">@link.SectionName<img class="arrow-img" src="~/Template/assets/images/arrow1.png" alt=""/> </a>
+                            <ul class="cute">
+                                @foreach (var cat in link.Categories)
+                                {
 
-                })">@link</a>
-            </td>
+                                    <li class="subitem1">
+                                        <a href="@Url.Action("Index", "Products",
+                                                     new
+                                                     {
+                                                         category = cat.Name,
+                                                         page = 1
 
-        </tr>
+                                                     })">@cat.Name</a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </li>
+                    </ul>
+                    </td>
+                </tr>
+            
 
             }
 
         </tbody>
     </table>
 </div>
+<script type="text/javascript">
+    $(function () {
+        var menu_ul = $('.menu > li > ul'),
+            menu_a = $('.menu > li > a');
+        menu_ul.hide();
+        menu_a.click(function (e) {
+            e.preventDefault();
+            if (!$(this).hasClass('active')) {
+                menu_a.removeClass('active');
+                menu_ul.filter(':visible').slideUp('normal');
+                $(this).addClass('active').next().stop(true, true).slideDown('normal');
+            } else {
+                $(this).removeClass('active');
+                $(this).next().stop(true, true).slideUp('normal');
+            }
+        });
+
+    });
+</script>
+<div class=" chain-grid menu-chain">
+    <a href="single.html"><img class="img-responsive" src="~/Template/assets/images/farm-technology.jpg" alt="Loading..." /></a>
+    <div class="grid-chain-bottom chain-watch " style="color:forestgreen">
+        <h4 style="color:forestgreen"> <strong><span class="text-medium">AjaOko: Farming </span><span>Virtualized </span></strong></h4>
+        <h4 style="color:black"><span>Be a Buyer</span></h4>
+        <h4 style="color:indianred"><span>Be a Merchant</span></h4>
+        <h4 style="color:forestgreen">Provide service</h4>
+    </div>
+</div>
+@*<a class="view-all all-product" href="#">AJAOKO FARMS...<span> </span></a>*@

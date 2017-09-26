@@ -5,6 +5,7 @@
 @{
     Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
 }
+    @Html.Partial("~/Views/Shared/Partials/_CategoryPartial.cshtml")
 
 @{
     <link href="~/Template/assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -23,14 +24,14 @@
 }
 
 
-<div class="container">
     <div class="shoes-grid">
         <a href="#">
             <div class="wrap-in">
                 <div class="wmuSlider example1 slide-grid">
-                    <div class="wmuSliderWrapper">
+                <div class="wmuSliderWrapper">
 
-                    </div>
+                </div>
+
         </a>
         <ul class="wmuSliderPagination">
             <li><a href="#" class="">0</a></li>
@@ -42,7 +43,7 @@
             $('.example1').wmuSlider();
         </script>
     </div>
-</div>
+
 
 <!---->
 <div class="products">

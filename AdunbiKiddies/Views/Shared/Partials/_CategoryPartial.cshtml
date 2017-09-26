@@ -11,39 +11,7 @@
 
 }
 <div class="sub-cate">
-    <div class="top-nav rsidebar span_1_of_left">
-        <h3 class="cate">CATEGORIES</h3>
-        <ul class="menu">
-
-            @foreach (var item in stores)
-            {
-                var storeid = item.StoreSectionId;
-                var storesName = item.SectionName;
-                storesName.ToString();
-
-                // var SC = categorys.Select(c => c.StoreSectionId);
-
-                var sc2 = categorys.Where(c => c.StoreSectionId == storeid);
-
-                <li class="item1">
-                    <a href="#">@storesName<img class="arrow-img" src="~/Template/assets/images/arrow1.png" alt="" /> </a>
-                    <ul class="cute">
-
-
-
-                        @foreach (var cat in sc2)
-                        {
-
-                            <li class="subitem1"><a href="@Url.Action("Item", "Home", new { id = cat.CategoryId })"> @cat.Name </a></li>
-                        }
-
-
-
-                    </ul>
-                </li>
-            }
-        </ul>
-    </div>
+    
     <!--initiate accordion-->
     <script type="text/javascript">
         $(function () {

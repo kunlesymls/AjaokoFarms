@@ -210,11 +210,17 @@ namespace AdunbiKiddies.Controllers
             }
         }
 
+        //public PartialViewResult Menu()
+        //{
+        //    IEnumerable<string> categories = _db.Categories.Select(s => s.Name)
+        //                                                    .OrderBy(s => s);
+        //    return PartialView(categories);
+        //}
         public PartialViewResult Menu()
         {
-            IEnumerable<string> categories = _db.Categories.Select(s => s.Name)
-                                                            .OrderBy(s => s);
-            return PartialView(categories);
+            var storeSections = _db.StoreSections.Include(x => x.Categories)
+                            .OrderByDescending(s => s.SectionName).ToList();
+            return PartialView(storeSections);
         }
 
         // GET: Items/Details/5

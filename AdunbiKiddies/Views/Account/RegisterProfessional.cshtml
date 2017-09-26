@@ -1,14 +1,13 @@
 ﻿@model AdunbiKiddies.Models.RegisterMerchantVm
 
 @{
-    ViewBag.Title = "Register Professional";
+    ViewBag.Title = "Professional Registration ";
     Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
 
 }
-@Html.Partial("~/Views/Shared/Partials/_PageUpper.cshtml")
-@Html.Partial("~/Views/Shared/Partials/_PageLower.cshtml")
 
-<h2>RegisterProfessional</h2>
+
+<h2>Professional Registration </h2>
 @using (Html.BeginForm("RegisterProfessional", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
