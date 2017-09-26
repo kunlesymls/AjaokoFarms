@@ -121,7 +121,7 @@ namespace AdunbiKiddies.Controllers
         {
             Sms sms = new Sms()
             {
-                Sender = "De Choice",
+                Sender = "AJAOKO",
                 Message = body,
                 Recipient = phoneNumber
             };
