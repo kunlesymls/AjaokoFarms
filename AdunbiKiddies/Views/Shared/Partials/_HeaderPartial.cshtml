@@ -27,7 +27,7 @@
                         <li>@Html.ActionLink("About", "About", "Home")</li>
 
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        @*<li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>*@
+                        <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
                     </ul>
                 </div>
 
@@ -49,31 +49,31 @@
                             <i class="fa fa-phone" aria-hidden="true"></i> Call us: 234 803 412 8919
                         </li>
 
-                        @if (Request.IsAuthenticated && User.IsInRole("Customer"))
-                    {
-                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        @if (Request.IsAuthenticated)
                         {
+                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
                                 @Html.AntiForgeryToken()
                                 @*<li class="active">@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>*@
-                                <li>
-                                    @if (Request.IsAuthenticated)
-                                {
-                                        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                                }
-                                </li>
+                               
                                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                                
 
+                            }
+                            <li>
+                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                    
+                            </li>
                         }
-                    }
-                    else
-                    {
+                        else
+                        {
                             <li class="head-dpdn">
                                 @Html.ActionLink("Log in", "Login", "Account")
                             </li>
                             <li class="head-dpdn">
                                 @Html.ActionLink("Sign Up", "Register", "Account")
                             </li>
-                    }
+                        }
 
                     </ul>
                 </div>

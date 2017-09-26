@@ -5,15 +5,15 @@ using System.Web.Mvc;
 
 namespace AdunbiKiddies.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ShoppingCartController : BaseController
     {
         //
-         public  ShoppingCartController()
+        public ShoppingCartController()
         {
 
         }
-       
+
         // GET: /ShoppingCart/
         public ActionResult Index()
         {

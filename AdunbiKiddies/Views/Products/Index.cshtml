@@ -6,22 +6,6 @@
     ViewBag.Title = "Products";
 }
 
-<script type="text/javascript">
-    $(function () {
-        // Document.ready -> link up remove event handler
-        $(".AddLink").click(function () {
-            // Get the id from the link
-            var recordToAdd = $(this).attr("data-id");
-            if (recordToAdd != '') {
-                // Perform the ajax post
-                $.post("/ShoppingCart/AddToCart", { "id": recordToAdd },
-                    function (data) {
-                        $('#cart-status').text(data.CartCount);
-                    });
-            }
-        });
-    });
-</script>
 
 <!-- Button trigger modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -74,8 +58,7 @@
                                     <h6>@Html.DisplayFor(modelItem => item.Price)<sup>#</sup></h6>
                                     <a href="#" class="AddLink w3ls-cart pw3ls-cart fa fa-cart-plus"
                                        data-id="@item.ProductId" data-toggle="modal" data-target="#myModal">
-                                        Add
-                                        to cart
+                                        Add to cart
                                     </a>
                                   
                                     @Html.ActionLink("More", "Details", new { id = item.ProductId })
@@ -105,3 +88,21 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $(".AddLink").click(function () {
+            // Get the id from the link
+            var recordToAdd = $(this).attr("data-id");
+            if (recordToAdd != '') {
+                // Perform the ajax post
+                $.post("/ShoppingCart/AddToCart", { "id": recordToAdd },
+                    function (data) {
+                        $('#cart-status').text(data.CartCount);
+                    });
+            }
+        });
+    });
+</script>
