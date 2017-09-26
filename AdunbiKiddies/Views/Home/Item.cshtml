@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
 }
 
-<h2>Items Categroy</h2>
+<h2>Items Category</h2>
 
 <table class="table">
     <tr>
@@ -51,49 +51,52 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Merchant.CompanyName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AlternativeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductDiscount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiscountPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsApproved)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateAdded)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StockQuantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InternalImage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ItemPictureUrl)
-        </td>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Merchant.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlternativeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductDiscount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsApproved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAdded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InternalImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemPictureUrl)
+            </td>
      
-    </tr>
-}
+        </tr>
+    }
 
 </table>
+
+@Scripts.Render("~/Template/assets/css")
+@Scripts.Render("~/Templates/assets/js")

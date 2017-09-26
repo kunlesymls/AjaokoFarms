@@ -59,6 +59,11 @@ namespace AdunbiKiddies.Models
 
         public DbSet<BusinessAddress> BusinessAddresses { get; set; }
 
-        public System.Data.Entity.DbSet<AdunbiKiddies.Models.BusinessDocument> BusinessDocuments { get; set; }
+        public DbSet<BusinessDocument> BusinessDocuments { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+
+        public System.Data.Entity.DbSet<AdunbiKiddies.Models.ShippingDetail> ShippingDetails { get; set; }
+
+        public System.Data.Entity.DbSet<AdunbiKiddies.Models.MerchantPayment> MerchantPayments { get; set; }
     }
 }

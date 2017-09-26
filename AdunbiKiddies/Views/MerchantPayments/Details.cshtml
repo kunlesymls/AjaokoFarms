@@ -1,0 +1,67 @@
+﻿@model AdunbiKiddies.Models.MerchantPayment
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MerchantPayment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Merchant.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Merchant.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountPayed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AmountPayed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPayed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPayed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MerchantPaymentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

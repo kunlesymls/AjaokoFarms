@@ -1,5 +1,7 @@
 ﻿using AdunbiKiddies.Models;
+using Microsoft.AspNet.Identity;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -8,9 +10,19 @@ namespace AdunbiKiddies.Controllers
 {
     public class BusinessDocumentsController : BaseController
     {
+
         // GET: BusinessDocuments
         public async Task<ActionResult> Index()
         {
+            if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                var userId = User.Identity.GetUserId();
+                var bDocument = _db.BusinessDocuments.Include(b => b.BusinessRegistration)
+                                .Include(i => i.BusinessRegistration.Merchant).AsNoTracking()
+                                .Where(x => x.BusinessRegistration.MerchantId.Equals(userId));
+                return View(await bDocument.ToListAsync());
+
+            }
             var businessDocuments = _db.BusinessDocuments.Include(b => b.BusinessRegistration);
             return View(await businessDocuments.ToListAsync());
         }
@@ -33,7 +45,9 @@ namespace AdunbiKiddies.Controllers
         // GET: BusinessDocuments/Create
         public ActionResult Create()
         {
-            ViewBag.BusinessRegistrationId = new SelectList(_db.BusinessRegistrations, "BusinessRegistrationId", "MerchantId");
+            var userId = User.Identity.GetUserId();
+            ViewBag.BusinessRegistrationId = new SelectList(_db.BusinessRegistrations.AsNoTracking()
+                                .Where(x => x.MerchantId.Equals(userId)), "BusinessRegistrationId", "MerchantId");
             return View();
         }
 
@@ -42,7 +56,7 @@ namespace AdunbiKiddies.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "BusinessDocumentId,BusinessRegistrationId,Document")] BusinessDocument businessDocument)
+        public async Task<ActionResult> Create(BusinessDocument businessDocument)
         {
             if (ModelState.IsValid)
             {
@@ -51,7 +65,9 @@ namespace AdunbiKiddies.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BusinessRegistrationId = new SelectList(_db.BusinessRegistrations, "BusinessRegistrationId", "MerchantId", businessDocument.BusinessRegistrationId);
+            var userId = User.Identity.GetUserId();
+            ViewBag.BusinessRegistrationId = new SelectList(_db.BusinessRegistrations.AsNoTracking()
+                .Where(x => x.MerchantId.Equals(userId)), "BusinessRegistrationId", "MerchantId", businessDocument.BusinessRegistrationId);
             return View(businessDocument);
         }
 
@@ -67,7 +83,9 @@ namespace AdunbiKiddies.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.BusinessRegistrationId = new SelectList(_db.BusinessRegistrations, "BusinessRegistrationId", "MerchantId", businessDocument.BusinessRegistrationId);
+            var userId = User.Identity.GetUserId();
+            ViewBag.BusinessRegistrationId = new SelectList(_db.BusinessRegistrations.AsNoTracking()
+                .Where(x => x.MerchantId.Equals(userId)), "BusinessRegistrationId", "MerchantId", businessDocument.BusinessRegistrationId);
             return View(businessDocument);
         }
 
@@ -76,7 +94,7 @@ namespace AdunbiKiddies.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "BusinessDocumentId,BusinessRegistrationId,Document")] BusinessDocument businessDocument)
+        public async Task<ActionResult> Edit(BusinessDocument businessDocument)
         {
             if (ModelState.IsValid)
             {
@@ -84,8 +102,9 @@ namespace AdunbiKiddies.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.BusinessRegistrationId = new SelectList(_db.BusinessRegistrations, "BusinessRegistrationId", "MerchantId", businessDocument.BusinessRegistrationId);
-            return View(businessDocument);
+            var userId = User.Identity.GetUserId();
+            ViewBag.BusinessRegistrationId = new SelectList(_db.BusinessRegistrations.AsNoTracking()
+                .Where(x => x.MerchantId.Equals(userId)), "BusinessRegistrationId", "MerchantId", businessDocument.BusinessRegistrationId); return View(businessDocument);
         }
 
         // GET: BusinessDocuments/Delete/5

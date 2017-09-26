@@ -1,9 +1,7 @@
-﻿using AdunbiKiddies.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 
-namespace OpenOrderFramework.Models
+namespace AdunbiKiddies.Models
 {
     public class ProfessionalWorker : Person
     {

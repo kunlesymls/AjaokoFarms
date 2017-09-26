@@ -21,7 +21,7 @@ namespace AdunbiKiddies.Controllers
     [Authorize]
     public class SalesController : BaseController
     {
-       
+
 
         // GET: Sales
         public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)

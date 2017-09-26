@@ -16,6 +16,9 @@
             @Html.DisplayNameFor(model => model.BusinessRegistration.MerchantId)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.DocumentName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Document)
         </th>
         <th></th>
@@ -25,6 +28,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.BusinessRegistration.MerchantId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Document)

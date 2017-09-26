@@ -68,7 +68,7 @@
             @Html.DisplayFor(modelItem => item.Category.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Merchant.CompanyName)
+            @Html.DisplayFor(modelItem => item.AlternativeName)
         </td>
 
         @*<td>
@@ -104,7 +104,7 @@
         <td>
 
             @*@Html.ActionLink("Details", "Details", new { id=item.ProductId }) |*@
-            @Html.ActionLink("Delete", "Delete", new {id = item.ProductId})
+            @*@Html.ActionLink("Delete", "Delete", new {id = item.ProductId})*@
         </td>
     </tr>
 }

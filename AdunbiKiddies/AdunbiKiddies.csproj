@@ -215,8 +215,10 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MerchantPaymentsController.cs" />
     <Compile Include="Controllers\MerchantsOldController.cs" />
     <Compile Include="Controllers\MerchantsController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
@@ -229,6 +231,7 @@
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\SalesController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\ShippingDetailsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StocksController.cs" />
     <Compile Include="Controllers\StoreSectionsController.cs" />
@@ -281,6 +284,10 @@
     <Compile Include="Migrations\201709241729104_afterUI.Designer.cs">
       <DependentUpon>201709241729104_afterUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709260141048_merchantPayement.cs" />
+    <Compile Include="Migrations\201709260141048_merchantPayement.Designer.cs">
+      <DependentUpon>201709260141048_merchantPayement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Analytics.cs" />
@@ -298,6 +305,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Merchant.cs" />
+    <Compile Include="Models\MerchantPayment.cs" />
     <Compile Include="Models\PartnerShipAgreement.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Product.cs" />
@@ -2455,11 +2463,6 @@
     <Content Include="Views\PartnerShipAgreements\Details.cshtml" />
     <Content Include="Views\PartnerShipAgreements\Edit.cshtml" />
     <Content Include="Views\PartnerShipAgreements\Index.cshtml" />
-    <Content Include="Views\BusinessDocuments\Create.cshtml" />
-    <Content Include="Views\BusinessDocuments\Delete.cshtml" />
-    <Content Include="Views\BusinessDocuments\Details.cshtml" />
-    <Content Include="Views\BusinessDocuments\Edit.cshtml" />
-    <Content Include="Views\BusinessDocuments\Index.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
@@ -2471,6 +2474,26 @@
     <Content Include="Views\Product\Approve.cshtml" />
     <Content Include="Views\Product\ProductsView.cshtml" />
     <Content Include="Views\ProfessionalWorkers\ProWorkerView.cshtml" />
+    <Content Include="Views\ShippingDetails\Create.cshtml" />
+    <Content Include="Views\ShippingDetails\Delete.cshtml" />
+    <Content Include="Views\ShippingDetails\Details.cshtml" />
+    <Content Include="Views\ShippingDetails\Edit.cshtml" />
+    <Content Include="Views\ShippingDetails\Index.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\BusinessDocuments\Create.cshtml" />
+    <Content Include="Views\BusinessDocuments\Delete.cshtml" />
+    <Content Include="Views\BusinessDocuments\Details.cshtml" />
+    <Content Include="Views\BusinessDocuments\Edit.cshtml" />
+    <Content Include="Views\BusinessDocuments\Index.cshtml" />
+    <Content Include="Views\MerchantPayments\Create.cshtml" />
+    <Content Include="Views\MerchantPayments\Delete.cshtml" />
+    <Content Include="Views\MerchantPayments\Details.cshtml" />
+    <Content Include="Views\MerchantPayments\Edit.cshtml" />
+    <Content Include="Views\MerchantPayments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2521,6 +2544,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709241729104_afterUI.resx">
       <DependentUpon>201709241729104_afterUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709260141048_merchantPayement.resx">
+      <DependentUpon>201709260141048_merchantPayement.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

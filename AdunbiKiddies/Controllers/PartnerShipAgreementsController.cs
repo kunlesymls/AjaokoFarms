@@ -1,4 +1,5 @@
-﻿using OpenOrderFramework.Models;
+﻿using Microsoft.AspNet.Identity;
+using OpenOrderFramework.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -40,7 +41,9 @@ namespace AdunbiKiddies.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
-            ViewBag.MerchantId = new SelectList(_db.Merchants, "MerchantId", "CompanyName");
+            var userId = User.Identity.GetUserId();
+            ViewBag.MerchantId = new SelectList(_db.Merchants.AsNoTracking()
+                .Where(x => merchantId.Equals(userId)), "MerchantId", "FullName");
             return View();
         }
 
@@ -49,7 +52,7 @@ namespace AdunbiKiddies.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "MerchantId,CategoryId,CanDropProduct,CanStockProduct,IsSellingElsewhere,WebisteLink,ProductList")] PartnerShipAgreement partnerShipAgreement)
+        public async Task<ActionResult> Create(PartnerShipAgreement partnerShipAgreement)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +62,9 @@ namespace AdunbiKiddies.Controllers
             }
 
             ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name", partnerShipAgreement.CategoryId);
-            ViewBag.MerchantId = new SelectList(_db.Merchants, "MerchantId", "CompanyName", partnerShipAgreement.MerchantId);
+            var userId = User.Identity.GetUserId();
+            ViewBag.MerchantId = new SelectList(_db.Merchants.AsNoTracking()
+                .Where(x => merchantId.Equals(userId)), "MerchantId", "FullName", partnerShipAgreement.MerchantId);
             return View(partnerShipAgreement);
         }
 
@@ -76,7 +81,9 @@ namespace AdunbiKiddies.Controllers
                 return HttpNotFound();
             }
             ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name", partnerShipAgreement.CategoryId);
-            ViewBag.MerchantId = new SelectList(_db.Merchants, "MerchantId", "CompanyName", partnerShipAgreement.MerchantId);
+            var userId = User.Identity.GetUserId();
+            ViewBag.MerchantId = new SelectList(_db.Merchants.AsNoTracking()
+                .Where(x => merchantId.Equals(userId)), "MerchantId", "FullName", partnerShipAgreement.MerchantId);
             return View(partnerShipAgreement);
         }
 
@@ -85,7 +92,7 @@ namespace AdunbiKiddies.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "MerchantId,CategoryId,CanDropProduct,CanStockProduct,IsSellingElsewhere,WebisteLink,ProductList")] PartnerShipAgreement partnerShipAgreement)
+        public async Task<ActionResult> Edit(PartnerShipAgreement partnerShipAgreement)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +101,9 @@ namespace AdunbiKiddies.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name", partnerShipAgreement.CategoryId);
-            ViewBag.MerchantId = new SelectList(_db.Merchants, "MerchantId", "CompanyName", partnerShipAgreement.MerchantId);
+            var userId = User.Identity.GetUserId();
+            ViewBag.MerchantId = new SelectList(_db.Merchants.AsNoTracking()
+                .Where(x => merchantId.Equals(userId)), "MerchantId", "FullName", partnerShipAgreement.MerchantId);
             return View(partnerShipAgreement);
         }
 

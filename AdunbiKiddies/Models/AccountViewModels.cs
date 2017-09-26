@@ -85,7 +85,7 @@ namespace AdunbiKiddies.Models
         {
             get
             {
-                return string.Format("{0} {1}", this.FirstName, this.LastName);
+                return $"{this.FirstName} {this.LastName}";
             }
         }
 
@@ -105,17 +105,7 @@ namespace AdunbiKiddies.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public string Name { get; set; }
 
-        [Display(Name = "Mobile Number")]
-        [DataType(DataType.PhoneNumber)]
-        public string PhoneNumber { get; set; }
-
-        [Display(Name = "Address")]
-        [DataType(DataType.MultilineText)]
-        [Required(ErrorMessage = "Your Address is required")]
-        [StringLength(50, ErrorMessage = "Your Address name is too long")]
-        public string Address { get; set; }
     }
     public class RegisterMerchantVm
     {

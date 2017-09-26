@@ -1,7 +1,7 @@
-﻿using AdunbiKiddies.ViewModels;
+﻿using AdunbiKiddies.Models;
+using AdunbiKiddies.ViewModels;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
-using OpenOrderFramework.Models;
 using PayStack.Net;
 using System;
 using System.Collections.Generic;

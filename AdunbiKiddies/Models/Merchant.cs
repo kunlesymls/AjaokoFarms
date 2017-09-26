@@ -1,4 +1,5 @@
 ﻿using OpenOrderFramework.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -24,14 +25,14 @@ namespace AdunbiKiddies.Models
         [DisplayName("Company Registration Number")]
         public string RegistrationNo { get; set; }
 
-
+        public bool Haspayed { get; set; }
+        public DateTime ExpiryDate { get; set; }
         public bool IsVerified { get; set; }
-
-
         public virtual PartnerShipAgreement PartnerShipAgreement { get; set; }
 
         public virtual ICollection<BusinessRegistration> BusinessRegistrations { get; set; }
         public virtual ICollection<BusinessAddress> BusinessAddresses { get; set; }
         public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<MerchantPayment> MerchantPayments { get; set; }
     }
 }

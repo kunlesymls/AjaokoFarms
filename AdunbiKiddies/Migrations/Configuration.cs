@@ -25,6 +25,14 @@ namespace AdunbiKiddies.Migrations
 
                 manager.Create(role);
             }
+            if (!context.Roles.Any(r => r.Name == "Customer"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Customer" };
+
+                manager.Create(role);
+            }
 
             if (!context.Roles.Any(r => r.Name == "SuperAdmin"))
             {

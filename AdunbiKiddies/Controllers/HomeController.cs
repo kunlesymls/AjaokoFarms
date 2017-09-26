@@ -43,11 +43,8 @@ namespace AdunbiKiddies.Controllers
                 List<Product> model = ProductRepo.GetProductByCat(id);
                 return View(model);
             }
-            else
-            {
-                ViewBag.Mesage = "No matching result";
-                return View();
-            }
+            ViewBag.Mesage = "No matching result";
+            return View();
             //return RedirectToAction("Index");
         }
 

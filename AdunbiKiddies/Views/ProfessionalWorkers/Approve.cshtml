@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OpenOrderFramework.Models.ProfessionalWorker>
+﻿@model IEnumerable<AdunbiKiddies.Models.ProfessionalWorker>
 
 @{
     ViewBag.Title = "Approve";
@@ -8,7 +8,7 @@
 <h2>
     <strong>
         <br />
-        <span style="color: green">List Of </span> <span style="color: red">Merchants</span>
+        <span style="color: green">List Of </span> <span style="color: red">Professionals</span>
     </strong>
     <br />
 </h2>
@@ -94,10 +94,11 @@
 
 
         <td>
-            <button class="btn btn-sm" style="color: Black; border-color: green">
-                @Html.ActionLink("Approve", "Approve", new {id = item.ProfessionalWorkerId}) |
+            @*<button class="btn btn-sm" style="color: Black; border-color: green">
+              
 
-            </button>
+            </button>*@
+            @Html.ActionLink("Approve", "Approve", new {id = item.ProfessionalWorkerId}) |
         </td>
     </tr>
 }

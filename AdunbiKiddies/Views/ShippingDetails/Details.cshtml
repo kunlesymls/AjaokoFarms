@@ -1,0 +1,67 @@
+﻿@model AdunbiKiddies.Models.ShippingDetail
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ShippingDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BuildingNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuildingNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StreetName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StreetName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TownName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TownName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StateName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StateName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CustomerId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

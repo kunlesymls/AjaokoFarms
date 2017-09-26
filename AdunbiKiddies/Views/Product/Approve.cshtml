@@ -103,11 +103,12 @@
             @Html.DisplayFor(modelItem => item.ItemPictureUrl)
         </td>*@
         <td>
-            <button class="btn btn-sm" style="color: Black; border-color: green">
-            @Html.ActionLink("Approve", "Approve", new {id = item.ProductId}) 
+            @*<button class="btn btn-sm" style="color: Black; border-color: green">
+          
             
-            </button>
+            </button>*@
            
+            @Html.ActionLink("Approve", "Approved", new {id = item.ProductId}) 
         </td>
     </tr>
 }

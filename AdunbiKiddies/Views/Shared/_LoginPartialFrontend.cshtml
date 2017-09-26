@@ -1,42 +1,45 @@
 ﻿@using Microsoft.AspNet.Identity
-        @if (Request.IsAuthenticated)
-                    {
-                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                    {
-      
-                        @Html.AntiForgeryToken()
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
 
-                        <ul class="nav navbar-nav navbar-right">
-           
-                            <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
-            
-                            <li>
-                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        @Html.AntiForgeryToken()
 
-</li>
-           
-                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-                        </ul>
-       
-                    
+        <ul class="nav navbar-nav navbar-right">
+
+            <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
+            <li> <img src="@Url.Action("RenderImage", "Customers", new { id = User.Identity.GetUserId()})" width="100" height="50" />
+            </li>
+
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+
+
+                    }
                 }
-            }
 
-            else
-            {
-                @*<ul class="nav navbar-nav navbar-right">*@
-                    <div class="header-bottom-right nav navbar-nav navbar-right">
-                       
-                        <div class="account"><a href="@Url.Action("Index","Account")"><span> </span> @Html.Label("YOUR ACCOUNT")</a></div>
-                        <ul class="login">
-                            <li><a href="@Url.Action("Login", "Account",new { id = "returnUrl" })"><span></span> <strong> LOGIN</strong></a></li> |
-                            <li><a href="@Url.Action("Register", "Account",new { id = "returnUrl" })"> <strong>SIGNUP</strong> </a></li>
-                        </ul>
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            
+                            <div class="cart"><a href="@Url.Action("Index", "ShoppingCart")"><span> </span> <strong>CART</strong></a>
+                            </div>
+                        </li>
+                        <li><a href="@Url.Action("Login", "Account",new { id = "returnUrl" })"> <strong>LOGIN</strong></a>
+                        </li>
+                        <li> <a href="@Url.Action("Register", "Account",new { id = "returnUrl" })"> <strong>SIGNUP</strong> </a>
+                        </li>
+                    </ul>
+                    @*<div class="account"><a href="@Url.Action("Index","Account")"><span> </span> @Html.Label("YOUR ACCOUNT")</a></div>*@
 
-                        <div class="cart"><a href="@Url.Action("Index","ShoppingCart")"><span> </span> <strong>CART</strong></a></div>
-                        <div class="clearfix"> </div>
-                    </div>
 
-           @* <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "returnUrl" })</li>*@
-                @*</ul>*@
-             }
+
+                    @* <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "returnUrl" })</li>*@
+                    @*</ul>*@
+                }

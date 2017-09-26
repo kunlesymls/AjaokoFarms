@@ -284,9 +284,11 @@ namespace AdunbiKiddies.Controllers
 
             if (User.IsInRole("Professional"))
             {
-                TempData["UserMessage"] = $"Login Successful, Welcome {username}";
-                TempData["Title"] = "Success.";
                 return RedirectToAction("Index", "Products");
+            }
+            if (User.IsInRole("Customer"))
+            {
+                return RedirectToAction("Index", "Home");
             }
 
 
@@ -357,27 +359,35 @@ namespace AdunbiKiddies.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.Username,
+                    UserName = model.Email,
                     Email = model.Email,
-                    PhoneNumber = model.PhoneNumber,
                     FirstName = model.FirstName,
                     MiddleName = model.MiddleName,
                     LastName = model.LastName,
-                    Address = model.Address
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var customer = new Customer
+                    {
+                        CustomerId = user.Id,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        MiddleName = model.MiddleName,
+                        Email = model.Email,
+                    };
+                    _db.Customers.Add(customer);
+                    await _db.SaveChangesAsync();
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     //Assign Role to user Here 
-                    await this.UserManager.AddToRoleAsync(user.Id, model.Name);
+                    await this.UserManager.AddToRoleAsync(user.Id, "Customer");
                     return RedirectToAction("Index", "Home");
                 }
 

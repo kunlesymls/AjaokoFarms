@@ -9,17 +9,17 @@ namespace AdunbiKiddies.Models
     public abstract class Person
     {
         //[Required]
-        [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
+        [StringLength(100, ErrorMessage = "First name cannot be longer than 100 characters.")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         // [Required]
-        [StringLength(50, ErrorMessage = "Middle name cannot be longer than 50 characters.")]
+        [StringLength(100, ErrorMessage = "Middle name cannot be longer than 100 characters.")]
         [Display(Name = "Middle Name")]
         public string MiddleName { get; set; }
 
         //[Required]
-        [StringLength(50, ErrorMessage = "Last name cannot be longer than 50 characters.")]
+        [StringLength(100, ErrorMessage = "Last name cannot be longer than 100 characters.")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
@@ -35,11 +35,9 @@ namespace AdunbiKiddies.Models
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
-        [ScaffoldColumn(false)]
         [Display(Name = "Full Name")]
         public string UserName => LastName + " " + FirstName;
 
-        [ScaffoldColumn(false)]
         [Display(Name = "Full Name")]
         public string FullName => LastName + " " + FirstName + " " + MiddleName;
 

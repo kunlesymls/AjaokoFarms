@@ -1,4 +1,5 @@
 ﻿using AdunbiKiddies.Models;
+using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -13,6 +14,14 @@ namespace AdunbiKiddies.Controllers
         // GET: BusinessAddresses
         public async Task<ActionResult> Index()
         {
+            if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                var userId = User.Identity.GetUserId();
+                var bAddress = _db.BusinessAddresses.Include(b => b.Merchant).AsNoTracking()
+                    .Where(x => x.MerchantId.Equals(userId));
+                return View(await bAddress.ToListAsync());
+
+            }
             var businessAddresses = _db.BusinessAddresses.Include(b => b.Merchant);
             return View(await businessAddresses.ToListAsync());
         }
@@ -35,8 +44,9 @@ namespace AdunbiKiddies.Controllers
         // GET: BusinessAddresses/Create
         public ActionResult Create()
         {
+            var userId = User.Identity.GetUserId();
             ViewBag.MerchantId = new SelectList(_db.Merchants.AsNoTracking()
-                        .Where(x => x.MerchantId.Equals(merchantId)), "MerchantId", "FullName");
+                .Where(x => merchantId.Equals(userId)), "MerchantId", "FullName");
             return View();
         }
 
@@ -45,7 +55,7 @@ namespace AdunbiKiddies.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "BusinessAddressId,MerchantId,AddressType,BuildingNo,StreetName,TownName,StateName")] BusinessAddress businessAddress)
+        public async Task<ActionResult> Create(BusinessAddress businessAddress)
         {
             if (ModelState.IsValid)
             {
@@ -54,7 +64,9 @@ namespace AdunbiKiddies.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MerchantId = new SelectList(_db.Merchants, "MerchantId", "CompanyName", businessAddress.MerchantId);
+            var userId = User.Identity.GetUserId();
+            ViewBag.MerchantId = new SelectList(_db.Merchants.AsNoTracking()
+                .Where(x => merchantId.Equals(userId)), "MerchantId", "FullName", businessAddress.MerchantId);
             return View(businessAddress);
         }
 
@@ -70,7 +82,9 @@ namespace AdunbiKiddies.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MerchantId = new SelectList(_db.Merchants, "MerchantId", "FullName", businessAddress.MerchantId);
+            var userId = User.Identity.GetUserId();
+            ViewBag.MerchantId = new SelectList(_db.Merchants.AsNoTracking()
+                .Where(x => merchantId.Equals(userId)), "MerchantId", "FullName", businessAddress.MerchantId);
             return View(businessAddress);
         }
 
@@ -87,8 +101,9 @@ namespace AdunbiKiddies.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.MerchantId = new SelectList(_db.Merchants, "MerchantId", "CompanyName", businessAddress.MerchantId);
-            return View(businessAddress);
+            var userId = User.Identity.GetUserId();
+            ViewBag.MerchantId = new SelectList(_db.Merchants.AsNoTracking()
+                .Where(x => merchantId.Equals(userId)), "MerchantId", "FullName", businessAddress.MerchantId); return View(businessAddress);
         }
 
         // GET: BusinessAddresses/Delete/5

@@ -28,28 +28,29 @@ namespace AdunbiKiddies.Controllers
         public async Task<ActionResult> Approve()
         {
             ViewBag.Message = "";
+
             return View(await _db.Products.Where(m => m.IsApproved == false).ToListAsync());
 
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Approve(int id)
+
+        public async Task<ActionResult> Approved(int id)
         {
             Product product = await _db.Products.FindAsync(id);
             if (product == null)
             {
                 ViewBag.Message = "Please select a Merchant";
-                return View();
+                return RedirectToAction("Approve");
             }
             //_db.Merchants.Attach(merchant);
 
             product.IsApproved = true;
-            _db.Entry(product).Property(x => x.IsApproved).IsModified = true;
+            _db.Entry(product).State = EntityState.Modified;
 
             _db.SaveChanges();
 
             ViewBag.Message = "Merchant Approval successful";
-            return View();
+            return RedirectToAction("Approve");
         }
 
         // GET: Product/Details/5

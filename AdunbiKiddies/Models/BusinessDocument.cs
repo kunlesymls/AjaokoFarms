@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Web;
-using OpenOrderFramework.Models;
 
 namespace AdunbiKiddies.Models
 {
     public class BusinessDocument
     {
         public int BusinessDocumentId { get; set; }
+        public string DocumentName { get; set; }
         public int BusinessRegistrationId { get; set; }
         public byte[] Document { get; set; }
 
