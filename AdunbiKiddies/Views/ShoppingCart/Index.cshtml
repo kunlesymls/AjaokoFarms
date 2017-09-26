@@ -1,6 +1,8 @@
 ﻿@model AdunbiKiddies.ViewModel.ShoppingCartViewModel
 @{
     ViewBag.Title = "Shopping Cart";
+    Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
+
 }
 
 <script src="~/Scripts/jquery-3.2.1.min.js"></script>
@@ -33,82 +35,77 @@
     <em>Review</em> your cart:
 </h3>
 
-@Html.ActionLink("Confirm link", "Index", "Checkout")
-    @{
+@{
 
-        if (Model.CartItems.Count > 0)
-        {
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Order Details</h3>
+    if (Model.CartItems.Count > 0) 
+    {
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Order Summary</h3>
+            </div>
+            <div class="panel-body">
+
+                <div id="update-message">
                 </div>
-                <div class="panel-body">
-                    <div id="update-message">
-                    </div>
-                    <table class="table table-striped table-hover ">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Item Name
-                                </th>
-                                <th>
-                                    Price (each)
-                                </th>
-                                <th>
-                                    Quantity
-                                </th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        @foreach (var item in Model.CartItems)
-                        {
-                            <tr id="row-@item.ProductId">
-                                <td>
-                                    @Html.ActionLink(item.Product.Name, "Details", "Store", new { id = item.ID }, null)
-                                </td>
-                                <td>
-                                    @item.Product.Price
-                                </td>
-                                <td id="item-count-@item.ProductId">
-                                    @item.Count
-                                </td>
-                                <td>
-                                    <a href="#" class="RemoveLink"
-                                       data-id="@item.ProductId">
-                                        Remove
-                                        from cart
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                        <tr class="info">
+                <table class="table table-striped table-hover ">
+                    <thead>
+                    <tr>
+                        <th>
+                            Item Name
+                        </th>
+                        <th>
+                            Price (each)
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <tr id="row-@item.CartId" >
                             <td>
-                                Total
+                               @item.Product.Name
                             </td>
-                            <td></td>
-                            <td></td>
-                            <td id="cart-total">
-                                @Model.CartTotal
+                            <td>
+                                @item.Product.Price
+                            </td>
+                            <td id="item-count-@item.ProductId">
+                                @item.Count
+                            </td>
+                            <td>
+                                <a href="#" class="RemoveLink"
+                                   data-id="@item.ProductId">
+                                    Remove
+                                    from cart
+                                </a>
                             </td>
                         </tr>
-                    </table>
-
-                    <button type="button" class="btn btn-success btn-sm" onclick="location.href='@Url.Action("AddressAndPayment", "Checkout")'">
-                        Check Out &raquo;
-                    </button>
-
-                    <button type="button" class="btn btn-success btn-sm" onclick="location.href='@Url.Action("AddressAndPayment", "Checkout")'">
-                        Make Deposit &raquo;
-                    </button>
-                </div>
+                    }
+                    <tr class="info">
+                        <td>
+                            Total
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td id="cart-total">
+                            @Model.CartTotal
+                        </td>
+                    </tr>
+                </table>
+                <button type="button" class="btn btn-success btn-sm" onclick="location.href='@Url.Action("AddressAndPayment", "Checkout")'">
+                    Check Out &raquo;
+                </button>
             </div>
-        }
-        else
-        {
-            <div>
-                <p>
-                    There are no items in your cart currently. Please shop for something and add items..
-                </p>
-            </div>
-        }
+        </div>
     }
+    else
+    {
+        <div>
+            <p>
+                There are no items in your cart currently. Please shop for something and add items..
+            </p>
+        </div>
+    }
+}
