@@ -20,13 +20,13 @@ namespace AdunbiKiddies.Controllers
     public class ProductsController : BaseController
     {
         // GET: Items
-        public ActionResult Index(string category, string sortOrder, string currentFilter, string searchString, string barString, int? page)
+        public ActionResult Index(string category, string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
 
-            if (searchString != null || barString != null)
+            if (searchString != null)
             {
                 page = 1;
             }
@@ -37,12 +37,13 @@ namespace AdunbiKiddies.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var items = _db.Products.AsNoTracking().Where(x => x.StockQuantity > 3);
-
+            var items = from i in _db.Products
+                select i;
             if (!String.IsNullOrEmpty(searchString))
             {
                 items = items.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper())
-                                       || s.Category.Name.ToUpper().Contains(searchString.ToUpper()));
+                                         || s.Category.Name.ToUpper().Contains(searchString.ToUpper())
+                                         || s.AlternativeName.ToUpper().Contains(searchString.ToUpper()));
             }
             else if (!String.IsNullOrEmpty(category))
             {
@@ -53,26 +54,23 @@ namespace AdunbiKiddies.Controllers
                 case "name_desc":
                     items = items.OrderByDescending(s => s.Name);
                     break;
-
                 case "Price":
                     items = items.OrderBy(s => s.Price);
                     break;
-
                 case "price_desc":
                     items = items.OrderByDescending(s => s.Price);
                     break;
-
-                default:  // Name ascending
+                default:  // Name ascending 
                     items = items.OrderBy(s => s.Name);
                     break;
             }
 
+
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(items.ToPagedList(pageNumber, pageSize));
-            ;
 
-            //var items = _db.Items.Include(i => i.Catagorie);
+            //var items = db.Items.Include(i => i.Catagorie);
             //return View(await items.ToListAsync());
         }
 

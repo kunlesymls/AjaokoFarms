@@ -2,20 +2,19 @@
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
+    Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
     ViewBag.Title = "Products";
 }
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
-
     $(function () {
         // Document.ready -> link up remove event handler
         $(".AddLink").click(function () {
-            // Get the ProductId from the link
-            var recordToAdd = $(this).attr("data-ProductId");
+            // Get the id from the link
+            var recordToAdd = $(this).attr("data-id");
             if (recordToAdd != '') {
                 // Perform the ajax post
-                $.post("/ShoppingCart/AddToCart", { "ProductId": recordToAdd },
+                $.post("/ShoppingCart/AddToCart", { "id": recordToAdd },
                     function (data) {
                         $('#cart-status').text(data.CartCount);
                     });
@@ -24,33 +23,8 @@
     });
 </script>
 
-<script type="text/javascript">
-    $(document).scannerDetection({
-
-        //https://github.com/kabachello/jQuery-Scanner-Detection
-
-        timeBeforeScanTest: 200, // wait for the next character for upto 200ms
-        avgTimeByChar: 40, // it's not a barcode if a character takes longer than 100ms
-        preventDefault: true,
-
-        endChar: [13],
-        onComplete: function (barcode, qty) {
-            validScan = true;
-
-            $('#scannerInput').val(barcode);
-
-        } // main callback function ,
-        ,
-        onError: function (string, qty) {
-
-            $('#userInput').val($('#userInput').val() + string);
-
-        }
-    });
-</script>
-
 <!-- Button trigger modal -->
-<div class="modal fade" ProductId="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div aria-hidden="true" class="alert alert-dismissable alert-success">
         <button type="button" class="close" data-dismiss="alert">×</button>
         <strong>An item was added to your cart.</strong> To check out now simply <a href="#" class="alert-link">click here</a>.
@@ -66,7 +40,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Continue</button>
-                <button type="submit" class="btn btn-primary" onclick="location.href = '@Url.Action("Index", "ShoppingCart")'">Check Out</button>
+                <button type="submit" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "ShoppingCart")'">Check Out</button>
             </div>
         </div>
     </div>
@@ -77,101 +51,83 @@
         @Html.Action("Menu", "Products")
     </div>
     <div class="col-md-8">
-        <p><br /></p>
+
+        <br />
 
         <table class="table">
             <thead>
-                <tr>
-                    <th>
-                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                        {
-                            <p>
-                                @Html.ActionLink("Create New", "Create")
-                            </p>
-                        }
-                        <div class="row">
-                            <div class="bs-docs-section">
+            <tr>
+                <th>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <p>
+                            @Html.ActionLink("Create New", "Create")
+                        </p>
+                    }
+                    <div class="bs-docs-section">
+                        <div class="agileits_search">
+                            @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+                            {
+                                <input name="searchString" type="text" placeholder="Enter the Product Name" required="">
 
-                                @using (Html.BeginForm("Index", "Products", FormMethod.Get))
-                                {
-
-                                    <div class="form-horizontal">
-                                        <div class="col-md6">
-
-                                            <div class="form-group">
-                                                <div class="control-label col-md-2">Find Product By Name or Category: </div>
-                                                <div class="col-md-10">
-                                                    @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md6">
-                                            <div class="form-group">
-                                                <div class="control-label col-md-2">Find Product By BarCode Number: </div>
-                                                <div class="col-md-10">
-                                                    <input ProductId="BarcodeInput" name="barString" type="text" autofocus />
-                                                    <br>
-                                                    <div class="test">
-                                                        <input ProductId="scannerInput" type="text" value="barcodescan" autofocus />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <input type="submit" class="btn btn-info btn-sm" value="Search" />
-                                    </div>
-
-                                }
-                            </div>
+                                <input type="submit" value="Search">
+                            }
                         </div>
-                    </th>
-                </tr>
+                    </div>
+                </th>
+            </tr>
             </thead>
         </table>
-
-        @foreach (var item in Model)
+        <div class="row">
+            @foreach (var item in Model)
             {
-            <table class="table table-hover">
-                <tbody>
-                    <tr class="active">
-                        <td>
-                            <div>
-                                <h3>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                    <span class="pull-right label label-primary">#@Html.DisplayFor(modelItem => item.Price)</span>
-                                    <h3><span class="lead">Stock Remaning ( @Html.DisplayFor(modelItem => item.StockQuantity))</span></h3>
-                                </h3>
-                                <span class="pull-right"><img src="@Url.Action("RenderImage", new { ProductId = item.ProductId})" height="60" width="100" class="img-rounded" /></span>
-                                <h4>
-                                    <a href="#" class="AddLink"
-                                       data-ProductId="@item.ProductId" data-toggle="modal" data-target="#myModal">
+
+                <div class="products-row">
+                    <div class="col-xs-6 col-sm-4 product-grids">
+                        <div class="flip-container">
+                            <div class="flipper agile-products">
+                                <div class="front">
+
+                                    <img src="@Url.Action("RenderImage", new { ProductId = item.ProductId })" class="img-responsive" alt="img">
+                                    @*<img src="@ViewBag.Image" class="img-responsive" alt="img" />*@
+                                    <div class="agile-product-text">
+                                        <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+                                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                                    <h6>@Html.DisplayFor(modelItem => item.Price)<sup>#</sup></h6>
+                                    <a href="#" class="AddLink w3ls-cart pw3ls-cart fa fa-cart-plus"
+                                       data-id="@item.ProductId" data-toggle="modal" data-target="#myModal">
                                         Add
                                         to cart
                                     </a>
-
-                                    <!--@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { ProductId = item.ProductId }, new { htmlAttributes = new { @data_toggle = "modal", @data_target = "#myModal" } })--> |
-                                    @Html.ActionLink("Details", "Details", new { ProductId = item.ProductId }) |
-                                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                                  
+                                    @Html.ActionLink("More", "Details", new { id = item.ProductId })
+                                    @if (Request.IsAuthenticated && (User.IsInRole("Admin") || (User.IsInRole("SalesRep"))))
                                     {
-                                        @Html.ActionLink("Edit", "Edit", new { ProductId = item.ProductId })
-                                        @Html.ActionLink("Delete", "Delete", new { ProductId = item.ProductId })
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductId })
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
                                     }
-                                </h4>
+                                 
+                                </div>
                             </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </div>
+                    </div>
+                </div>
+            }
 
-        }
+        </div>
+
+
 
         @*</table>*@
         <br />
         <div class="btn-group pull-right">
             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
             @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
         </div>
     </div>
 </div>
