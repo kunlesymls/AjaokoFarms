@@ -973,11 +973,11 @@ h3.w3ls-title.w3ls-title1 {
 } 
 .product-grids {
 	margin-top: 3em;
-} 
+}
 .agile-product-text {
-	background: #08cae2;
-	padding: 1.5em 2em;
-	text-align: center;
+    background: #ff7070;
+    padding: 1.5em 2em;
+    text-align: center;
 }
 .agile-product-text.agile-product-text2 {
 	background: #fd463e;

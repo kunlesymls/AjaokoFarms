@@ -51,33 +51,7 @@
         @Html.Action("Menu", "Products")
     </div>
     <div class="col-md-8">
-
-        <br />
-
-        <table class="table">
-            <thead>
-            <tr>
-                <th>
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                        <p>
-                            @Html.ActionLink("Create New", "Create")
-                        </p>
-                    }
-                    <div class="bs-docs-section">
-                        <div class="agileits_search">
-                            @using (Html.BeginForm("Index", "Product", FormMethod.Get))
-                            {
-                                <input name="searchString" type="text" placeholder="Enter the Product Name" required="">
-
-                                <input type="submit" value="Search">
-                            }
-                        </div>
-                    </div>
-                </th>
-            </tr>
-            </thead>
-        </table>
+    
         <div class="row">
             @foreach (var item in Model)
             {
