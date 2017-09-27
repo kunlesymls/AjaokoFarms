@@ -110,8 +110,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PayStack.Net, Version=0.6.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Bin\PayStack.Net.dll</HintPath>
+      <HintPath>..\packages\PayStack.Net.0.6.6\lib\net45\PayStack.Net.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
@@ -173,6 +172,9 @@
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="XtremeIT.Library.Pins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5f275dd942b1b995, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayStack.Net.0.6.6\lib\net45\XtremeIT.Library.Pins.dll</HintPath>
     </Reference>
     <Reference Include="Zen.Barcode.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b5ae55aa76d2d9de, processorArchitecture=MSIL">
       <HintPath>..\packages\Zen.Barcode.Core.2.0.0\lib\net45\Zen.Barcode.Core.dll</HintPath>

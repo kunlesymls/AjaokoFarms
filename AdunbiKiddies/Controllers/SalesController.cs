@@ -173,7 +173,8 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sale sales = await _db.Sales.FindAsync(id);
+            Sale sales = await _db.Sales.Include(i => i.Customer).AsNoTracking()
+                            .Where(x => x.SaleId.Equals((int)id)).FirstOrDefaultAsync();
             var saleDetails = _db.SaleDetails.Where(x => x.SaleId == id);
 
             sales.SaleDetails = await saleDetails.ToListAsync();

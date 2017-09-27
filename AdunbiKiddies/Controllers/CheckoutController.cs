@@ -64,13 +64,12 @@ namespace AdunbiKiddies.Controllers
         {
             if (ModelState.IsValid)
             {
-                var totalSale = await storeDB.Sales.AsNoTracking().CountAsync();
-                var saleId = totalSale + 1;
+                //var totalSale = await storeDB.Sales.AsNoTracking().CountAsync();
+                //var saleId = totalSale + 1;
 
 
                 var sale = new Sale
                 {
-                    SaleId = saleId,
                     CustomerId = model.CustomerId,
                     Total = model.TotalAmount,
                     IsPayed = false,
@@ -98,7 +97,7 @@ namespace AdunbiKiddies.Controllers
                     {
                         new CustomField("customerid","customerid", model.CustomerId),
                         new CustomField("amount", "amount", model.TotalAmount.ToString(CultureInfo.InvariantCulture)),
-                        new CustomField("saleid", "saleid", saleId.ToString())
+                        new CustomField("saleid", "saleid", sale.SaleId.ToString())
                     }
 
                 };
@@ -136,21 +135,32 @@ namespace AdunbiKiddies.Controllers
                     }).ToList();
                 }
                 //var studentid = _db.Users.Find(id);
+                var saleId = Convert.ToInt32(convertedValues.Where(x => x.key.Equals("saleid")).Select(s => s.value).FirstOrDefault());
                 var payment = new OrderPayment()
                 {
                     CustomerId = convertedValues.Where(x => x.key.Equals("customerid")).Select(s => s.value).FirstOrDefault(),
                     PaymentDateTime = DateTime.Now,
                     Amount = Convert.ToDecimal(convertedValues.Where(x => x.key.Equals("amount")).Select(s => s.value).FirstOrDefault()),
                     IsPayed = true,
-                    SaleId = Convert.ToInt32(convertedValues.Where(x => x.key.Equals("saleid")).Select(s => s.value).FirstOrDefault()),
+                    SaleId = saleId,
                     AmountPaid = _query.ConvertToNaira(verifyResponse.Data.Amount),
 
                 };
                 _db.OrderPayments.Add(payment);
-                await _db.SaveChangesAsync();
+                _db.SaveChanges();
+
+                var sale = await storeDB.Sales.AsNoTracking().Where(x => x.SaleId.Equals(saleId)).FirstOrDefaultAsync();
+                if (sale != null)
+                {
+                    sale.IsPayed = true;
+                    _db.Entry(sale).State = EntityState.Modified;
+                    await _db.SaveChangesAsync();
+                }
+
+                return RedirectToAction("Details", "Sales", new { id = saleId });
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("AddressAndPayment");
         }
 
         //

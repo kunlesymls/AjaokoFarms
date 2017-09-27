@@ -13,6 +13,7 @@ namespace AdunbiKiddies.Models
         public string CustomerId { get; set; }
         public decimal Total { get; set; }
         public bool IsPayed { get; set; }
+        public bool IsDelivered { get; set; }
         public virtual Customer Customer { get; set; }
         public List<SaleDetail> SaleDetails { get; set; }
 

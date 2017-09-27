@@ -1,39 +1,47 @@
 ﻿@model AdunbiKiddies.Models.Sale
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Order Details";
+    Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
+
 }
-<h2>Details</h2>
+
 
 <div>
-    <h4>Sales Details</h4>
+    <h4>Order Details</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.Customer.FirstName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.Customer.LastName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.Customer.LastName)
         </dd>
  
         <dt>
-            @Html.DisplayNameFor(model => model.Phone)
+            @Html.DisplayNameFor(model => model.Customer.PhoneNumber)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Phone)
+            @Html.DisplayFor(model => model.Customer.PhoneNumber)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.SalesRepName)
+            @Html.DisplayNameFor(model => model.IsPayed)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.SalesRepName)
+            @Html.DisplayFor(model => model.IsPayed)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDelivered)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsDelivered)
+        </dd>
+       
    
     </dl>
 </div>
@@ -93,7 +101,7 @@
         </td>
     </tr>
 </table>
-<p>
+@*<p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.SaleId }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@
