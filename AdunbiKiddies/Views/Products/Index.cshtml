@@ -39,40 +39,45 @@
         <div class="row">
             @foreach (var item in Model)
             {
+                if (item.StockQuantity != null)
+                 {
 
-                <div class="products-row">
-                    <div class="col-xs-6 col-sm-4 product-grids">
-                        <div class="flip-container">
-                            <div class="flipper agile-products">
-                                <div class="front">
+                     <div class="products-row">
+                         <div class="col-xs-6 col-sm-4 product-grids">
+                             <div class="flip-container">
+                                 <div class="flipper agile-products">
+                                     <div class="front">
 
-                                    <img src="@Url.Action("RenderImage", new { ProductId = item.ProductId })" class="img-responsive" alt="img">
-                                    @*<img src="@ViewBag.Image" class="img-responsive" alt="img" />*@
-                                    <div class="agile-product-text">
-                                        <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
-                                    </div>
-                                </div>
-                                <div class="back">
-                                    <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
-                                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
-                                    <h6>@Html.DisplayFor(modelItem => item.Price)<sup>#</sup></h6>
-                                    <a href="#" class="AddLink w3ls-cart pw3ls-cart fa fa-cart-plus"
-                                       data-id="@item.ProductId" data-toggle="modal" data-target="#myModal">
-                                        Add to cart
-                                    </a>
-                                  
-                                    @Html.ActionLink("More", "Details", new { id = item.ProductId })
-                                    @if (Request.IsAuthenticated && (User.IsInRole("Admin") || (User.IsInRole("SalesRep"))))
-                                    {
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductId })
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
-                                    }
-                                 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                         <img src="@Url.Action("RenderImage", new {ProductId = item.ProductId})" class="img-responsive" alt="img">
+                                         @*<img src="@ViewBag.Image" class="img-responsive" alt="img" />*@
+                                         <div class="agile-product-text">
+                                             <h5>@Html.DisplayFor(modelItem => item.Name)</h5><br/>
+
+                                             <span class="text-sm">Left(@item.StockQuantity)</span>
+                                         </div>
+                                     </div>
+                                     <div class="back">
+                                         <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+                                         <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                                         <h6>@Html.DisplayFor(modelItem => item.Price)<sup>#</sup></h6>
+                                         <a href="#" class="AddLink w3ls-cart pw3ls-cart fa fa-cart-plus"
+                                            data-id="@item.ProductId" data-toggle="modal" data-target="#myModal">
+                                             Add to cart
+                                         </a>
+
+                                         @Html.ActionLink("More", "Details", new {id = item.ProductId})
+                                         @if (Request.IsAuthenticated && (User.IsInRole("Admin") || (User.IsInRole("SalesRep"))))
+                                         {
+                                             @Html.ActionLink("Edit", "Edit", new {id = item.ProductId})
+                                             @Html.ActionLink("Delete", "Delete", new {id = item.ProductId})
+                                         }
+
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 }
             }
 
         </div>

@@ -1,4 +1,4 @@
-﻿@model AdunbiKiddies.Models.Sale
+﻿@model AdunbiKiddies.ViewModels.OrderPaymentVm
 
 @{
     ViewBag.Title = "Address And Payment";
@@ -25,63 +25,54 @@
     });
 </script>
 
-<!--<div class="col-lg-4">
-    <div class="demo-container">
-       
-
-        <div class="form-container active">
-            <form action="">
-                <input placeholder="Card number" type="text" name="number">
-                <input placeholder="Full name" type="text" name="name">
-                <input placeholder="MM/YY" type="text" name="expiry">
-                <input placeholder="CVC" type="text" name="cvc">
-            </form>
-        </div>
-
-        <div class="card-wrapper"></div>
-    </div>
-</div>-->
+<div class="well">
+    <h3>Shipping Details</h3>
+    <p>
+        <ul>
+            <li>State: <span>@Model.ShippingDetail.StateName</span></li>
+            <li>Town: <span>@Model.ShippingDetail.TownName</span></li>
+            <li>Street: <span>@Model.ShippingDetail.StateName</span></li>
+            <li>Building No: <span>@Model.ShippingDetail.BuildingNo</span></li>
+            <li>Address Type: <span>@Model.ShippingDetail.AddressType</span></li>
+        </ul>
+    </p>
+</div>
 
 <div class="col-lg-10">
   <div class="well bs-component">
-    @using (Html.BeginForm("AddressAndPayment", "Checkout", FormMethod.Post))
+    @using (Html.BeginForm("MakePayment", "Checkout", FormMethod.Post))
     {
        <h2>Customer's Information</h2>
         <fieldset>
             @*<legend>Customer's Information</legend>*@
 
-
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "col-lg-2 control-label" })
+            @Html.HiddenFor(m => Model.CustomerId)
+            @*@Html.HiddenFor(m => Model.SaleId)*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "col-lg-2 control-label" })
                 <div class="col-lg-10">
-                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @type = "text"} })
-                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                    @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-lg-2 control-label" })
                 <div class="col-lg-10">
-                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @type = "text"} })
-                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <br>
 
+        
             <div class="form-group">
-                @Html.LabelFor(model => model.SalesRepName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.Editor("SalesRepName", (string)(ViewBag.SalesRepName), new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
-                    @Html.ValidationMessageFor(model => model.SalesRepName, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-10">
+                    @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "form-control", @readonly = "true"} })
+                    @Html.ValidationMessageFor(model => model.TotalAmount, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @type = "text"} })
-                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
    
 
             <div class="form-group">

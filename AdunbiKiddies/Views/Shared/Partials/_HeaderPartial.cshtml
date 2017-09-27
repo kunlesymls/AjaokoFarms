@@ -21,13 +21,16 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
-                        <li>@Html.ActionLink("Products", "Index", "Product")</li>
+                        <li>@Html.ActionLink("Products", "Index", "Products")</li>
                         <li>@Html.ActionLink("Mechants", "About", "Home")</li>
                         <li>@Html.ActionLink("Professional", "About", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
 
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
+                        @if (Request.IsAuthenticated && User.IsInRole("Customer"))
+                        {
+                            <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
+                        }
                     </ul>
                 </div>
 
@@ -41,7 +44,7 @@
             <!-- header-one -->
             <div class="container">
                 <div class="w3ls-header-left">
-                    <p>Free home delivery at your doorstep For Above (Specify Amount)</p>
+                    <h4 style="color:antiquewhite">Become a <a href="#" style="color: forestgreen; text-decoration: underline;">Merchant</a> <span><a href="#" style="color: indianred;text-decoration: underline;">Professional</a></span></h4>
                 </div>
                 <div class="w3ls-header-right">
                     <ul>

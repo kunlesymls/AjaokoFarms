@@ -9,9 +9,13 @@ namespace AdunbiKiddies.Models
         [Key, ForeignKey("Customer")]
         public string CustomerId { get; set; }
         public string AddressType { get; set; }
+        [Required]
         public string BuildingNo { get; set; }
+        [Required]
         public string StreetName { get; set; }
+        [Required]
         public string TownName { get; set; }
+        [Required]
         public string StateName { get; set; }
         public virtual Customer Customer { get; set; }
 

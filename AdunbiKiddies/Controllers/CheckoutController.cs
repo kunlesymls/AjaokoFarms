@@ -1,8 +1,14 @@
 ﻿using AdunbiKiddies.Models;
 using AdunbiKiddies.SMS_Service;
+using AdunbiKiddies.ViewModels;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json.Linq;
+using PayStack.Net;
 using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -32,10 +38,119 @@ namespace AdunbiKiddies.Controllers
         }
 
         //GET: /Checkout/AddressAndPayment
-        public ActionResult AddressAndPayment()
+        public async Task<ActionResult> AddressAndPayment()
         {
-            ViewBag.SalesRepName = User.Identity.GetUserName().ToString();
-            return View();
+            var cId = User.Identity.GetUserId();
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cDetails = await storeDB.ShippingDetails.Where(x => x.CustomerId.Equals(cId)).FirstOrDefaultAsync();
+            if (cDetails != null)
+            {
+                var payment = new OrderPaymentVm
+                {
+                    CustomerId = cDetails.CustomerId,
+                    CustomerName = cDetails.Customer.FullName,
+                    Email = cDetails.Customer.Email,
+                    TotalAmount = cart.GetTotal(),
+                    ShippingDetail = cDetails,
+                    //SaleId = Convert.ToInt32(cart.ShoppingCartId)
+                };
+                return View(payment);
+            }
+            return RedirectToAction("Create", "ShippingDetails");
+
+        }
+
+        public async Task<ActionResult> MakePayment(OrderPaymentVm model)
+        {
+            if (ModelState.IsValid)
+            {
+                var totalSale = await storeDB.Sales.AsNoTracking().CountAsync();
+                var saleId = totalSale + 1;
+
+
+                var sale = new Sale
+                {
+                    SaleId = saleId,
+                    CustomerId = model.CustomerId,
+                    Total = model.TotalAmount,
+                    IsPayed = false,
+                    SaleDate = DateTime.Now
+                };
+                storeDB.Sales.Add(sale);
+                await storeDB.SaveChangesAsync();
+
+                //Process the order
+                var cart = ShoppingCart.GetCart(this.HttpContext);
+                sale = cart.CreateOrder(sale);
+                var testOrLiveSecret = ConfigurationManager.AppSettings["PayStackSecret"];
+                var api = new PayStackApi(testOrLiveSecret);
+                // Initializing a transaction
+                //var response = api.Transactions.Initialize("user@somewhere.net", 5000000);
+                var transactionInitializaRequest = new TransactionInitializeRequest
+                {
+                    //Reference = "SwifKampus",
+                    AmountInKobo = _query.ConvertToKobo((int)model.TotalAmount),
+                    CallbackUrl = "http://localhost:59969/Checkout/ConfrimPayment",
+                    Email = model.Email,
+                    Bearer = "Ajaoko Order Payment",
+
+                    CustomFields = new List<CustomField>
+                    {
+                        new CustomField("customerid","customerid", model.CustomerId),
+                        new CustomField("amount", "amount", model.TotalAmount.ToString(CultureInfo.InvariantCulture)),
+                        new CustomField("saleid", "saleid", saleId.ToString())
+                    }
+
+                };
+                var response = api.Transactions.Initialize(transactionInitializaRequest);
+
+                if (response.Status)
+                {
+                    //redirect to authorization url
+                    return RedirectPermanent(response.Data.AuthorizationUrl);
+                    // return Content("Successful");
+                }
+                return Content("An error occurred");
+
+            }
+            return RedirectToAction("AddressAndPayment");
+        }
+
+        public async Task<ActionResult> ConfrimPayment(string reference)
+        {
+            var testOrLiveSecret = ConfigurationManager.AppSettings["PayStackSecret"];
+            var api = new PayStackApi(testOrLiveSecret);
+            //Verifying a transaction
+            var verifyResponse = api.Transactions.Verify(reference); // auto or supplied when initializing;
+            if (verifyResponse.Status)
+            {
+                var convertedValues = new List<SelectableEnumItem>();
+                var valuepair = verifyResponse.Data.Metadata.Where(x => x.Key.Contains("custom")).Select(s => s.Value);
+
+                foreach (var item in valuepair)
+                {
+                    convertedValues = ((JArray)item).Select(x => new SelectableEnumItem
+                    {
+                        key = (string)x["display_name"],
+                        value = (string)x["value"]
+                    }).ToList();
+                }
+                //var studentid = _db.Users.Find(id);
+                var payment = new OrderPayment()
+                {
+                    CustomerId = convertedValues.Where(x => x.key.Equals("customerid")).Select(s => s.value).FirstOrDefault(),
+                    PaymentDateTime = DateTime.Now,
+                    Amount = Convert.ToDecimal(convertedValues.Where(x => x.key.Equals("amount")).Select(s => s.value).FirstOrDefault()),
+                    IsPayed = true,
+                    SaleId = Convert.ToInt32(convertedValues.Where(x => x.key.Equals("saleid")).Select(s => s.value).FirstOrDefault()),
+                    AmountPaid = _query.ConvertToNaira(verifyResponse.Data.Amount),
+
+                };
+                _db.OrderPayments.Add(payment);
+                await _db.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Index");
         }
 
         //
@@ -43,9 +158,6 @@ namespace AdunbiKiddies.Controllers
         [HttpPost]
         public async Task<ActionResult> AddressAndPayment(FormCollection values)
         {
-            //ViewBag.CreditCardTypes = CreditCardTypes;
-            // string result = values[9];
-
             var sale = new Sale();
             TryUpdateModel(sale);
             //order.CreditCard = result;
@@ -63,9 +175,6 @@ namespace AdunbiKiddies.Controllers
                 var cart = ShoppingCart.GetCart(this.HttpContext);
                 sale = cart.CreateOrder(sale);
 
-                //ModelState.Clear();
-                //ViewBag.Message = "Thank you for Contacting us ";
-
                 //CheckoutController.SendOrderMessage(sale.FirstName, "New Order: " + sale.SaleId, sale.ToString(sale));
                 string body = "Thanks for patronizing us, We will get in touch with you soon";
                 SendMessage(body, sale.Customer.PhoneNumber);
@@ -75,7 +184,7 @@ namespace AdunbiKiddies.Controllers
             catch
             {
                 //Invalid - redisplay with errors
-                return View(sale);
+                return View("AddressAndPayment");
             }
         }
 

@@ -60,7 +60,7 @@ namespace AdunbiKiddies.Controllers
                 //User myUser = myDBContext.Users.SingleOrDefault(user => user.Username == username);
                 //var user = _db.Users.Where(c => c.Email.Equals(model.Email)).SingleOrDefault();
                 //Product product = await _db.Products.FindAsync(int.Parse(stock.Name));
-                Product product = await _db.Products.SingleOrDefaultAsync(s => s.ProductId.Equals(stock.Name));
+                Product product = await _db.Products.SingleOrDefaultAsync(s => s.ProductId.Equals(stock.ProductId));
                 if (product == null)
                 {
                     return HttpNotFound();

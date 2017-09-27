@@ -306,6 +306,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Merchant.cs" />
     <Compile Include="Models\MerchantPayment.cs" />
+    <Compile Include="Models\OrderPayment.cs" />
     <Compile Include="Models\PartnerShipAgreement.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Product.cs" />
@@ -329,6 +330,7 @@
     <Compile Include="SMS Service\SmsServiceTemp.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\OrderPaymentVm.cs" />
     <Compile Include="ViewModels\PaymentVm.cs" />
     <Compile Include="ViewModels\SaleDateGroup.cs" />
     <Compile Include="ViewModels\SearchProductViewModel.cs" />

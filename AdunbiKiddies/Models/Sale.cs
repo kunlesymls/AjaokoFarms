@@ -11,8 +11,8 @@ namespace AdunbiKiddies.Models
 
         public DateTime SaleDate { get; set; }
         public string CustomerId { get; set; }
-
         public decimal Total { get; set; }
+        public bool IsPayed { get; set; }
         public virtual Customer Customer { get; set; }
         public List<SaleDetail> SaleDetails { get; set; }
 

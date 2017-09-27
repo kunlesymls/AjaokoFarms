@@ -1,5 +1,7 @@
 ﻿using AdunbiKiddies.Models;
+using Microsoft.AspNet.Identity;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -35,7 +37,9 @@ namespace AdunbiKiddies.Controllers
         // GET: ShippingDetails/Create
         public ActionResult Create()
         {
-            ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FirstName");
+            var id = User.Identity.GetUserId();
+            ViewBag.CustomerId = new SelectList(db.Customers.AsNoTracking()
+                                    .Where(x => x.CustomerId.Equals(id)), "CustomerId", "FullName");
             return View();
         }
 
@@ -44,16 +48,17 @@ namespace AdunbiKiddies.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CustomerId,AddressType,BuildingNo,StreetName,TownName,StateName")] ShippingDetail shippingDetail)
+        public async Task<ActionResult> Create(ShippingDetail shippingDetail)
         {
             if (ModelState.IsValid)
             {
                 db.ShippingDetails.Add(shippingDetail);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "ShoppingCart");
             }
-
-            ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FirstName", shippingDetail.CustomerId);
+            var id = User.Identity.GetUserId();
+            ViewBag.CustomerId = new SelectList(db.Customers.AsNoTracking()
+                .Where(x => x.CustomerId.Equals(id)), "CustomerId", "FullName");
             return View(shippingDetail);
         }
 
