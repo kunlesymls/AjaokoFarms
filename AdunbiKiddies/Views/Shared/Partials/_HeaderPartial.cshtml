@@ -22,8 +22,7 @@
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
                         <li>@Html.ActionLink("Products", "Index", "Products")</li>
-                        <li>@Html.ActionLink("Mechants", "About", "Home")</li>
-                        <li>@Html.ActionLink("Professional", "About", "Home")</li>
+                        <li>@Html.ActionLink("Professional", "Index", "ProfessionalWorkers")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
 
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -44,7 +43,8 @@
             <!-- header-one -->
             <div class="container">
                 <div class="w3ls-header-left">
-                    <h4 style="color:antiquewhite">Become a <a href="#" style="color: forestgreen; text-decoration: underline;">Merchant</a> <span><a href="#" style="color: indianred;text-decoration: underline;">Professional</a></span></h4>
+                    <h5 style="color:antiquewhite"> <a href="@Url.Action("RegisterMerchant","Account")" style="color:antiquewhite;">Sell On Ajaoko</a> 
+                        <span><a href="@Url.Action("RegisterProfessional","Account")" style="color: indianred;">Service Provider</a></span></h5>
                 </div>
                 <div class="w3ls-header-right">
                     <ul>

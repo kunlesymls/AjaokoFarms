@@ -1,4 +1,6 @@
 ﻿using AdunbiKiddies.Models;
+using PagedList;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -9,50 +11,62 @@ namespace AdunbiKiddies.Controllers
 {
     public class ProductController : BaseController
     {
+        private AjaoOkoDb db = new AjaoOkoDb();
 
         // GET: Product
-        public async Task<ActionResult> Index()
+        public ActionResult Index(string category, string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var products = _db.Products.Include(p => p.Category).Include(p => p.Merchant);
-            return View(await products.ToListAsync());
-        }
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
 
-        public async Task<ActionResult> ProductsView()
-        {
-            var products = _db.Products.Include(p => p.Category).Include(p => p.Merchant);
-            return View(await products.ToListAsync());
-        }
-
-
-
-        public async Task<ActionResult> Approve()
-        {
-            ViewBag.Message = "";
-
-            return View(await _db.Products.Where(m => m.IsApproved == false).ToListAsync());
-
-        }
-
-
-        public async Task<ActionResult> Approved(int id)
-        {
-            Product product = await _db.Products.FindAsync(id);
-            if (product == null)
+            if (searchString != null)
             {
-                ViewBag.Message = "Please select a Merchant";
-                return RedirectToAction("Approve");
+                page = 1;
             }
-            //_db.Merchants.Attach(merchant);
+            else
+            {
+                searchString = currentFilter;
+            }
 
-            product.IsApproved = true;
-            _db.Entry(product).State = EntityState.Modified;
+            ViewBag.CurrentFilter = searchString;
 
-            _db.SaveChanges();
+            var items = from i in _db.Products
+                        select i;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                items = items.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper())
+                                         || s.Category.Name.ToUpper().Contains(searchString.ToUpper())
+                                         || s.AlternativeName.ToUpper().Contains(searchString.ToUpper()));
+            }
+            else if (!String.IsNullOrEmpty(category))
+            {
+                items = items.Where(s => s.Category.Name.ToUpper().Contains(category.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    items = items.OrderByDescending(s => s.Name);
+                    break;
+                case "Price":
+                    items = items.OrderBy(s => s.Price);
+                    break;
+                case "price_desc":
+                    items = items.OrderByDescending(s => s.Price);
+                    break;
+                default:  // Name ascending 
+                    items = items.OrderBy(s => s.Name);
+                    break;
+            }
 
-            ViewBag.Message = "Merchant Approval successful";
-            return RedirectToAction("Approve");
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(items.ToPagedList(pageNumber, pageSize));
+
+            //var items = db.Items.Include(i => i.Catagorie);
+            //return View(await items.ToListAsync());
         }
-
         // GET: Product/Details/5
         public async Task<ActionResult> Details(int? id)
         {
@@ -60,7 +74,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await _db.Products.FindAsync(id);
+            Product product = await db.Products.FindAsync(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -68,11 +82,18 @@ namespace AdunbiKiddies.Controllers
             return View(product);
         }
 
+
+        public PartialViewResult CreateReview()
+        {
+            ViewBag.ProductId = new SelectList(_db.Products, "ProductId", "MerchantId");
+            return PartialView();
+        }
+
         // GET: Product/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
-            ViewBag.MerchantId = new SelectList(_db.Merchants, "MerchantId", "FullName");
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name");
+            ViewBag.MerchantId = new SelectList(db.Merchants, "MerchantId", "CompanyName");
             return View();
         }
 
@@ -81,17 +102,17 @@ namespace AdunbiKiddies.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Product product)
+        public async Task<ActionResult> Create([Bind(Include = "ProductId,MerchantId,CategoryId,Name,AlternativeName,Price,Quantity,Unit,OtherUnitName,Description,ProductDiscount,DiscountPrice,IsApproved,DateAdded,StockQuantity,InternalImage,ItemPictureUrl")] Product product)
         {
             if (ModelState.IsValid)
             {
-                _db.Products.Add(product);
-                await _db.SaveChangesAsync();
+                db.Products.Add(product);
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name", product.CategoryId);
-            ViewBag.MerchantId = new SelectList(_db.Merchants, "MerchantId", "FullName", product.MerchantId);
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", product.CategoryId);
+            ViewBag.MerchantId = new SelectList(db.Merchants, "MerchantId", "CompanyName", product.MerchantId);
             return View(product);
         }
 
@@ -102,13 +123,13 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await _db.Products.FindAsync(id);
+            Product product = await db.Products.FindAsync(id);
             if (product == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name", product.CategoryId);
-            ViewBag.MerchantId = new SelectList(_db.Merchants, "MerchantId", "FullName", product.MerchantId);
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", product.CategoryId);
+            ViewBag.MerchantId = new SelectList(db.Merchants, "MerchantId", "CompanyName", product.MerchantId);
             return View(product);
         }
 
@@ -117,16 +138,16 @@ namespace AdunbiKiddies.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Product product)
+        public async Task<ActionResult> Edit([Bind(Include = "ProductId,MerchantId,CategoryId,Name,AlternativeName,Price,Quantity,Unit,OtherUnitName,Description,ProductDiscount,DiscountPrice,IsApproved,DateAdded,StockQuantity,InternalImage,ItemPictureUrl")] Product product)
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(product).State = EntityState.Modified;
-                await _db.SaveChangesAsync();
+                db.Entry(product).State = EntityState.Modified;
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name", product.CategoryId);
-            ViewBag.MerchantId = new SelectList(_db.Merchants, "MerchantId", "FullName", product.MerchantId);
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", product.CategoryId);
+            ViewBag.MerchantId = new SelectList(db.Merchants, "MerchantId", "CompanyName", product.MerchantId);
             return View(product);
         }
 
@@ -137,7 +158,7 @@ namespace AdunbiKiddies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await _db.Products.FindAsync(id);
+            Product product = await db.Products.FindAsync(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -150,17 +171,26 @@ namespace AdunbiKiddies.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Product product = await _db.Products.FindAsync(id);
-            _db.Products.Remove(product);
-            await _db.SaveChangesAsync();
+            Product product = await db.Products.FindAsync(id);
+            db.Products.Remove(product);
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        public async Task<ActionResult> RenderImage(int ProductId)
+        {
+            Product item = await _db.Products.FindAsync(ProductId);
+
+            byte[] photoBack = item.InternalImage;
+
+            return File(photoBack, "image/png");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                _db.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }

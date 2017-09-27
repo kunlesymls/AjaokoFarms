@@ -114,11 +114,7 @@ namespace AdunbiKiddies.Models
         [Required(ErrorMessage = "Your First name is required")]
         [StringLength(40, ErrorMessage = "Your First name is too long")]
         public string FirstName { get; set; }
-
-        [Display(Name = "Middle Name")]
-        [Required(ErrorMessage = "Your Middle name is required")]
-        [StringLength(40, ErrorMessage = "Your Middle name is too long")]
-        public string MiddleName { get; set; }
+ 
 
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = "Your last name is required")]

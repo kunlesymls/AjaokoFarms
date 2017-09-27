@@ -13,14 +13,14 @@ namespace AdunbiKiddies.Controllers
         // GET: BusinessRegistrations
         public async Task<ActionResult> Index()
         {
-            if (Request.IsAuthenticated && User.IsInRole("Admin"))
-            {
-                var userId = User.Identity.GetUserId();
-                var bReg = _db.BusinessRegistrations.Include(b => b.Merchant).AsNoTracking()
-                                                .Where(x => x.MerchantId.Equals(userId));
-                return View(await bReg.ToListAsync());
+            //if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            //{
+            //    var userId = User.Identity.GetUserId();
+            //    var bReg = _db.BusinessRegistrations.Include(b => b.Merchant).AsNoTracking()
+            //                                    .Where(x => x.MerchantId.Equals(userId));
+            //    return View(await bReg.ToListAsync());
 
-            }
+            //}
             var businessRegistrations = _db.BusinessRegistrations.Include(b => b.Merchant);
             return View(await businessRegistrations.ToListAsync());
         }

@@ -14,9 +14,9 @@ namespace AdunbiKiddies.Models
         public string CompanyName { get; set; }
         [DisplayName("Preferred Store")]
         public string PreferedStoreName { get; set; }
-        [DisplayName("Were you refered ?")]
+        [DisplayName("Were you referred ?")]
         public bool IsReffered { get; set; }
-        [DisplayName("Business Entry")]
+        [DisplayName("Business Entity")]
         public string BusinessEntry { get; set; }
 
         [DisplayName("Mode of Identification")]
@@ -26,7 +26,7 @@ namespace AdunbiKiddies.Models
         public string RegistrationNo { get; set; }
 
         public bool Haspayed { get; set; }
-        public DateTime ExpiryDate { get; set; }
+        public DateTime? ExpiryDate { get; set; }
         public bool IsVerified { get; set; }
         public virtual PartnerShipAgreement PartnerShipAgreement { get; set; }
 

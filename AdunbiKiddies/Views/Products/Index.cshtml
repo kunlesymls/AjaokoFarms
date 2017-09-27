@@ -1,9 +1,13 @@
 ﻿@model PagedList.IPagedList<AdunbiKiddies.Models.Product>
+
+@using AdunbiKiddies.Models
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
     ViewBag.Title = "Products";
+    var storeSection = (List<StoreSection>)ViewBag.StoreSection;
+
 }
 
 
@@ -53,7 +57,9 @@
                                          <div class="agile-product-text">
                                              <h5>@Html.DisplayFor(modelItem => item.Name)</h5><br/>
 
-                                             <span class="text-sm">Left(@item.StockQuantity)</span>
+                                             <span class="text-sm">Left(@item.StockQuantity)<br/></span>
+                                             <span class="text-sm">Price:(@item.Price)<br /></span>
+                                             <span class="text-sm">(@item.DiscountPrice)</span>
                                          </div>
                                      </div>
                                      <div class="back">

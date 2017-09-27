@@ -10,9 +10,9 @@ namespace OpenOrderFramework.Models
         [Key, ForeignKey("Merchant")]
         public string MerchantId { get; set; }
         public int CategoryId { get; set; }
-        [DisplayName("Can you Drop Product?")]
+        [DisplayName("Can you Drop your product with Ajaoko?")]
         public bool CanDropProduct { get; set; }
-        [DisplayName("Can you Stock Product?")]
+        [DisplayName("Can you Stock Product with Ajaoko?")]
         public bool CanStockProduct { get; set; }
         [DisplayName("Are you selling the Product Elsewhere?")]
         public bool IsSellingElsewhere { get; set; }

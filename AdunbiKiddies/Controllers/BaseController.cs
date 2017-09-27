@@ -47,6 +47,9 @@ namespace AdunbiKiddies.Controllers
                 model.MerchantId = "AJAOKO";
                 model.Color = "";
             }
+
+            var storeSection = _db.StoreSections.AsNoTracking().ToList();
+            ViewBag.StoreSection = storeSection;
             ViewBag.LayoutViewModel = model;
 
 

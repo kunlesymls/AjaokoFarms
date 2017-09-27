@@ -21,6 +21,19 @@ namespace AdunbiKiddies.Controllers
         {
             return View();
         }
+        public ActionResult SuperAdminDashBoard()
+        {
+            return View();
+
+        }
+        public ActionResult ProfessionalDashBoard()
+        {
+            return View();
+        }
+        public ActionResult MerchantDashBoard()
+        {
+            return View();
+        }
 
         public ActionResult CategoryItems(int id)
         {

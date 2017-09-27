@@ -30,8 +30,19 @@ namespace AdunbiKiddies.Models
         public string AlternativeName { get; set; }
 
 
-        [Required(ErrorMessage = "Price is required")]
+        [Required(ErrorMessage = "Price Per Quantity")]
         public decimal Price { get; set; }
+
+        [Range(1, 1000)]
+        [DisplayName("Quantity")]
+        [Required(ErrorMessage = "Quantity")]
+        public int Quantity { get; set; }
+
+        [DisplayName("Unit Name")]
+        public string Unit { get; set; }
+
+        [DisplayName("Other Unit Name")]
+        public string OtherUnitName { get; set; }
 
         //[Required(ErrorMessage = "A Product Description is required")]
         [Display(Name = "Product Description")]
@@ -48,7 +59,7 @@ namespace AdunbiKiddies.Models
                 {
                     decimal calculatedPrice = ((decimal)ProductDiscount / 100) * Price;
                     decimal discountPrice = Price - calculatedPrice;
-                    return discountPrice;
+                    return Math.Round(discountPrice, 2);
                 }
                 return 0;
             }

@@ -2,7 +2,6 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using OpenOrderFramework.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -138,7 +137,6 @@ namespace AdunbiKiddies.Controllers
                     UserName = model.Username,
                     Email = model.Email,
                     FirstName = model.FirstName,
-                    MiddleName = model.MiddleName,
                     LastName = model.LastName,
 
                 };
@@ -149,7 +147,6 @@ namespace AdunbiKiddies.Controllers
                     {
                         MerchantId = user.Id,
                         FirstName = model.FirstName,
-                        MiddleName = model.MiddleName,
                         LastName = model.LastName,
                         Email = model.Email
                     };
@@ -194,7 +191,6 @@ namespace AdunbiKiddies.Controllers
                     UserName = model.Username,
                     Email = model.Email,
                     FirstName = model.FirstName,
-                    MiddleName = model.MiddleName,
                     LastName = model.LastName,
 
                 };
@@ -205,7 +201,6 @@ namespace AdunbiKiddies.Controllers
                     {
                         ProfessionalWorkerId = user.Id,
                         FirstName = model.FirstName,
-                        MiddleName = model.MiddleName,
                         LastName = model.LastName,
                         Email = model.Email
                     };
@@ -274,24 +269,22 @@ namespace AdunbiKiddies.Controllers
         {
             if (User.IsInRole("Admin"))
             {
-                return RedirectToAction("Index", "Products");
+                return RedirectToAction("MerchantDashBoard", "Home");
             }
 
             if (User.IsInRole("SuperAdmin"))
             {
-                return RedirectToAction("Index", "Products");
+                return RedirectToAction("SuperAdminDashBoard", "Home");
             }
 
             if (User.IsInRole("Professional"))
             {
-                return RedirectToAction("Index", "Products");
+                return RedirectToAction("ProfessionalDashBoard", "Home");
             }
             if (User.IsInRole("Customer"))
             {
                 return RedirectToAction("Index", "Home");
             }
-
-
             return RedirectToAction("Index", "Home");
         }
         //

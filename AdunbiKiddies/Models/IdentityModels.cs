@@ -66,5 +66,7 @@ namespace AdunbiKiddies.Models
 
         public DbSet<MerchantPayment> MerchantPayments { get; set; }
         public DbSet<OrderPayment> OrderPayments { get; set; }
+
+        public System.Data.Entity.DbSet<AdunbiKiddies.Models.ProductReview> ProductReviews { get; set; }
     }
 }

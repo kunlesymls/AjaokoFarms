@@ -7,6 +7,10 @@
         {
             Add = 1, Remove
         }
+        public enum Unit
+        {
+            Kg = 1, Litres, Bag, Crate, Basket, Tubbers, Mudu, Cup, Bottle, Tonnnes
+        }
 
         public enum Withdrawal
         {
