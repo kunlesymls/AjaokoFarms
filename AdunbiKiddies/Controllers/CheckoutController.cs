@@ -16,7 +16,7 @@ using System.Web.Mvc;
 
 namespace AdunbiKiddies.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class CheckoutController : BaseController
     {
         private AjaoOkoDb storeDB;
@@ -35,6 +35,19 @@ namespace AdunbiKiddies.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        public PartialViewResult Address()
+        {
+            return PartialView();
+
+        }
+        public PartialViewResult Shiping()
+        {
+            return PartialView();
+        }
+        public PartialViewResult ReviewCart()
+        {
+            return PartialView();
         }
 
         //GET: /Checkout/AddressAndPayment
@@ -56,7 +69,8 @@ namespace AdunbiKiddies.Controllers
                 };
                 return View(payment);
             }
-            return RedirectToAction("Create", "ShippingDetails");
+            //return RedirectToAction("Create", "ShippingDetails");
+            return View();
 
         }
 

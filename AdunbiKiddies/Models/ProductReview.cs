@@ -27,7 +27,7 @@ namespace AdunbiKiddies.Models
     {
         public int ProductId { get; set; }
         public int rating { get; set; }
-        public string userName { get; set; }
+        public string username { get; set; }
         public string email { get; set; }
         public string subject { get; set; }
         public string review { get; set; }

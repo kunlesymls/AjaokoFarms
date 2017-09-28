@@ -117,6 +117,7 @@ namespace AdunbiKiddies.Models
         // public virtual SubCategory SubCategory { get; set; }
         public virtual List<SaleDetail> SaleDetails { get; set; }
         public virtual ICollection<Stock> Stocks { get; set; }
+        public virtual ICollection<ProductReview> ProductReviews { get; set; }
 
     }
 }

@@ -10,7 +10,7 @@ namespace AdunbiKiddies.Models
     public partial class ShoppingCart
     {
         AjaoOkoDb storeDB = new AjaoOkoDb();
-         public string ShoppingCartId { get; set; }
+        public string ShoppingCartId { get; set; }
         public const string CartSessionKey = "CartId";
 
         public static ShoppingCart GetCart(HttpContextBase context)
@@ -124,7 +124,7 @@ namespace AdunbiKiddies.Models
             decimal? total = (from cartItems in storeDB.Carts
                               where cartItems.CartId == ShoppingCartId
                               select (int?)cartItems.Count *
-                              cartItems.Product.Price).Sum();
+                              cartItems.Product.DiscountPrice).Sum();
 
             return total ?? decimal.Zero;
         }

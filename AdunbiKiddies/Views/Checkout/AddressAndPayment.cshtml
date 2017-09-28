@@ -2,30 +2,68 @@
 
 @{
     ViewBag.Title = "Address And Payment";
-    Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
+    Layout = "~/Views/Shared/_LayoutSales.cshtml";
 
 }
 
-<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+@*<script src="~/Scripts/jquery-3.2.1.min.js"></script>
 <script src="~/Scripts/card.js"></script>
-<link rel="stylesheet" href="~/Content/card.css">
-<script>
-    $('.active form').card({ container: $('.card-wrapper') });
-    $('form').card({
-        // a selector or jQuery object for the container
-        // where you want the card to appear
-        container: '.card-wrapper', // *required*
-        numberInput: 'input#number', // optional — default input[name="number"]
-        expiryInput: 'input#expiry', // optional — default input[name="expiry"]
-        cvcInput: 'input#cvc', // optional — default input[name="cvc"]
-        nameInput: 'input#name', // options - defaults input[name="name"]
+<link rel="stylesheet" href="~/Content/card.css">*@
+<br />
 
-        width: 200, // optional — default 350px
-        formatting: true // optional - default true
-    });
-</script>
+<!-- Page Content-->
+<div class="container padding-bottom-3x mb-2">
+    <div class="row">
+        <!-- Checkout Adress-->
+        <div class="col-xl-9 col-lg-8">
+            <div class="checkout-steps"><a href="#" id="review">3. Review</a><a href="#" id="shipping"><span class="angle"></span>2. Shipping</a><a class="active" href="#" id="address"><span class="angle"></span>1. Address</a></div>
+         
+          
+            <div id="display"></div>
+            </div>
+        <!-- Sidebar          -->
+        <div class="col-xl-3 col-lg-4">
+            <aside class="sidebar">
+                <div class="padding-top-2x hidden-lg-up"></div>
+                <!-- Order Summary Widget-->
+                <section class="widget widget-order-summary">
+                    <h3 class="widget-title">Order Summary</h3>
+                    @if (Model != null)
+                    {
+                        <table class="table">
+                            <tr>
+                                <td>Cart Subtotal:</td>
+                                <td class="text-medium">#@Model.TotalAmount</td>
+                            </tr>
+                            <tr>
+                                <td>Shipping:</td>
+                                <td class="text-medium">#@Model.ShippingDetail.BuildingNo</td>
+                            </tr>
+                       
+                            <tr>
+                                <td></td>
+                                @{ var total = Model.TotalAmount + 5;}
+                                <td class="text-lg text-medium">@total</td>
+                            </tr>
+                        </table>
+                    }
+                   
+                </section>
+                <!-- Featured Products Widget-->
+              
+                <!-- Promo Banner-->
+                <section class="promo-box" style="background-image: url(img/banners/02.jpg);"><span class="overlay-dark" style="opacity: .4;"></span>
+                    <div class="promo-box-content text-center padding-top-2x padding-bottom-2x">
+                        <h4 class="text-light text-thin text-shadow">New Collection of</h4>
+                        <h3 class="text-bold text-light text-shadow">Sunglasses</h3><a class="btn btn-outline-white btn-sm" href="shop-grid-ls.html">Shop Now</a>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </div>
+</div>
 
-<div class="well">
+@*<div class="well">
     <h3>Shipping Details</h3>
     <p>
         <ul>
@@ -44,10 +82,10 @@
     {
        <h2>Customer's Information</h2>
         <fieldset>
-            @*<legend>Customer's Information</legend>*@
+            @*<legend>Customer's Information</legend>
 
             @Html.HiddenFor(m => Model.CustomerId)
-            @*@Html.HiddenFor(m => Model.SaleId)*@
+            @Html.HiddenFor(m => Model.SaleId)
             <div class="form-group">
                 @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "col-lg-2 control-label" })
                 <div class="col-lg-10">
@@ -87,4 +125,37 @@
 
 @section Scripts {
    @Scripts.Render("~/bundles/jqueryval")
-}
+}*@
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var url = "/Checkout/Address";
+        $('#display').load(url);
+
+        $("#review").click(function () {
+            $("#review").attr("class", "active");
+            $("#shipping").attr("class", "");
+            $("#address").attr("class", "");
+            var url = "/Checkout/ReviewCart";
+            $('#display').load(url);
+        });
+        $("#address").click(function () {
+            $("#address").attr("class", "active");
+            $("#shipping").attr("class", "");
+            $("#review").attr("class", "");
+            var url = "/Checkout/Address";
+            $('#display').load(url);
+        });
+
+        $("#shipping").click(function () {
+            window.alert("hi");
+            $("#shipping").attr("class", "active");
+            $("#address").attr("class", "");
+            $("#review").attr("class", "");
+            var url = "/Checkout/Shiping";
+            $('#display').load(url);
+        });
+
+    });
+    </script>

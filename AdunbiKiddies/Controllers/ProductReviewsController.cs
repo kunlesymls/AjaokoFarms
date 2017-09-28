@@ -32,16 +32,16 @@ namespace AdunbiKiddies.Controllers
         }
 
         // GET: ProductReviews/Create
-        public PartialViewResult Create()
-        {
-            ViewBag.ProductId = new SelectList(_db.Products, "ProductId", "MerchantId");
-            return PartialView();
-        }
+        //public PartialViewResult Create()
+        //{
+        //    ViewBag.ProductId = new SelectList(_db.Products, "ProductId", "MerchantId");
+        //    return PartialView();
+        //}
 
         // POST: ProductReviews/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        //[HttpPost]
         public async Task<ActionResult> Create(ProductReviewVm model)
         {
             if (ModelState.IsValid)
@@ -51,7 +51,7 @@ namespace AdunbiKiddies.Controllers
                     ProductId = model.ProductId,
                     Rating = model.rating,
                     Review = model.review,
-                    UserName = model.userName,
+                    UserName = model.username,
                     Email = model.email,
                     Subject = model.subject
                 };

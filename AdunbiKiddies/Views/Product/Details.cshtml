@@ -6,188 +6,172 @@
 }
 
 <div class="container padding-bottom-3x mb-1">
-<div class="row">
-    <!-- Poduct Gallery-->
-    <div class="col-md-6">
-        <div class="product-gallery"><span class="product-badge text-danger">@Model.ProductDiscount% Off</span>
-            <div class="gallery-wrapper">
-                <div class="gallery-item active"><a href="img/shop/single/01.jpg" data-hash="one" data-size="1000x667"></a></div>
-                <div class="gallery-item"><a href="img/shop/single/02.jpg" data-hash="two" data-size="1000x667"></a></div>
-                <div class="gallery-item"><a href="img/shop/single/03.jpg" data-hash="three" data-size="1000x667"></a></div>
-                <div class="gallery-item"><a href="img/shop/single/04.jpg" data-hash="four" data-size="1000x667"></a></div>
-                <div class="gallery-item"><a href="img/shop/single/05.jpg" data-hash="five" data-size="1000x667"></a></div>
+    <div class="row">
+        <!-- Poduct Gallery-->
+        <div class="col-md-6">
+            <div class="product-gallery"><span class="product-badge text-danger">@Model.ProductDiscount% Off</span>
+                <div class="gallery-wrapper">
+                    <div class="gallery-item active"><a href="@Url.Action("RenderImage", new {ProductId = Model.ProductId})" data-hash="one" data-size="1000x667"></a></div>
+                    <div class="gallery-item"><a href="img/shop/single/02.jpg" data-hash="two" data-size="1000x667"></a></div>
+                    <div class="gallery-item"><a href="img/shop/single/03.jpg" data-hash="three" data-size="1000x667"></a></div>
+                    <div class="gallery-item"><a href="img/shop/single/04.jpg" data-hash="four" data-size="1000x667"></a></div>
+                    <div class="gallery-item"><a href="img/shop/single/05.jpg" data-hash="five" data-size="1000x667"></a></div>
+                </div>
+                <div class="product-carousel owl-carousel">
+                    <div data-hash="one"><img src="@Url.Action("RenderImage", new {ProductId = Model.ProductId})" alt="Product"></div>
+                    <div data-hash="two"><img src="img/shop/single/02.jpg" alt="Product"></div>
+                    <div data-hash="three"><img src="img/shop/single/03.jpg" alt="Product"></div>
+                    <div data-hash="four"><img src="img/shop/single/04.jpg" alt="Product"></div>
+                    <div data-hash="five"><img src="img/shop/single/05.jpg" alt="Product"></div>
+                </div>
+                <ul class="product-thumbnails">
+                    <li class="active"><a href="#one"><img src="@Url.Action("RenderImage", new {ProductId = Model.ProductId})" alt="Product"></a></li>
+                    <li><a href="#two"><img src="img/shop/single/th02.jpg" alt="Product"></a></li>
+                    <li><a href="#three"><img src="img/shop/single/th03.jpg" alt="Product"></a></li>
+                    <li><a href="#four"><img src="img/shop/single/th04.jpg" alt="Product"></a></li>
+                    <li><a href="#five"><img src="img/shop/single/th05.jpg" alt="Product"></a></li>
+                </ul>
             </div>
-            <div class="product-carousel owl-carousel">
-                <div data-hash="one"><img src="img/shop/single/01.jpg" alt="Product"></div>
-                <div data-hash="two"><img src="img/shop/single/02.jpg" alt="Product"></div>
-                <div data-hash="three"><img src="img/shop/single/03.jpg" alt="Product"></div>
-                <div data-hash="four"><img src="img/shop/single/04.jpg" alt="Product"></div>
-                <div data-hash="five"><img src="img/shop/single/05.jpg" alt="Product"></div>
-            </div>
-            <ul class="product-thumbnails">
-                <li class="active"><a href="#one"><img src="img/shop/single/th01.jpg" alt="Product"></a></li>
-                <li><a href="#two"><img src="img/shop/single/th02.jpg" alt="Product"></a></li>
-                <li><a href="#three"><img src="img/shop/single/th03.jpg" alt="Product"></a></li>
-                <li><a href="#four"><img src="img/shop/single/th04.jpg" alt="Product"></a></li>
-                <li><a href="#five"><img src="img/shop/single/th05.jpg" alt="Product"></a></li>
-            </ul>
         </div>
-    </div>
-    <!-- Product Info-->
-    <div class="col-md-6">
-        <div class="padding-top-2x mt-2 hidden-md-up"></div>
-        <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star"></i>
-        </div><span class="text-muted align-middle">&nbsp;&nbsp;4.2 | 3 customer reviews</span>
-        <h2 class="padding-top-1x text-normal">@Model.Name</h2><span class="h2 d-block">
-            <del class="text-muted text-normal">#@Model.Price</del>&nbsp; @Model.DiscountPrice</span>
-        <p>@Model.Description</p>
+        <!-- Product Info-->
+        <div class="col-md-6">
+            <div class="padding-top-2x mt-2 hidden-md-up"></div>
+            <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star"></i>
+            </div><span class="text-muted align-middle">&nbsp;&nbsp;4.2 | 3 customer reviews</span>
+            <h2 class="padding-top-1x text-normal">@Model.Name</h2><span class="h2 d-block">
+                <del class="text-muted text-normal">#@Model.Price</del>&nbsp; @Model.DiscountPrice</span>
+            <p>@Model.Description</p>
        
-        <hr class="mb-3">
-        <div class="d-flex flex-wrap justify-content-between">
-            <div class="entry-share mt-2 mb-2"><span class="text-muted">Share:</span>
-                <div class="share-links"><a class="social-button shape-circle sb-facebook" href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="socicon-facebook"></i></a><a class="social-button shape-circle sb-twitter" href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="socicon-twitter"></i></a><a class="social-button shape-circle sb-instagram" href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="socicon-instagram"></i></a><a class="social-button shape-circle sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a></div>
-            </div>
-            <div class="sp-buttons mt-2 mb-2">
-                <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
-                <button class="btn btn-primary" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="icon-bag"></i> Add to Cart</button>
+            <hr class="mb-3">
+            <div class="d-flex flex-wrap justify-content-between">
+                <div class="entry-share mt-2 mb-2"><span class="text-muted">Share:</span>
+                    <div class="share-links"><a class="social-button shape-circle sb-facebook" href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="socicon-facebook"></i></a><a class="social-button shape-circle sb-twitter" href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="socicon-twitter"></i></a><a class="social-button shape-circle sb-instagram" href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="socicon-instagram"></i></a><a class="social-button shape-circle sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a></div>
+                </div>
+                <div class="sp-buttons mt-2 mb-2">
+                    <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
+                    <button class="btn btn-primary" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="icon-bag"></i> Add to Cart</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Product Tabs-->
-<div class="row padding-top-3x mb-3">
-    <div class="col-lg-10 offset-lg-1">
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item"><a class="nav-link active" href="#description" data-toggle="tab" role="tab">Description</a></li>
-            <li class="nav-item"><a class="nav-link" href="#reviews" data-toggle="tab" role="tab">Reviews (3)</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane fade show active" id="description" role="tabpanel">
-                <p>@Model.Description</p>
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="http://www.youtube.com/embed/B81qd2v6alw?rel=0" allowfullscreen></iframe>
+    <!-- Product Tabs-->
+    <div class="row padding-top-3x mb-3">
+        <div class="col-lg-10 offset-lg-1">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><a class="nav-link active" href="#description" data-toggle="tab" role="tab">Description</a></li>
+                <li class="nav-item"><a class="nav-link" href="#reviews" data-toggle="tab" role="tab">Reviews (@Model.ProductReviews.Count)</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="description" role="tabpanel">
+                    <p>@Model.Description</p>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="" allowfullscreen></iframe>
+                    </div>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="reviews" role="tabpanel">
-                <!-- Review-->
-                <div class="comment">
-                    <div class="comment-author-ava"><img src="img/reviews/01.jpg" alt="Review author"></div>
-                    <div class="comment-body">
-                        <div class="comment-header d-flex flex-wrap justify-content-between">
-                            <h4 class="comment-title">Average quality for the price</h4>
-                            <div class="mb-2">
-                                <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star"></i><i class="icon-star"></i>
+                <div class="tab-pane fade" id="reviews" role="tabpanel">
+                    @foreach (var review in Model.ProductReviews)
+                    {
+                        <!-- Review-->
+                        <div class="comment">
+                            <div class="comment-author-ava"><img src="img/reviews/01.jpg" alt="Review author">
+                            </div>
+                            <div class="comment-body">
+                                <div class="comment-header d-flex flex-wrap justify-content-between">
+                                    <h4 class="comment-title">@review.Subject</h4>
+                                    <div class="mb-2">
+                                        <div class="rating-stars">
+                                            @for (int i = 0; i <= review.Rating; i++)
+                                            {
+                                                <i class="icon-star filled"></i>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="comment-text">@review.Review</p>
+                                <div class="comment-footer"><span class="comment-meta">@review.UserName</span>
                                 </div>
                             </div>
                         </div>
-                        <p class="comment-text">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
-                        <div class="comment-footer"><span class="comment-meta">Francis Burton</span></div>
-                    </div>
-                </div>
-                <!-- Review-->
-                <div class="comment">
-                    <div class="comment-author-ava"><img src="img/reviews/02.jpg" alt="Review author"></div>
-                    <div class="comment-body">
-                        <div class="comment-header d-flex flex-wrap justify-content-between">
-                            <h4 class="comment-title">My husband love his new...</h4>
-                            <div class="mb-2">
-                                <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <div class="comment-footer"><span class="comment-meta">Maggie Scott</span></div>
-                    </div>
-                </div>
-                <!-- Review-->
-                <div class="comment">
-                    <div class="comment-author-ava"><img src="img/reviews/03.jpg" alt="Review author"></div>
-                    <div class="comment-body">
-                        <div class="comment-header d-flex flex-wrap justify-content-between">
-                            <h4 class="comment-title">Soft, comfortable, quite durable...</h4>
-                            <div class="mb-2">
-                                <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="comment-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-                        <div class="comment-footer"><span class="comment-meta">Jacob Hammond</span></div>
-                    </div>
-                </div>
-                <!-- Review Form-->
-                <h5 class="mb-30 padding-top-1x">Leave Review</h5>
-
-
-                <form class="row" id="myform" onsubmit="return false;">
-                    @Html.TextBoxFor(model => Model.ProductId, new {style = "display:none"})
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="username">Your Name</label>
-                            <input class="form-control form-control-rounded" type="text" id="username" name="username" required>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="email">Your Email</label>
-                            <input class="form-control form-control-rounded" type="email" id="email" name="email" required>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input class="form-control form-control-rounded" type="text" id="subject" name="subject" required>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="rating">Rating</label>
-                            <select class="form-control form-control-rounded" id="rating" name="rating">
-                                <option>5</option>
-                                <option>4</option>
-                                <option>3</option>
-                                <option>2</option>
-                                <option>1</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label for="review">Review </label>
-                            <textarea class="form-control form-control-rounded" id="review" name="review" rows="8" required></textarea>
-                        </div>
-                    </div>
-
-                    <div class="col-12 text-right">
-                        <button id="btnsubmit" class="btn btn-outline-primary" type="submit">Submit Review</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-</div>
-<script src="~/Scripts/jquery-3.2.1.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#btnsubmit").click(function() {
-
-            var data = $("#myform").serialize();
-            window.alert(data);
-            $.ajax({
-                type: "POST",
-                url: "/ProductReviews/Create",
-                data: data,
-                success: function(data) {
-                    if (data.status) {
-                        $('#myform')[0].reset();
-                        toastr["success"](data.message);
-                    } else {
-                        toastr["error"](data.message);
                     }
+               
+                    <!-- Review Form-->
+                    <h5 class="mb-30 padding-top-1x">Leave Review</h5>
 
-                }
+
+                    <form class="row" id="myform" onsubmit="return false;">
+                        @Html.TextBoxFor(model => Model.ProductId, new {style = "display:none"})
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="username">Your Name</label>
+                                <input class="form-control form-control-rounded" type="text" id="username" name="username" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="email">Your Email</label>
+                                <input class="form-control form-control-rounded" type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input class="form-control form-control-rounded" type="text" id="subject" name="subject" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="rating">Rating</label>
+                                <select class="form-control form-control-rounded" id="rating" name="rating">
+                                    <option>5</option>
+                                    <option>4</option>
+                                    <option>3</option>
+                                    <option>2</option>
+                                    <option>1</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="review">Review </label>
+                                <textarea class="form-control form-control-rounded" id="review" name="review" rows="8" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-12 text-right">
+                            <button id="btnsubmit" class="btn btn-outline-primary" type="submit">Submit Review</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="~/Scripts/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#btnsubmit").click(function() {
+
+                var data = $("#myform").serialize();
+                window.alert(data);
+                $.ajax({
+                    type: "POST",
+                    url: "/ProductReviews/Create",
+                    contentType: "application/json", 
+                    data: data,
+                    success: function(data) {
+                        if (data.status) {
+                            $('#myform')[0].reset();
+                            toastr["success"](data.message);
+                        } else {
+                            toastr["error"](data.message);
+                        }
+
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
+
+
+

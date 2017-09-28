@@ -31,7 +31,6 @@
             </div>
         </div>
         <div class="column">
-            <div class="shop-view"><a class="grid-view active" href="shop-grid-ls.html"><span></span><span></span><span></span></a><a class="list-view" href="shop-list-ls.html"><span></span><span></span><span></span></a></div>
         </div>
     </div>
     <!-- Products Grid-->
@@ -39,27 +38,27 @@
         <div class="gutter-sizer"></div>
         <div class="grid-sizer"></div>
         <!-- Product-->
-    @foreach (var item in Model)
-    {
-        if (item.StockQuantity != null)
+        @foreach (var item in Model)
         {
-            <div class="grid-item">
-                <div class="product-card">
-                    <div class="rating-stars">@item.ProductDiscount % Off</div>
-                    <div class="product-badge text-danger">(@item.StockQuantity)</div><a class="product-thumb" href="@Url.Action("Details", new {id=item.ProductId})"><img src="@Url.Action("RenderImage", new {ProductId = item.ProductId})" alt="Product"></a>
-                    <h3 class="product-title"><a href="@Url.Action("Details", new {id=item.ProductId})">@item.Name</a>
-                    </h3>
-                    <h4 class="product-price">
-                        <del>#@item.Price</del>#@item.DiscountPrice
-                    </h4>
-                    <div class="product-buttons">
-                        <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
-                        <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
+            if (item.StockQuantity != null)
+            {
+                <div class="grid-item">
+                    <div class="product-card">
+                        <div class="rating-stars">@item.ProductDiscount % Off</div>
+                        <div class="product-badge text-danger">(@item.StockQuantity)</div><a class="product-thumb" href="@Url.Action("Details", new {id=item.ProductId})"><img src="@Url.Action("RenderImage", new {ProductId = item.ProductId})" alt="Product"></a>
+                        <h3 class="product-title"><a href="@Url.Action("Details", new {id=item.ProductId})">@item.Name</a>
+                        </h3>
+                        <h4 class="product-price">
+                            <del>#@item.Price</del>#@item.DiscountPrice
+                        </h4>
+                        <div class="product-buttons">
+                            <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
+                            <button class="btn btn-outline-primary btn-sm" id="AddLink" data-id="@item.ProductId">Add to Cart</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         }
-    }
 
     </div>
     <!-- Pagination-->
@@ -91,23 +90,28 @@
         <section class="widget widget-categories">
             <h3 class="widget-title">Shop Categories</h3>
             <ul>
-        @foreach (var sec in storeSection)
-        {
-            <li class="has-children expanded"><a href="#">@sec.SectionName</a><span>(1138)</span>
+                @foreach (var sec in storeSection)
+                {
+                    <li class="has-children expanded"><a href="#">@sec.SectionName</a><span>(1138)</span>
          
-            @foreach (var category in sec.Categories.Where(x => x.StoreSectionId.Equals(sec.StoreSectionId)))
-             {
-                 <ul>
-                     <li><a href="#">@category.Name</a><span>(508)</span>
+                        @foreach (var category in sec.Categories.Where(x => x.StoreSectionId.Equals(sec.StoreSectionId)))
+                        {
+                            <ul>
+                                <li><a href="@Url.Action("Index", "Product", new
+                                             {
+                                                 category = category.Name,
+                                                 page = 1
+
+                                             })">@category.Name</a><span>(508)</span>
                         
-                     </li>
+                                </li>
                     
                     
-                 </ul>
+                            </ul>
+                        }
+                    </li>
                 }
-            </li>
-        }
-                </ul>
+            </ul>
             @*<ul>
                 <li class="has-children expanded"><a href="#">Shoes</a><span>(1138)</span>
                     <ul>
@@ -240,3 +244,25 @@
 </div>
 </div>
 </div>
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+ 
+        // Document.ready -> link up remove event handler
+        $("#AddLink").click(function () {
+            // Get the id from the link
+            var recordToAdd = $(this).attr("data-id");
+            window.alert(recordToAdd);
+            if (recordToAdd !== '') {
+                // Perform the ajax post
+                $.post("/ShoppingCart/AddToCart", { "id": recordToAdd },
+                    function (data) {
+                        var url = "/ShoppingCart/PartialIndex";
+                        $('#mycart').load(url);
+                        toastr["success"](data.status);
+                    });
+            }
+        });
+    });
+</script>

@@ -28,6 +28,20 @@ namespace AdunbiKiddies.Controllers
             // Return the view
             return View(viewModel);
         }
+
+        public PartialViewResult PartialIndex()
+        {
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+
+            // Set up our ViewModel
+            var viewModel = new ShoppingCartViewModel
+            {
+                CartItems = cart.GetCartItems(),
+                CartTotal = cart.GetTotal()
+            };
+            // Return the view
+            return PartialView(viewModel);
+        }
         //
         // GET: /Store/AddToCart/5
         [HttpPost]
