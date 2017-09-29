@@ -1878,10 +1878,13 @@
     <Content Include="Content\Images\logo.gif" />
     <Content Include="Content\Images\logo.jpeg" />
     <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\Logo.resized.png" />
     <Content Include="Content\Images\logo2.jpg" />
     <Content Include="Content\Images\Logo_800X400.jpg" />
     <Content Include="Content\Images\mobile.jpg" />
     <Content Include="Content\Images\payment_methods.png" />
+    <Content Include="Content\Images\slide2.fw.png" />
+    <Content Include="Content\Images\slideOne.fw.png" />
     <Content Include="Content\Images\social-icon.png" />
     <Content Include="Content\Images\splash_logo.png" />
     <Content Include="Content\Images\Team Member_1.jpg" />
@@ -2589,6 +2592,7 @@
     <Content Include="Views\Checkout\Shiping.cshtml" />
     <Content Include="Views\Checkout\ReviewCart.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

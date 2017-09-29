@@ -1,89 +1,103 @@
 ﻿@model AdunbiKiddies.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
-    Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
+    Layout = "~/Views/Shared/_LayoutSales.cshtml";
 }
 
-
-@Html.Partial("~/Views/Shared/Partials/_PageUpper.cshtml")
-
-
-@Html.Partial("~/Views/Shared/Partials/_PageLower.cshtml")
-
-<h2 class="headline" style="color:green">@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+<div class="page-title">
+    <div class="container">
+        <div class="column">
+            <h1>Register Account</h1>
+        </div>
+        <div class="column">
+            <ul class="breadcrumbs">
+                <li>
+                  
+                </li>
+                <li class="separator">&nbsp;</li>
+                <li>
+                    <a href="#">&nbsp;</a>
+                </li>
+                <li class="separator">&nbsp;</li>
+                <li>Register</li>
+            </ul>
         </div>
     </div>
+</div>
+<div style="width:50%; margin:0 auto">
+    <div class="container padding-bottom-3x mb-2">
+        <div class="row">
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.MiddleName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
-        </div>
-    </div>
+            <!-- Login Side Section Should go here-->
+            <!-- Register Section comes here with the BS col-6-md class -->
+            <div class="col-md-6">
+                <div class="padding-top-3x hidden-md-up"></div>
+                @*<h3 class="margin-bottom-1x">&nbsp;</h3>*@
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-
-    @*<div class="form-group">
-        @Html.Label("Select Your User Type", new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.DropDownList("Name")
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
-        </div>
-    </div>*@
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="Register" />
+                <form class="row" action="@Url.Action("Register","Account")" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="reg-fn">First Name</label>
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                            @*<input class="form-control" type="text" id="reg-fn" required>*@
+                        </div>
+                    </div>
+                    @*<div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-ln">Middle Name</label>
+                                @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
+                                @*<input class="form-control" type="text" id="reg-ln" required>
+                            </div>
+                        </div>
+                    *@
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="reg-ln">Last Name</label>
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                            @*<input class="form-control" type="text" id="reg-ln" required>*@
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="reg-email">E-mail Address</label>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @*<input class="form-control" type="email" id="reg-email" required>*@
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="reg-phone">Phone Number</label>
+                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                            @*<input class="form-control" type="text" id="reg-phone" required>*@
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="reg-pass">Password</label>
+                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                            @*<input class="form-control" type="password" id="reg-pass" required>*@
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="reg-pass-confirm">Confirm Password</label>
+                            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                            @*<input class="form-control" type="password" id="reg-pass-confirm" required>*@
+                        </div>
+                    </div>
+                    <div class="col-12 text-center text-sm">
+                        <input class="btn btn-primary margin-bottom-none" type="submit" value="Register" />
+                    </div>
+                </form>
             </div>
+            <!-- Register Sectio ends here-->
         </div>
-}
+    </div>
+
+</div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

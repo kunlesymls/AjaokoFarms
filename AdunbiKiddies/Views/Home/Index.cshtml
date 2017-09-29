@@ -1,8 +1,18 @@
-﻿
+﻿@using AdunbiKiddies.Models.Repository
 @{
     ViewBag.Title = "MerchantDashBoard";
     Layout = "~/Views/Shared/_LayoutSales.cshtml";
 }
+@{
+    CategoryRepo categoryRepo = new CategoryRepo();
+    ProductRepo productRepo = new ProductRepo();
+
+    var getProduct = productRepo.GetAll();
+    var topCategory = categoryRepo.GetTopCategory();
+    var getCategory = categoryRepo.GetAll();
+}
+
+
 
 <!-- Main Slider-->
 <section class="hero-slider" style="background-image: url(img/hero-slider/main-bg.jpg);">
@@ -13,11 +23,11 @@
                     <div class="col-lg-5 col-md-6 padding-bottom-2x text-md-left text-center">
                         <div class="from-bottom">
                             <img class="d-inline-block w-200 mb-4" src="img/hero-slider/logo01.png" alt="Converse">
-                            <div class="h2 text-body text-normal mb-2 pt-1">Chuck Taylor All Star II</div>
-                            <div class="h2 text-body text-normal mb-4 pb-1">for only <span class="text-bold">$59.99</span></div>
-                        </div><a class="btn btn-primary scale-up delay-1" href="shop-single.html">Shop Now</a>
+                            <div class="h2 text-body text-normal mb-2 pt-1">For Your Farm Produce and crops.</div>
+                            <div class="h2 text-body text-normal mb-4 pb-1">Get them @@ <span class="text-bold">Affordable Prices</span></div>
+                        </div><a class="btn btn-primary scale-up delay-1" href="shop-single.html">Get Farm Produce</a>
                     </div>
-                    <div class="col-md-6 padding-bottom-2x mb-3"><img class="d-block mx-auto" src="img/hero-slider/01.png" alt="Chuck Taylor All Star II"></div>
+                    <div class="col-md-6 padding-bottom-2x mb-3"><img class="d-block mx-auto" src="img/hero-slider/01.png" alt="Farm Produce"></div>
                 </div>
             </div>
         </div>
@@ -26,12 +36,12 @@
                 <div class="row justify-content-center align-items-center">
                     <div class="col-lg-5 col-md-6 padding-bottom-2x text-md-left text-center">
                         <div class="from-bottom">
-                            <img class="d-inline-block w-150 mb-4" src="img/hero-slider/logo02.png" alt="Puma">
-                            <div class="h2 text-body text-normal mb-2 pt-1">Puma Backpacks Collection</div>
-                            <div class="h2 text-body text-normal mb-4 pb-1">starting at <span class="text-bold">$37.99</span></div>
-                        </div><a class="btn btn-primary scale-up delay-1" href="shop-grid-ls.html">View Offers</a>
+                            <img class="d-inline-block w-150 mb-4" src="img/hero-slider/logo02.png" alt="Farm Tools and REntals">
+                            <div class="h2 text-body text-normal mb-2 pt-1">Farm Tools and Rentals.</div>
+                            <div class="h2 text-body text-normal mb-4 pb-1">Do You<span class="text-bold">Need Machineries or Tools ?</span></div>
+                        </div><a class="btn btn-primary scale-up delay-1" href="shop-grid-ls.html">Get Machines and Tools easily Now !</a>
                     </div>
-                    <div class="col-md-6 padding-bottom-2x mb-3"><img class="d-block mx-auto" src="img/hero-slider/02.png" alt="Puma Backpack"></div>
+                    <div class="col-md-6 padding-bottom-2x mb-3"><img class="d-block mx-auto" src="img/hero-slider/02.png" alt="Farm Machineries"></div>
                 </div>
             </div>
         </div>
@@ -41,9 +51,9 @@
                     <div class="col-lg-5 col-md-6 padding-bottom-2x text-md-left text-center">
                         <div class="from-bottom">
                             <img class="d-inline-block mb-4" src="img/hero-slider/logo03.png" style="width: 125px;" alt="Motorola">
-                            <div class="h2 text-body text-normal mb-2 pt-1">Smart Watch Moto 360 2nd</div>
-                            <div class="h2 text-body text-normal mb-4 pb-1">for only <span class="text-bold">$299.99</span></div>
-                        </div><a class="btn btn-primary scale-up delay-1" href="shop-single.html">Shop Now</a>
+                            <div class="h2 text-body text-normal mb-2 pt-1">Farm Support Services</div>
+                            <div class="h2 text-body text-normal mb-4 pb-1">for only <span class="text-bold">Need Help ?</span></div>
+                        </div><a class="btn btn-primary scale-up delay-1" href="shop-single.html">Get Professional Support</a>
                     </div>
                     <div class="col-md-6 padding-bottom-2x mb-3"><img class="d-block mx-auto" src="img/hero-slider/03.png" alt="Moto 360"></div>
                 </div>
@@ -55,21 +65,32 @@
 <section class="container padding-top-3x">
     <h3 class="text-center mb-30">Top Categories</h3>
     <div class="row">
+@foreach (var item in topCategory)
+{
+    for (int i = 1; i <= 3; i++)
+    {
         <div class="col-md-4 col-sm-6">
             <div class="card mb-30">
-                <a class="card-img-tiles" href="shop-grid-ls.html">
-                    <div class="inner">
-                        <div class="main-img"><img src="img/shop/categories/01.jpg" alt="Category"></div>
-                        <div class="thumblist"><img src="img/shop/categories/02.jpg" alt="Category"><img src="img/shop/categories/03.jpg" alt="Category"></div>
-                    </div>
-                </a>
-                <div class="card-body text-center">
-                    <h4 class="card-title">Clothing</h4>
-                    <p class="text-muted">Starting from $49.99</p><a class="btn btn-outline-primary btn-sm" href="shop-grid-ls.html">View Products</a>
-                </div>
+              
+                        <a class="card-img-tiles" href="shop-grid-ls.html">
+                            <div class="inner">
+                                <div class="main-img"><img src="img/shop/categories/01.jpg" alt="Category"></div>
+                                <div class="thumblist">
+                                    <img src="img/shop/categories/02.jpg" alt="Category">
+                                    <img src="img/shop/categories/03.jpg" alt="Category">
+                                </div>
+                            </div>
+                        </a>
+                        <div class="card-body text-center">
+                            <h4 class="card-title"> @item.Name </h4>
+                            @*<p class="text-muted">Starting from $49.99</p><a class="btn btn-outline-primary btn-sm" href="shop-grid-ls.html">View Products</a>*@
+                        </div>
+                
             </div>
         </div>
-        <div class="col-md-4 col-sm-6">
+                    }
+                }
+        @*<div class="col-md-4 col-sm-6">
             <div class="card mb-30">
                 <a class="card-img-tiles" href="shop-grid-ls.html">
                     <div class="inner">
@@ -82,8 +103,8 @@
                     <p class="text-muted">Starting from $56.00</p><a class="btn btn-outline-primary btn-sm" href="shop-grid-ls.html">View Products</a>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
+        </div>*@
+        @*<div class="col-md-4 col-sm-6">
             <div class="card mb-30">
                 <a class="card-img-tiles" href="shop-grid-ls.html">
                     <div class="inner">
@@ -96,12 +117,12 @@
                     <p class="text-muted">Starting from $27.00</p><a class="btn btn-outline-primary btn-sm" href="shop-grid-ls.html">View Products</a>
                 </div>
             </div>
-        </div>
+        </div>*@
     </div>
     <div class="text-center"><a class="btn btn-outline-secondary margin-top-none" href="shop-categories.html">All Categories</a></div>
 </section>
 <!-- Promo #1-->
-<section class="container-fluid padding-top-3x">
+@*<section class="container-fluid padding-top-3x">
     <div class="row justify-content-center">
         <div class="col-xl-5 col-lg-6 mb-30">
             <div class="rounded bg-faded position-relative padding-top-3x padding-bottom-3x">
@@ -131,9 +152,9 @@
             <div class="img-cover rounded" style="background-image: url(img/banners/home01.jpg);"></div>
         </div>
     </div>
-</section>
+</section>*@
 <!-- Promo #2-->
-<section class="container-fluid">
+@*<section class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-xl-10 col-lg-12">
             <div class="fw-section rounded padding-top-4x padding-bottom-4x" style="background-image: url(img/banners/home02.jpg);">
@@ -146,7 +167,7 @@
             </div>
         </div>
     </div>
-</section>
+</section>*@
 <!-- Featured Products Carousel-->
 <section class="container padding-top-3x padding-bottom-3x">
     <h3 class="text-center mb-30">Featured Products</h3>
@@ -236,7 +257,7 @@
 <!-- Product Widgets-->
 <section class="container padding-bottom-2x">
     <div class="row">
-        <div class="col-md-4 col-sm-6">
+        @*<div class="col-md-4 col-sm-6">
             <div class="widget widget-featured-products">
                 <h3 class="widget-title">Top Sellers</h3>
                 <!-- Entry-->
@@ -261,9 +282,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
         <div class="col-md-4 col-sm-6">
-            <div class="widget widget-featured-products">
+            @*<div class="widget widget-featured-products">
                 <h3 class="widget-title">New Arrivals</h3>
                 <!-- Entry-->
                 <div class="entry">
@@ -286,9 +307,9 @@
                         <h4 class="entry-title"><a href="shop-single.html">Skagen Holst Watch</a></h4><span class="entry-meta">$145.00</span>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
-        <div class="col-md-4 col-sm-6">
+        @*<div class="col-md-4 col-sm-6">
             <div class="widget widget-featured-products">
                 <h3 class="widget-title">Best Rated</h3>
                 <!-- Entry-->
@@ -313,7 +334,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
     </div>
 </section>
 <!-- Popular Brands-->

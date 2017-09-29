@@ -3,61 +3,159 @@
 
 @{
     ViewBag.Title = "Log in";
-    Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
+    Layout = "~/Views/Shared/_LayoutSales.cshtml";
 }
 
 
-@Html.Partial("~/Views/Shared/Partials/_PageUpper.cshtml")
+@*@Html.Partial("~/Views/Shared/Partials/_PageUpper.cshtml")
 
 
-@Html.Partial("~/Views/Shared/Partials/_PageLower.cshtml")
+    @Html.Partial("~/Views/Shared/Partials/_PageLower.cshtml")*@
 
-<div class="row">
-   
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-6">
+<div class="row" style="width:50%; margin:0 auto">
+
+    <div class="container padding-bottom-3x mb-2">
+        <div class="row" style="margin-top:45px">
+            
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h4>Use a local account to log in.</h4>
+                    <hr />
+                    <br />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="row margin-bottom-1x">
+                        <div class="col-xl-4 col-md-6 col-sm-4"><a class="btn btn-sm btn-block facebook-btn" href="#"><i class="socicon-facebook"></i>&nbsp;Facebook login</a></div>
+                        <div class="col-xl-4 col-md-6 col-sm-4"><a class="btn btn-sm btn-block twitter-btn" href="#"><i class="socicon-twitter"></i>&nbsp;Twitter login</a></div>
+                        <div class="col-xl-4 col-md-6 col-sm-4"><a class="btn btn-sm btn-block google-btn" href="#"><i class="socicon-googleplus"></i>&nbsp;Google+ login</a></div>
+                    </div>
+                    <hr/>
+                    <br />
+
+                    @*<h4 class="margin-bottom-1x">Or using form below</h4>*@
+                    <div class="form-group input-group">
                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        <span class="input-group-addon"><i class="icon-mail"></i></span>
                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                        @*<input class="form-control" type="email" placeholder="Email" required>*@
                     </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-6">
+                    <div class="form-group input-group">
+
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        <span class="input-group-addon"><i class="icon-lock"></i></span>
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                        @*<input class="form-control" type="password" placeholder="Password" required>*@
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-6">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                    <div class="d-flex flex-wrap justify-content-between padding-bottom-1x">
+                        <label class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" checked><span class="custom-control-indicator"></span><span class="custom-control-description">Remember me</span>
+                        </label><a class="navi-link" href="account-password-recovery.html">Forgot password?</a>
+                    </div>
+                    <div class="text-center text-sm-right">
+
+                        <input class="btn btn-primary margin-bottom-none" type="submit" name="Submit" value="Login">
+
+                    </div>
+                }
+            </div>
+            @*@*<div class="col-md-6">
+                    <div class="padding-top-3x hidden-md-up"></div>
+                    <h3 class="margin-bottom-1x">no account? register</h3>
+                    <p>registration takes less than a minute but gives you full control over your orders.</p>
+                    <form class="row" method="post">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-fn">first name</label>
+                                <input class="form-control" type="text" id="reg-fn" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-ln">last name</label>
+                                <input class="form-control" type="text" id="reg-ln" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-email">e-mail address</label>
+                                <input class="form-control" type="email" id="reg-email" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-phone">phone number</label>
+                                <input class="form-control" type="text" id="reg-phone" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-pass">password</label>
+                                <input class="form-control" type="password" id="reg-pass" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reg-pass-confirm">confirm password</label>
+                                <input class="form-control" type="password" id="reg-pass-confirm" required>
+                            </div>
+                        </div>
+                        <div class="col-12 text-center text-sm-right">
+                            <button class="btn btn-primary margin-bottom-none" type="submit">register</button>
+                        </div>
+                    </form>
+                </div>*@
+        </div>
+ </div>
+
+
+    @*<section id="loginform">
+                @using (html.beginform("login", "account", new { returnurl = viewbag.returnurl }, formmethod.post, new { @class = "form-horizontal", role = "form" }))
+        {
+                    @html.antiforgerytoken()
+                    <h4>use a local account to log in.</h4>
+                    @html.validationsummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @html.labelfor(m => m.email, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-6">
+                            @html.textboxfor(m => m.email, new { @class = "form-control" })
+                            @html.validationmessagefor(m => m.email, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-6">
-                        <input type="submit" value="Log in" class="btn btn-default" />
+                    <div class="form-group">
+                        @html.labelfor(m => m.password, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-6">
+                            @html.passwordfor(m => m.password, new { @class = "form-control" })
+                            @html.validationmessagefor(m => m.password, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-                @*<p>
-                        @Html.ActionLink("Register as a new user", "Register")
-                    </p>*@
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-  
-</div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-6">
+                            <div class="checkbox">
+                                @html.checkboxfor(m => m.rememberme)
+                                @html.labelfor(m => m.rememberme)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-6">
+                            <input type="submit" value="log in" class="btn btn-default" />
+                        </div>
+                    </div>*@
+                    @*<p>
+                            @Html.ActionLink("Register as a new user", "Register")
+                        </p>
+    Enable this once you have account confirmation enabled for password reset functionality
+        <p>
+            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+        </p>
+    </section>}*@
+    
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
