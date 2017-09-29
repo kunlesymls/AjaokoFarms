@@ -1,10 +1,19 @@
 ﻿@using AdunbiKiddies.Models
+@using AdunbiKiddies.Models.Repository
 @using AdunbiKiddies.ViewModels
 
 @{
     BaseViewModel Model = (BaseViewModel)ViewBag.LayoutViewModel;
     var storeSection = (List<StoreSection>)ViewBag.StoreSection;
 
+}
+
+@{ 
+    CategoryRepo categoryRepo = new CategoryRepo();
+    ProductRepo productRepo = new ProductRepo();
+
+    var getProduct = productRepo.GetAll();
+    var getCategory = categoryRepo.GetAll();
 }
 
 <!DOCTYPE html>
@@ -229,7 +238,7 @@
             <div class="inner">
                 <!-- Off-Canvas Toggle (#shop-categories)--><a class="offcanvas-toggle cats-toggle" href="#shop-categories" data-toggle="offcanvas"></a>
                 <!-- Off-Canvas Toggle (#mobile-menu)--><a class="offcanvas-toggle menu-toggle" href="#mobile-menu" data-toggle="offcanvas"></a>
-                <!-- Site Logo--><a class="site-logo" href="@Url.Action("Index","Home")"><img src="~/Content/Images/Ajaoko_LogoInitial.png" alt="Unishop" height="30"></a>
+                <!-- Site Logo--><a class="site-logo" href="@Url.Action("Index","Home")"><img height="70" width="40" src="~/Content/Images/Ajaoko_LogoInitial.png" alt="AjaOko" ></a>
             </div>
         </div>
         <!-- Main Navigation-->
@@ -242,6 +251,34 @@
                     <a href="@Url.Action("Index","Product")"><span>Products</span></a>
                     
                 </li>
+                <li>
+                    <a href="#"><span>Merchant</span></a>
+                    <ul class="sub-menu">
+                        @if (!(Request.IsAuthenticated && User.IsInRole("Admin")))
+                        {
+                            <li><a href="@Url.Action("RegisterMerchant","Account")">Be A Merhants </a></li>
+                        }
+                                              
+                        
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><span>Professionals</span></a>
+                    <ul class="sub-menu">
+                        @if (Request.IsAuthenticated && User.IsInRole("Professional"))
+                        {
+                            <li><a href="@Url.Action("ProWorkerView","ProfessionalWorkers")">View Professionals </a></li>
+
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("RegisterProfessional","Account")">Be A Professional</a></li>
+                            <li><a href="@Url.Action("ProWorkerView","ProfessionalWorkers")">View Professionals </a></li>
+
+                        }
+
+                    </ul>
+                </li>
 
                 <li class="has-megamenu">
                     <a href="#"><span>Mega Menu</span></a>
@@ -249,27 +286,32 @@
                         <li>
                             <span class="mega-menu-title">Top Categories</span>
                             <ul class="sub-menu">
-                                <li><a href="#">Men's Shoes</a></li>
-                                <li><a href="#">Women's Shoes</a></li>
+                                @foreach( var item in getCategory) {
+                                <li><a href="#">@item.Name</a></li>
+                                }
+                                @*<li><a href="#">Women's Shoes</a></li>
                                 <li><a href="#">Shirts and Tops</a></li>
                                 <li><a href="#">Swimwear</a></li>
                                 <li><a href="#">Shorts and Pants</a></li>
-                                <li><a href="#">Accessories</a></li>
+                                <li><a href="#">Accessories</a></li>*@
                             </ul>
                         </li>
                         <li>
                             <span class="mega-menu-title">Specialty Shops</span>
                             <ul class="sub-menu">
-                                <li><a href="#">Junior's Shop</a></li>
-                                <li><a href="#">Swim Shop</a></li>
+                                 @foreach (var sec in storeSection)
+                                 {
+                                <li><a href="#">@sec.SectionName</a></li>
+                                @*<li><a href="#">Swim Shop</a></li>
                                 <li><a href="#">Athletic Shop</a></li>
                                 <li><a href="#">Outdoor Shop</a></li>
                                 <li><a href="#">Luxury Shop</a></li>
-                                <li><a href="#">Accessories Shop</a></li>
+                                <li><a href="#">Accessories Shop</a></li>*@
+                                 }
                             </ul>
                         </li>
                         <li>
-                            <section class="promo-box" style="background-image: url(img/banners/02.jpg);">
+                            <section class="promo-box" style="background-image: url(~/Content/Images/slideOne.fw.png)">
                                 <span class="overlay-dark" style="opacity: .4;"></span>
                                 <div class="promo-box-content text-center padding-top-2x padding-bottom-2x">
                                     <h4 class="text-light text-thin text-shadow">New Collection of</h4>
@@ -278,7 +320,7 @@
                             </section>
                         </li>
                         <li>
-                            <section class="promo-box" style="background-image: url(img/banners/03.jpg);">
+                            <section class="promo-box" style="background-image: url(~/Content/Images/slide2.fw.png)">
                                 <!-- Choose between .overlay-dark (#000) or .overlay-light (#fff) with default opacity of 50%. You can overrride default color and opacity values via 'style' attribute.--><span class="overlay-dark" style="opacity: .45;"></span>
                                 <div class="promo-box-content text-center padding-top-2x padding-bottom-2x">
                                     <h3 class="text-bold text-light text-shadow">Limited Offer</h3>
@@ -291,17 +333,25 @@
                 <li>
                     <a href="account-orders.html"><span>Account</span></a>
                     <ul class="sub-menu">
-                        <li><a href="account-login.html">Login / Register</a></li>
-                        <li><a href="account-password-recovery.html">Password Recovery</a></li>
-                        <li><a href="account-orders.html">Orders List</a></li>
-                        <li><a href="account-wishlist.html">Wishlist</a></li>
-                        <li><a href="account-profile.html">Profile Page</a></li>
-                        <li><a href="account-address.html">Contact / Shipping Address</a></li>
-                        <li><a href="account-tickets.html">My Tickets</a></li>
+                        @if (Request.IsAuthenticated && User.IsInRole("Customer"))
+                        {
+                            <li><a href="account-password-recovery.html">Password Recovery</a></li>
+                            <li><a href="account-orders.html">Orders List</a></li>
+                            <li><a href="account-wishlist.html">Wishlist</a></li>
+                            <li><a href="account-profile.html">Profile Page</a></li>
+                            <li><a href="account-address.html">Contact / Shipping Address</a></li>
+                            <li><a href="account-tickets.html">My Tickets</a></li>
+                        }
+
+                        else
+                        {
+                            <li><a href="@Url.Action("Login","Account")">Login </a></li>
+                            <li><a href="@Url.Action("Register","Account")">Register </a></li>
+                        }
                     </ul>
                 </li>
               
-                <li>
+                @*<li>
                     <a href="blog-rs.html"><span>Blog</span></a>
                     <ul class="sub-menu">
                         <li class="has-children">
@@ -321,17 +371,17 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li>*@
                 <li>
                     <a href="#"><span>Pages</span></a>
                     <ul class="sub-menu">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contacts.html">Contacts</a></li>
-                        <li><a href="faq.html">Help / FAQ</a></li>
-                        <li><a href="order-tracking.html">Order Tracking</a></li>
+                        <li><a href="@Url.Action("About","Home")">About Us</a></li>
+                        <li><a href="@Url.Action("Contact","Home")">Contact Us</a></li>
+                        <li><a href="#">Help / FAQ</a></li>
+                        @*<li><a href="order-tracking.html">Order Tracking</a></li>
                         <li><a href="search-results.html">Search Results</a></li>
                         <li><a href="404.html">404 Not Found</a></li>
-                        <li><a class="text-danger" href="docs/dev-setup.html">Documentation</a></li>
+                        <li><a class="text-danger" href="docs/dev-setup.html">Documentation</a></li>*@
                     </ul>
                 </li>
 

@@ -13,7 +13,13 @@ namespace AdunbiKiddies.Models.Repository
         {
             return DbSet.Where(p => p.StoreSection.SectionName == section).ToList();
         }
-        
+
+        public List<Category> GetTopCategory()
+        {
+            return DbSet.OrderByDescending(p => p.Products.Count()).ToList();
+        }
+
+
     }
 
     public class StoreSectionRepo : Repository<StoreSection>
@@ -43,6 +49,7 @@ namespace AdunbiKiddies.Models.Repository
 
         }
 
+      
 
         public List<Product> SearchProduct(string searchTerm)
         {
