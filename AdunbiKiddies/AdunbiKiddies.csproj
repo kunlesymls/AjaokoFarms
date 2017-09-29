@@ -2589,6 +2589,7 @@
     <Content Include="Views\Checkout\Shiping.cshtml" />
     <Content Include="Views\Checkout\ReviewCart.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\Shared\_LayoutForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

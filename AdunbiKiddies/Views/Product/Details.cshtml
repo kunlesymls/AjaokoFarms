@@ -97,81 +97,14 @@
                     <!-- Review Form-->
                     <h5 class="mb-30 padding-top-1x">Leave Review</h5>
 
+                    @{Html.RenderAction("CreateReview", "Product");}
 
-                    <form class="row" id="myform" onsubmit="return false;">
-                        @Html.TextBoxFor(model => Model.ProductId, new {style = "display:none"})
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="username">Your Name</label>
-                                <input class="form-control form-control-rounded" type="text" id="username" name="username" required>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="email">Your Email</label>
-                                <input class="form-control form-control-rounded" type="email" id="email" name="email" required>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <input class="form-control form-control-rounded" type="text" id="subject" name="subject" required>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="rating">Rating</label>
-                                <select class="form-control form-control-rounded" id="rating" name="rating">
-                                    <option>5</option>
-                                    <option>4</option>
-                                    <option>3</option>
-                                    <option>2</option>
-                                    <option>1</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="review">Review </label>
-                                <textarea class="form-control form-control-rounded" id="review" name="review" rows="8" required></textarea>
-                            </div>
-                        </div>
-
-                        <div class="col-12 text-right">
-                            <button id="btnsubmit" class="btn btn-outline-primary" type="submit">Submit Review</button>
-                        </div>
-                    </form>
+                 
                 </div>
             </div>
         </div>
     </div>
 
 </div>
-<script src="~/Scripts/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#btnsubmit").click(function() {
-
-                var data = $("#myform").serialize();
-                window.alert(data);
-                $.ajax({
-                    type: "POST",
-                    url: "/ProductReviews/Create",
-                    contentType: "application/json", 
-                    data: data,
-                    success: function(data) {
-                        if (data.status) {
-                            $('#myform')[0].reset();
-                            toastr["success"](data.message);
-                        } else {
-                            toastr["error"](data.message);
-                        }
-
-                    }
-                });
-            });
-        });
-    </script>
-
 
 

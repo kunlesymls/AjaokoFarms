@@ -45,8 +45,7 @@
         <div class="offcanvas-header">
             <h3 class="offcanvas-title">Shop Categories</h3>
         </div>
-
-
+        
         @foreach (var sec in storeSection)
         {
             <nav class="offcanvas-menu">
@@ -455,7 +454,7 @@
     <!-- Back To Top Button--><a class="scroll-to-top-btn" href="#"><i class="icon-arrow-up"></i></a>
     <!-- Backdrop-->
     <div class="site-backdrop"></div>
-<script src="~/Scripts/jquery-1.11.3.min.js"></script>
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
     
 <script type="text/javascript">
     $(document).ready(function () {
@@ -467,14 +466,14 @@
 
    
 
-    @RenderSection("scripts", required: false)
 </script>
 <!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
     <script src="~/Content/Ecommerce/js/vendor.min.js"></script>
     <script src="~/Content/Ecommerce/js/scripts.min.js"></script>
     <script src="~/Content/Ecommerce/js/card.min.js"></script>
-    <script src="~/Content/Ecommerce/js/modernizr.min.js"></script>
 <!-- Customizer scripts-->
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+@RenderSection("scripts", required: false)
 
 
 

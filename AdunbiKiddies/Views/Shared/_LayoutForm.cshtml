@@ -1,0 +1,37 @@
+﻿@using AdunbiKiddies.Models
+@using AdunbiKiddies.ViewModels
+
+@{
+    BaseViewModel Model = (BaseViewModel)ViewBag.LayoutViewModel;
+    var storeSection = (List<StoreSection>)ViewBag.StoreSection;
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    
+
+   
+    <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
+    <link href="~/Content/Ecommerce/css/vendor.min.css" rel="stylesheet" />
+    <!-- Main Template Styles-->
+    <link id="mainStyles" href="~/Content/Ecommerce/css/styles.min.css" rel="stylesheet" />
+    <!-- Customizer Styles-->
+    <link href="~/Content/Ecommerce/css/customizer.min.css" rel="stylesheet" />
+
+</head>
+<!-- Body-->
+<body>
+
+        @RenderBody()
+      
+
+<!-- Customizer scripts-->
+
+
+
+</body>
+</html>
