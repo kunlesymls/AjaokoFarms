@@ -1,100 +1,129 @@
-﻿  
-    <h4>Billing Address</h4>
-    <hr class="padding-bottom-1x">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="checkout-fn">First Name</label>
-                <input class="form-control" type="text" id="checkout-fn">
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="checkout-ln">Last Name</label>
-                <input class="form-control" type="text" id="checkout-ln">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="checkout-email">E-mail Address</label>
-                <input class="form-control" type="email" id="checkout-email">
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="checkout-phone">Phone Number</label>
-                <input class="form-control" type="text" id="checkout-phone">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="checkout-company">Company</label>
-                <input class="form-control" type="text" id="checkout-company">
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="checkout-country">Country</label>
-                <select class="form-control" id="checkout-country">
-                    <option>Choose country</option>
-                    <option>Australia</option>
-                    <option>Canada</option>
-                    <option>France</option>
-                    <option>Germany</option>
-                    <option>Switzerland</option>
-                    <option>USA</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="checkout-city">City</label>
-                <select class="form-control" id="checkout-city">
-                    <option>Choose city</option>
-                    <option>Amsterdam</option>
-                    <option>Berlin</option>
-                    <option>Geneve</option>
-                    <option>New York</option>
-                    <option>Paris</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="checkout-zip">ZIP Code</label>
-                <input class="form-control" type="text" id="checkout-zip">
-            </div>
-        </div>
-    </div>
-    <div class="row padding-bottom-1x">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="checkout-address1">Address 1</label>
-                <input class="form-control" type="text" id="checkout-address1">
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="checkout-address2">Address 2</label>
-                <input class="form-control" type="text" id="checkout-address2">
-            </div>
-        </div>
-    </div>
-    <h4>Shipping Address</h4>
-    <hr class="padding-bottom-1x">
-    <div class="form-group">
-        <label class="custom-control custom-checkbox">
-            <input class="custom-control-input" type="checkbox" checked><span class="custom-control-indicator"></span><span class="custom-control-description">Same as billing address</span>
-        </label>
-    </div>
-    <div class="checkout-footer">
-        <div class="column"><a class="btn btn-outline-secondary" href="cart.html"><i class="icon-arrow-left"></i><span class="hidden-xs-down">&nbsp;Back To Cart</span></a></div>
-        <div class="column"><a class="btn btn-primary" href="checkout-shipping.html"><span class="hidden-xs-down">Continue&nbsp;</span><i class="icon-arrow-right"></i></a></div>
-    </div>
+﻿@model AdunbiKiddies.Models.ShippingDetail
 
+  @if (Model != null)
+  {
+      <dl class="dl-horizontal">
+          <dt>
+              @Html.DisplayNameFor(model => model.Customer.FirstName)
+          </dt>
+
+          <dd>
+              @Html.DisplayFor(model => model.Customer.FirstName)
+          </dd>
+
+          <dt>
+              @Html.DisplayNameFor(model => model.AddressType)
+          </dt>
+
+          <dd>
+              @Html.DisplayFor(model => model.AddressType)
+          </dd>
+
+          <dt>
+              @Html.DisplayNameFor(model => model.BuildingNo)
+          </dt>
+
+          <dd>
+              @Html.DisplayFor(model => model.BuildingNo)
+          </dd>
+
+          <dt>
+              @Html.DisplayNameFor(model => model.StreetName)
+          </dt>
+
+          <dd>
+              @Html.DisplayFor(model => model.StreetName)
+          </dd>
+
+          <dt>
+              @Html.DisplayNameFor(model => model.TownName)
+          </dt>
+
+          <dd>
+              @Html.DisplayFor(model => model.TownName)
+          </dd>
+
+          <dt>
+              @Html.DisplayNameFor(model => model.StateName)
+          </dt>
+
+          <dd>
+              @Html.DisplayFor(model => model.StateName)
+          </dd>
+
+      </dl>
+
+      <h4>Shipping Address</h4>
+      <hr class="padding-bottom-1x">
+
+      <div class="checkout-footer">
+          <div class="column"><a class="btn btn-outline-secondary" href="cart.html"><i class="icon-arrow-left"></i><span class="hidden-xs-down">&nbsp;Back To Cart</span></a>
+          </div>
+          <div class="column"><a class="btn btn-primary" href="checkout-shipping.html"><span class="hidden-xs-down">Continue&nbsp;</span><i class="icon-arrow-right"></i></a>
+          </div>
+      </div>
+  }
+  else
+  {
+      using (Ajax.BeginForm("Create", "ShippingDetails", null, new AjaxOptions() {UpdateTargetId = "display", HttpMethod = "POST"}, new {id = "adressform" }))
+      {
+           @Html.TextBoxFor(model => Model.CustomerId, new {style = "display:none"})
+
+
+           <div class="form-group">
+               @Html.Label("Address Type")
+               <div class="col-md-10">
+                   @Html.EditorFor(model => model.AddressType, new {htmlAttributes = new {@class = "form-control"}})
+                   @Html.ValidationMessageFor(model => model.AddressType, "", new {@class = "text-danger"})
+               </div>
+           </div>
+
+           <div class="form-group">
+               @Html.Label("Building Number", htmlAttributes: new {@class = "control-label col-md-2"})
+               <div class="col-md-10">
+                   @Html.EditorFor(model => model.BuildingNo, new {htmlAttributes = new {@class = "form-control"}})
+                   @Html.ValidationMessageFor(model => model.BuildingNo, "", new {@class = "text-danger"})
+               </div>
+           </div>
+
+           <div class="form-group">
+               @Html.Label("Street Name", htmlAttributes: new {@class = "control-label col-md-2"})
+               <div class="col-md-10">
+                   @Html.EditorFor(model => model.StreetName, new {htmlAttributes = new {@class = "form-control"}})
+                   @Html.ValidationMessageFor(model => model.StreetName, "", new {@class = "text-danger"})
+               </div>
+           </div>
+
+           <div class="form-group">
+               @Html.Label("Town Name", htmlAttributes: new {@class = "control-label col-md-2"})
+               <div class="col-md-10">
+                   @Html.EditorFor(model => model.TownName, new {htmlAttributes = new {@class = "form-control"}})
+                   @Html.ValidationMessageFor(model => model.TownName, "", new {@class = "text-danger"})
+               </div>
+           </div>
+
+           <div class="form-group">
+               @Html.Label("State Name", htmlAttributes: new {@class = "control-label col-md-2"})
+               <div class="col-md-10">
+                   @Html.EditorFor(model => model.StateName, new {htmlAttributes = new {@class = "form-control"}})
+                   @Html.ValidationMessageFor(model => model.StateName, "", new {@class = "text-danger"})
+               </div>
+           </div>
+
+           <h4>Shipping Address</h4>
+           <hr class="padding-bottom-1x">
+
+           <div class="checkout-footer">
+               <div class="column"><a class="btn btn-outline-secondary" href="@Url.Action("Index","ShoppingCart")"><i class="icon-arrow-left"></i><span class="hidden-xs-down">&nbsp;Back To Cart</span></a>
+               </div>
+               <div class="column"><button class="btn btn-primary"><span class="hidden-xs-down">Continue&nbsp;</span><i class="icon-arrow-right"></i></button>
+
+               </div>
+           </div>
+       }
+  }
+ 
+   
+
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

@@ -38,7 +38,11 @@ namespace AdunbiKiddies.Controllers
         }
         public PartialViewResult Address()
         {
-            return PartialView();
+            var cId = User.Identity.GetUserId();
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cDetails = storeDB.ShippingDetails.FirstOrDefault(x => x.CustomerId.Equals(cId));
+
+            return PartialView(cDetails);
 
         }
         public PartialViewResult Shiping()
@@ -56,6 +60,7 @@ namespace AdunbiKiddies.Controllers
             var cId = User.Identity.GetUserId();
             var cart = ShoppingCart.GetCart(this.HttpContext);
             var cDetails = await storeDB.ShippingDetails.Where(x => x.CustomerId.Equals(cId)).FirstOrDefaultAsync();
+
             if (cDetails != null)
             {
                 var payment = new OrderPaymentVm
@@ -65,13 +70,22 @@ namespace AdunbiKiddies.Controllers
                     Email = cDetails.Customer.Email,
                     TotalAmount = cart.GetTotal(),
                     ShippingDetail = cDetails,
-                    //SaleId = Convert.ToInt32(cart.ShoppingCartId)
+                };
+                return View(payment);
+            }
+            else
+            {
+                var payment = new OrderPaymentVm
+                {
+                    CustomerId = User.Identity.GetUserId(),
+                    CustomerName = "",
+                    Email = User.Identity.GetUserName(),
+                    TotalAmount = cart.GetTotal(),
+                    ShippingDetail = null,
                 };
                 return View(payment);
             }
             //return RedirectToAction("Create", "ShippingDetails");
-            return View();
-
         }
 
         public async Task<ActionResult> MakePayment(OrderPaymentVm model)

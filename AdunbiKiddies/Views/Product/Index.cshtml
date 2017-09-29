@@ -53,7 +53,14 @@
                         </h4>
                         <div class="product-buttons">
                             <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
-                            <button class="btn btn-outline-primary btn-sm" id="AddLink" data-id="@item.ProductId">Add to Cart</button>
+                            @using (Ajax.BeginForm("AddToCart", "ShoppingCart", null, new AjaxOptions() {UpdateTargetId = "mycart" }, new{id ="myproductadd"}))
+                            {
+                               
+                                <input style = "display:none" type="text" id="id" name="id"  value="@item.ProductId"required>
+
+                                <button class="btn btn-outline-primary btn-sm">Add to Cart</button>
+                            }
+                           
                         </div>
                     </div>
                 </div>
@@ -184,7 +191,8 @@
 </div>
 </div>
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
-<script type="text/javascript">
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@*<script type="text/javascript">
     $(document).ready(function (event) {
         event.preventDefault();
         // Document.ready -> link up remove event handler
@@ -204,4 +212,4 @@
             }
         });
     });
-</script>
+</script>*@

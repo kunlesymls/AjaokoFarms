@@ -57,10 +57,10 @@ namespace AdunbiKiddies.Controllers
                 };
                 _db.ProductReviews.Add(productReview);
                 await _db.SaveChangesAsync();
-                return new JsonResult { Data = new { status = true, message = "Product Review Saved Successfully" } };
+                return RedirectToAction("Details", "Product", new { id = model.ProductId });
             }
 
-            return new JsonResult { Data = new { status = false, message = "Product review not Saved" } };
+            return RedirectToAction("Details", "Product", new { id = model.ProductId });
 
         }
 

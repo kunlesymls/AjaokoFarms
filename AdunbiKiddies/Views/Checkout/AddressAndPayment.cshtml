@@ -16,10 +16,34 @@
     <div class="row">
         <!-- Checkout Adress-->
         <div class="col-xl-9 col-lg-8">
-            <div class="checkout-steps"><a href="#" id="review">3. Review</a><a href="#" id="shipping"><span class="angle"></span>2. Shipping</a><a class="active" href="#" id="address"><span class="angle"></span>1. Address</a></div>
+            <div class="checkout-steps">
+                @*<a href="#" id="review">3. Review</a>*@
+            @Ajax.ActionLink("3. Review", "ReviewCart", null, new AjaxOptions
+       {
+           OnComplete = "reviewbutton",
+           UpdateTargetId = "display", // <-- DOM element ID to update
+           HttpMethod = "GET" // <-- HTTP method
+       }, new { @class = "", id = "review" })
+            @Ajax.ActionLink("2. Shipping", "Shiping", null, new AjaxOptions
+       {
+           OnComplete = "shippingbutton",
+           UpdateTargetId = "display", // <-- DOM element ID to update
+           HttpMethod = "GET" // <-- HTTP method
+       }, new { @class = "", id = "shipping" })<span class="angle"></span>
+            @Ajax.ActionLink("1. Address", "Address", null, new AjaxOptions
+         {
+             OnComplete = "addressbutton",
+             UpdateTargetId = "display", // <-- DOM element ID to update
+             HttpMethod = "GET" // <-- HTTP method
+         }, new { @class = "active", id = "address" })
+        </div>
+
+            @*<a class="active" href="#" id="address">1. Address</a>*@
          
           
-            <div id="display"></div>
+            <div id="display">
+            @{Html.RenderAction("Address", "Checkout");}
+            </div>
             </div>
         <!-- Sidebar          -->
         <div class="col-xl-3 col-lg-4">
@@ -34,11 +58,14 @@
                             <tr>
                                 <td>Cart Subtotal:</td>
                                 <td class="text-medium">#@Model.TotalAmount</td>
-                            </tr>
-                            <tr>
-                                <td>Shipping:</td>
-                                <td class="text-medium">#@Model.ShippingDetail.BuildingNo</td>
-                            </tr>
+
+@if (Model.ShippingDetail != null)
+{
+    <tr>
+        <td>Shipping:</td>
+        <td class="text-medium">#@Model.ShippingDetail.BuildingNo</td>
+    </tr>
+}                           
                        
                             <tr>
                                 <td></td>
@@ -63,99 +90,29 @@
     </div>
 </div>
 
-@*<div class="well">
-    <h3>Shipping Details</h3>
-    <p>
-        <ul>
-            <li>State: <span>@Model.ShippingDetail.StateName</span></li>
-            <li>Town: <span>@Model.ShippingDetail.TownName</span></li>
-            <li>Street: <span>@Model.ShippingDetail.StateName</span></li>
-            <li>Building No: <span>@Model.ShippingDetail.BuildingNo</span></li>
-            <li>Address Type: <span>@Model.ShippingDetail.AddressType</span></li>
-        </ul>
-    </p>
-</div>
 
-<div class="col-lg-10">
-  <div class="well bs-component">
-    @using (Html.BeginForm("MakePayment", "Checkout", FormMethod.Post))
-    {
-       <h2>Customer's Information</h2>
-        <fieldset>
-            @*<legend>Customer's Information</legend>
-
-            @Html.HiddenFor(m => Model.CustomerId)
-            @Html.HiddenFor(m => Model.SaleId)
-            <div class="form-group">
-                @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
-                    @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <br>
-
-        
-            <div class="form-group">
-                @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "form-control", @readonly = "true"} })
-                    @Html.ValidationMessageFor(model => model.TotalAmount, "", new { @class = "text-danger" })
-                </div>
-            </div>
-   
-
-            <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-8">
-                    <button type="submit" class="btn btn-primary">Pay for Order &raquo;</button>
-                </div>
-            </div>
-        </fieldset>
-    }
-  </div>
-</div>
-
-@section Scripts {
-   @Scripts.Render("~/bundles/jqueryval")
-}*@
-<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
 
-        var url = "/Checkout/Address";
-        $('#display').load(url);
-
-        $("#review").click(function () {
-            $("#review").attr("class", "active");
-            $("#shipping").attr("class", "");
-            $("#address").attr("class", "");
-            var url = "/Checkout/ReviewCart";
-            $('#display').load(url);
-        });
-        $("#address").click(function () {
-            $("#address").attr("class", "active");
-            $("#shipping").attr("class", "");
-            $("#review").attr("class", "");
-            var url = "/Checkout/Address";
-            $('#display').load(url);
-        });
-
-        $("#shipping").click(function () {
-            window.alert("hi");
+    function shippingbutton() {
             $("#shipping").attr("class", "active");
             $("#address").attr("class", "");
             $("#review").attr("class", "");
-            var url = "/Checkout/Shiping";
-            $('#display').load(url);
-        });
+           
+        };
+    
+    function reviewbutton() {
+            $("#review").attr("class", "active");
+            $("#shipping").attr("class", "");
+            $("#address").attr("class", "");
+       
+        };
+    
+    function addressbutton() {
+            $("#address").attr("class", "active");
+            $("#shipping").attr("class", "");
+            $("#review").attr("class", "");
 
-    });
+    }
     </script>
