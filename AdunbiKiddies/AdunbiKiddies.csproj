@@ -1851,6 +1851,7 @@
     <Content Include="Content\Ecommerce\Faicon\touch-icon-iphone.png" />
     <Content Include="Content\Ecommerce\js\card.min.js" />
     <Content Include="Content\Ecommerce\js\modernizr.min.js" />
+    <Content Include="Content\Ecommerce\js\newScript.js" />
     <Content Include="Content\Ecommerce\js\scripts.min.js" />
     <Content Include="Content\Ecommerce\js\vendor.min.js" />
     <Content Include="Content\Ecommerce\fonts\feather-webfont.svg" />
@@ -2255,6 +2256,7 @@
     <Content Include="Scripts\d3.min.js" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.js" />

@@ -53,7 +53,7 @@
                         </h4>
                         <div class="product-buttons">
                             <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
-                            <button class="btn btn-outline-primary btn-sm" onclick="Edit(@item.ProductId)"  id="AddLink" data-id="@item.ProductId">Add to Cart</button>
+                            <button class="btn btn-outline-primary btn-sm" id="AddLink" data-id="@item.ProductId">Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -183,29 +183,15 @@
 </div>
 </div>
 </div>
-<script src="~/Content/newscipt.js"></script>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
-
-
-       
-        //$("#AddLink").click(function () {
-           
-        //    // Get the id from the link
-        //    var recordToAdd = $(this).attr("data-id");
-        //    window.alert(recordToAdd);
-        //    if (recordToAdd != '') {
-        //        // Perform the ajax post
-        //        $.post("/ShoppingCart/AddToCart", { "id": recordToAdd },
-        //            function (data) {
-        //                var url = "/ShoppingCart/PartialIndex";
-        //                $('#mycart').load(url);
-        //                toastr["success"](data.status);
-        //            });
-        //    }
-        //});
-    function Edit(blockId) {
-
-        var recordToAdd = blockId;
+    $(document).ready(function (event) {
+        event.preventDefault();
+        // Document.ready -> link up remove event handler
+        $("#AddLink").click(function (event) {
+            event.preventDefault();
+            // Get the id from the link
+            var recordToAdd = $(this).attr("data-id");
             window.alert(recordToAdd);
             if (recordToAdd != '') {
                 // Perform the ajax post
@@ -216,6 +202,6 @@
                         toastr["success"](data.status);
                     });
             }
-    };
-   
+        });
+    });
 </script>
