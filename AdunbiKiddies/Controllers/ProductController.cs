@@ -84,6 +84,7 @@ namespace AdunbiKiddies.Controllers
 
         public PartialViewResult CreateReview()
         {
+            ViewBag.ProductId = new SelectList(_db.Products, "ProductId", "MerchantId");
             return PartialView();
         }
 

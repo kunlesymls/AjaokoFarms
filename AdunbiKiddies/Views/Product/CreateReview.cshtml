@@ -1,81 +1,68 @@
-﻿
-@{
-    Layout = "~/Views/Shared/_LayoutForm.cshtml";
+﻿@model AdunbiKiddies.Models.ProductReview
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>ProductReview</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductId, "ProductId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Review, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Review, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Review, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
 }
-<form class="row" id="myform" onsubmit="return false;">
-    
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label for="username">Your Name</label>
-            <input class="form-control form-control-rounded" type="text" id="ProductId" name="ProductId" required>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label for="username">Your Name</label>
-            <input class="form-control form-control-rounded" type="text" id="username" name="username" required>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label for="email">Your Email</label>
-            <input class="form-control form-control-rounded" type="email" id="email" name="email" required>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label for="subject">Subject</label>
-            <input class="form-control form-control-rounded" type="text" id="subject" name="subject" required>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label for="rating">Rating</label>
-            <select class="form-control form-control-rounded" id="rating" name="rating">
-                <option>5</option>
-                <option>4</option>
-                <option>3</option>
-                <option>2</option>
-                <option>1</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-12">
-        <div class="form-group">
-            <label for="review">Review </label>
-            <textarea class="form-control form-control-rounded" id="review" name="review" rows="8" required></textarea>
-        </div>
-    </div>
 
-    <div class="col-12 text-right">
-        <button id="btnsubmit" class="btn btn-outline-primary" type="submit">Submit Review</button>
-    </div>
-</form>
-
-<script src="~/Scripts/jquery-1.11.3.min.js"></script>
-<script type="text/javascript">
-   
-        $("#btnsubmit").click(function (event) {
-            event.preventDefault();
-
-            var data = $("#myform").serialize();
-            window.alert(data);
-            $.ajax({
-                type: "POST",
-                url: "/ProductReviews/Create",
-                contentType: "application/json", 
-                data: data,
-                success: function(data) {
-                    if (data.status) {
-                        $('#myform')[0].reset();
-                        toastr["success"](data.message);
-                    } else {
-                        toastr["error"](data.message);
-                    }
-
-                }
-            });
-        });
-   
-</script>
 

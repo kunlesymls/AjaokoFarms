@@ -1,17 +1,31 @@
 ﻿@model IEnumerable<AdunbiKiddies.Models.ProfessionalWorker>
 
 @{
-    ViewBag.Title = "ProWorkerView";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Profesional Support Workers";
+    Layout = "~/Views/Shared/_LayoutSales.cshtml";
 }
 
-<h2>
-    <strong>
-        <br />
-        <span style="color: green">List Of </span> <span style="color: red">Professionals</span>
-    </strong>
-    <br />
-</h2>
+
+<div class="page-title">
+    <div class="container">
+        <div class="column">
+            <h1>@ViewBag.Title.</h1>
+        </div>
+        <div class="column">
+            <ul class="breadcrumbs">
+                <li>
+                    <a href="#">Reach US</a>
+                </li>
+                <li class="separator">&nbsp;</li>
+                <li>
+                    <a href="account-orders.html">&nbsp;</a>
+                </li>
+                <li class="separator">&nbsp;</li>
+                <li>@ViewBag.Title</li>
+            </ul>
+        </div>
+    </div>
+</div>
 
 
 <table class="table">

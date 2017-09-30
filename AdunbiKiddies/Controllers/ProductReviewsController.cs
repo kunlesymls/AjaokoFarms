@@ -41,7 +41,7 @@ namespace AdunbiKiddies.Controllers
         // POST: ProductReviews/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        //[HttpPost]
         public async Task<ActionResult> Create(ProductReviewVm model)
         {
             if (ModelState.IsValid)
@@ -57,10 +57,10 @@ namespace AdunbiKiddies.Controllers
                 };
                 _db.ProductReviews.Add(productReview);
                 await _db.SaveChangesAsync();
-                return RedirectToAction("Details", "Product", new { id = model.ProductId });
+                return new JsonResult { Data = new { status = true, message = "Product Review Saved Successfully" } };
             }
 
-            return RedirectToAction("Details", "Product", new { id = model.ProductId });
+            return new JsonResult { Data = new { status = false, message = "Product review not Saved" } };
 
         }
 

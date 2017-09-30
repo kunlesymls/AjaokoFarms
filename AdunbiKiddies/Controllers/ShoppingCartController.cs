@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace AdunbiKiddies.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ShoppingCartController : BaseController
     {
         //
@@ -29,20 +29,6 @@ namespace AdunbiKiddies.Controllers
             return View(viewModel);
         }
 
-        public PartialViewResult CartIndex()
-        {
-            var cart = ShoppingCart.GetCart(this.HttpContext);
-
-            // Set up our ViewModel
-            var viewModel = new ShoppingCartViewModel
-            {
-                CartItems = cart.GetCartItems(),
-                CartTotal = cart.GetTotal()
-            };
-            // Return the view
-            return PartialView(viewModel);
-        }
-        [AllowAnonymous]
         public PartialViewResult PartialIndex()
         {
             var cart = ShoppingCart.GetCart(this.HttpContext);
@@ -80,15 +66,15 @@ namespace AdunbiKiddies.Controllers
                 ItemCount = count,
                 DeleteId = id
             };
-            //return Json(results);
+            return Json(results);
 
             // Go back to the main store page for more shopping
-            return RedirectToAction("PartialIndex");
+            // return RedirectToAction("Index");
         }
         //
         // AJAX: /ShoppingCart/RemoveFromCart/5
         [HttpPost]
-        public ActionResult RemoveFromCart(int productid)
+        public ActionResult RemoveFromCart(int id)
         {
             // Remove the item from the cart
             var cart = ShoppingCart.GetCart(this.HttpContext);
@@ -97,22 +83,22 @@ namespace AdunbiKiddies.Controllers
 
             // Get the name of the album to display confirmation
             string itemName = _db.Products
-                .Single(item => item.ProductId == productid).Name;
+                .Single(item => item.ProductId == id).Name;
 
             // Remove from cart
-            int itemCount = cart.RemoveFromCart(productid);
+            int itemCount = cart.RemoveFromCart(id);
 
             // Display the confirmation message
-            //var results = new ShoppingCartRemoveViewModel
-            //{
-            //    Message = "One (1) " + Server.HtmlEncode(itemName) +
-            //        " has been removed from your shopping cart.",
-            //    CartTotal = cart.GetTotal(),
-            //    CartCount = cart.GetCount(),
-            //    ItemCount = itemCount,
-            //    DeleteId = productid
-            //};
-            return RedirectToAction("CartIndex");
+            var results = new ShoppingCartRemoveViewModel
+            {
+                Message = "One (1) " + Server.HtmlEncode(itemName) +
+                    " has been removed from your shopping cart.",
+                CartTotal = cart.GetTotal(),
+                CartCount = cart.GetCount(),
+                ItemCount = itemCount,
+                DeleteId = id
+            };
+            return Json(results);
         }
         //
         // GET: /ShoppingCart/CartSummary

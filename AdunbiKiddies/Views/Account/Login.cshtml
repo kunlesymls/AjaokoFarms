@@ -16,7 +16,7 @@
 
     <div class="container padding-bottom-3x mb-2">
         <div class="row" style="margin-top:45px">
-            
+            <h3>@ViewBag.Message</h3>
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
@@ -52,7 +52,7 @@
                     <div class="d-flex flex-wrap justify-content-between padding-bottom-1x">
                         <label class="custom-control custom-checkbox">
                             <input class="custom-control-input" type="checkbox" checked><span class="custom-control-indicator"></span><span class="custom-control-description">Remember me</span>
-                        </label><a class="navi-link" href="account-password-recovery.html">Forgot password?</a>
+                        </label><a class="navi-link" href="@Url.Action("ForgotPassword","Manage")">Forgot password?</a>
                     </div>
                     <div class="text-center text-sm-right">
 
@@ -158,5 +158,6 @@
 
 
 @section Scripts {
+    @Scripts.Render("~/bundles/juery")
     @Scripts.Render("~/bundles/jqueryval")
 }

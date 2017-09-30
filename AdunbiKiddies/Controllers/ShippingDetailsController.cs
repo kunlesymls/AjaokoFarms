@@ -43,19 +43,23 @@ namespace AdunbiKiddies.Controllers
             return View();
         }
 
-
+        // POST: ShippingDetails/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ShippingDetail shippingDetail)
         {
             if (ModelState.IsValid)
             {
-                shippingDetail.CustomerId = User.Identity.GetUserId();
                 db.ShippingDetails.Add(shippingDetail);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Shiping", "Checkout");
+                return RedirectToAction("Index", "ShoppingCart");
             }
-            return RedirectToAction("Address", "Checkout");
+            var id = User.Identity.GetUserId();
+            ViewBag.CustomerId = new SelectList(db.Customers.AsNoTracking()
+                .Where(x => x.CustomerId.Equals(id)), "CustomerId", "FullName");
+            return View(shippingDetail);
         }
 
         // GET: ShippingDetails/Edit/5
