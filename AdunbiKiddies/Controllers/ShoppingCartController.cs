@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace AdunbiKiddies.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class ShoppingCartController : BaseController
     {
         //
@@ -42,7 +42,7 @@ namespace AdunbiKiddies.Controllers
             // Return the view
             return PartialView(viewModel);
         }
-
+        [AllowAnonymous]
         public PartialViewResult PartialIndex()
         {
             var cart = ShoppingCart.GetCart(this.HttpContext);

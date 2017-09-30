@@ -16,7 +16,7 @@ using System.Web.Mvc;
 
 namespace AdunbiKiddies.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class CheckoutController : BaseController
     {
         private AjaoOkoDb storeDB;

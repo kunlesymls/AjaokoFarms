@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace AdunbiKiddies.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class AccountController : BaseController
     {
         //private new readonly AjaoOkoDb  _db;
@@ -119,6 +119,7 @@ namespace AdunbiKiddies.Controllers
         }
 
         //GET: Account/RegisterMerchant
+        [AllowAnonymous]
         public ActionResult RegisterMerchant()
         {
             return View();
