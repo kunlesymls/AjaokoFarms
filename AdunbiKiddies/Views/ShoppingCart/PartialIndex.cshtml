@@ -1,9 +1,10 @@
 ﻿@model AdunbiKiddies.ViewModel.ShoppingCartViewModel
 
-<script type="text/javascript">
+@*<script type="text/javascript">
     $(function () {
         // Document.ready -> link up remove event handler
-        $(".RemoveLink").click(function () {
+        $(".RemoveLink").click(function (event) {
+            event.preventDefault();
             // Get the id from the link
             var recordToDelete = $(this).attr("data-id");
             if (recordToDelete !== '') {
@@ -24,7 +25,7 @@
             }
         });
     });
-</script>
+</script>*@
 <a href="@Url.Action("Index","ShoppingCart")"></a><i class="icon-bag"></i><span class="count">@Model.CartItems.Count</span><span class="subtotal">#@Model.CartTotal</span>
 <div class="toolbar-dropdown">
     @if (Model.CartItems.Count > 0) 
@@ -32,7 +33,16 @@
     foreach (var cart in Model.CartItems)
     {
         <div id="row-@cart.CartId" class="dropdown-product-item">
-            <span class="dropdown-product-remove"><a href="#" class="RemoveLink" data-id="@cart.ProductId"></a><i class="icon-cross"></i></span><a class="dropdown-product-thumb" href="shop-single.html"><img src="@Url.Action("RenderImage","Product", new {ProductId = cart.ProductId})" alt="Product"></a>
+            <span class="dropdown-product-remove">
+            @using (Ajax.BeginForm("RemoveFromCart", "ShoppingCart", new AjaxOptions() {UpdateTargetId = "mycart" }))
+            {
+                               
+                <input style = "display:none" type="text" id="productid" name="productid"  value="@cart.ProductId" required>
+
+                <button class="dropdown-product-remove"><i class="icon-cross"></i></button>
+            }
+          
+                </span><a class="dropdown-product-thumb" href="shop-single.html"><img src="@Url.Action("RenderImage", "Product", new {ProductId = cart.ProductId})" alt="Product"></a>
             <div class="dropdown-product-info"><a class="dropdown-product-title" href="shop-single.html">@cart.Product.Name</a><span class="dropdown-product-details">@cart.Count x @cart.Product.DiscountPrice</span>
             </div>
         </div>
@@ -49,7 +59,7 @@
     <div class="toolbar-dropdown-group">
         <div class="column"><a class="btn btn-sm btn-block btn-secondary" href="@Url.Action("Index","ShoppingCart")">View Cart</a>
         </div>
-        <div class="column"><a class="btn btn-sm btn-block btn-success" href="checkout-address.html">Checkout</a>
+        <div class="column"><a class="btn btn-sm btn-block btn-success" href="@Url.Action("AddressAndPayment","Checkout")">Checkout</a>
         </div>
     </div>
 </div>

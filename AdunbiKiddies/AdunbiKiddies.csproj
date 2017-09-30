@@ -1851,6 +1851,7 @@
     <Content Include="Content\Ecommerce\Faicon\touch-icon-iphone.png" />
     <Content Include="Content\Ecommerce\js\card.min.js" />
     <Content Include="Content\Ecommerce\js\modernizr.min.js" />
+    <Content Include="Content\Ecommerce\js\newScript.js" />
     <Content Include="Content\Ecommerce\js\scripts.min.js" />
     <Content Include="Content\Ecommerce\js\vendor.min.js" />
     <Content Include="Content\Ecommerce\fonts\feather-webfont.svg" />
@@ -1858,7 +1859,6 @@
     <Content Include="Content\Ecommerce\fonts\socicon.svg" />
     <Content Include="Content\Images\470x250.gif" />
     <Content Include="Content\Images\64x64.gif" />
-    <Content Include="Content\Images\Ajaoko_Logo_Enlarged.fw.png" />
     <Content Include="Content\Images\backg.gif" />
     <Content Include="Content\Images\backg.jpg" />
     <Content Include="Content\Images\Background Image_1_Gradient.jpg" />
@@ -1868,8 +1868,6 @@
     <Content Include="Content\Images\caro3.jpeg" />
     <Content Include="Content\Images\Drugs_800x400.jpg" />
     <Content Include="Content\Images\Drugs_Gradient_800x400.jpg" />
-    <Content Include="Content\Images\future-farming.Resized.Further.png" />
-    <Content Include="Content\Images\future-farming.Resized.jpg" />
     <Content Include="Content\Images\img1.jpg" />
     <Content Include="Content\Images\img2.jpeg" />
     <Content Include="Content\Images\img3.jpg" />
@@ -1886,11 +1884,7 @@
     <Content Include="Content\Images\Logo_800X400.jpg" />
     <Content Include="Content\Images\mobile.jpg" />
     <Content Include="Content\Images\payment_methods.png" />
-    <Content Include="Content\Images\payment_methodsOrigin.png" />
-    <Content Include="Content\Images\slide1Index.fw.png" />
     <Content Include="Content\Images\slide2.fw.png" />
-    <Content Include="Content\Images\slide2Index.jpg" />
-    <Content Include="Content\Images\slideIndex.jpg" />
     <Content Include="Content\Images\slideOne.fw.png" />
     <Content Include="Content\Images\social-icon.png" />
     <Content Include="Content\Images\splash_logo.png" />
@@ -2265,6 +2259,7 @@
     <Content Include="Scripts\d3.min.js" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.js" />
@@ -2601,8 +2596,7 @@
     <Content Include="Views\Checkout\Shiping.cshtml" />
     <Content Include="Views\Checkout\ReviewCart.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
-    <Content Include="Views\View.cshtml" />
-    <Content Include="Views\Shared\PartialsForSales\_TitleTab.cshtml" />
+    <Content Include="Views\ShoppingCart\CartIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
