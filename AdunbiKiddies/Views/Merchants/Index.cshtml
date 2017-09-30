@@ -140,14 +140,11 @@
             @Html.DisplayFor(modelItem => item.Passport)
         </td>
         <td>
-            <button class="btn btn-sm" style="color: Black; border-color: green">
                 @Html.ActionLink("Details", "Details", new {id = item.MerchantId})
 
-            </button>
+         
 
-            <button class="btn btn-sm" style="color: Black; border-color: red">
-                @Html.ActionLink("Delete", "Delete", new {id = item.MerchantId})
-            </button>
+                @*@Html.ActionLink("Delete", "Delete", new {id = item.MerchantId})*@
         </td>
     </tr>
 }

@@ -16,7 +16,7 @@ namespace AdunbiKiddies.Controllers
         public async Task<ActionResult> Index()
         {
             var merchants = _db.Merchants.Include(m => m.PartnerShipAgreement);
-            return View(await merchants.ToListAsync());
+            return View(await merchants.Where(x => x.IsVerified.Equals(true)).ToListAsync());
         }
 
         //public async Task<ActionResult> ViewMerchants()
@@ -27,18 +27,18 @@ namespace AdunbiKiddies.Controllers
         public async Task<ActionResult> ApproveMerchant()
         {
             ViewBag.Message = "";
-            return View(await _db.Merchants.Where(m => m.IsVerified == false).ToListAsync());
+            return View(await _db.Merchants.Where(m => m.IsVerified.Equals(false)).ToListAsync());
 
         }
 
-        [HttpPost]
-        public async Task<ActionResult> ApproveMerchant(int id)
+
+        public async Task<ActionResult> Approve(string id)
         {
             Merchant merchant = await _db.Merchants.FindAsync(id);
             if (merchant == null)
             {
                 ViewBag.Message = "Please select a Merchant";
-                return View();
+                return RedirectToAction("ApproveMerchant");
             }
             merchant.IsVerified = true;
             //_db.Merchants.Attach(merchant);
@@ -46,7 +46,7 @@ namespace AdunbiKiddies.Controllers
             _db.SaveChanges();
 
             ViewBag.Message = "Merchant Approval successful";
-            return View();
+            return RedirectToAction("ApproveMerchant");
         }
 
         // GET: MerchantsTest/Details/5

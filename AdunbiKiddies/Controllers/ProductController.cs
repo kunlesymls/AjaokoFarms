@@ -31,8 +31,7 @@ namespace AdunbiKiddies.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var items = from i in _db.Products
-                        select i;
+            var items = _db.Products.Include(i => i.Merchant).Where(x => x.Merchant.IsVerified.Equals(true));
             if (!String.IsNullOrEmpty(searchString))
             {
                 items = items.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper())

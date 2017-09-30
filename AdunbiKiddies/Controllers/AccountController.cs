@@ -249,21 +249,30 @@ namespace AdunbiKiddies.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var user = _db.Users.SingleOrDefault(c => c.Email.Equals(model.Email)); //Where _db is an application instance
-            var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            var user = await _db.Users.AsNoTracking().FirstOrDefaultAsync(c =>
+                c.Email.ToUpper().Equals(model.Email.ToUpper().Trim())
+                || c.UserName.ToUpper().Equals(model.Email.ToUpper().Trim()));
+            // var user = _db.Users.SingleOrDefault(c => c.Email.Equals(model.Email)); //Where _db is an application instance
+            if (user != null)
             {
-                case SignInStatus.Success:
-                    return RedirectToAction("CustomDashborad", new { username = user.UserName });
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToAction("CustomDashborad", new { username = user.UserName });
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+                }
+
             }
+            ModelState.AddModelError("", "User dont exist.");
+            return View(model);
         }
         [AllowAnonymous]
         public ActionResult CustomDashborad(string username)
