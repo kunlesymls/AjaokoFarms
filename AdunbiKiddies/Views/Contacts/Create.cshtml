@@ -1,22 +1,38 @@
 ﻿@Model<AdunbiKiddies.Models.Contact>
 
 @{ 
-    Layout = "~/Views/Shared/_LayoutBigStore.cshtml";
+    ViewBag.Title = "Contact Us";
+    Layout = "~/Views/Shared/_LayoutSales.cshtml";
 }
 
-
-@Html.Partial("~/Views/Shared/Partials/_PageUpper.cshtml")
-
-
-
-@Html.Partial("~/Views/Shared/Partials/_PageLower.cshtml")
+          <div class="page-title">
+              <div class="container">
+                  <div class="column">
+                      <h1>@ViewBag.Title.</h1>
+                  </div>
+                  <div class="column">
+                      <ul class="breadcrumbs">
+                          <li>
+                              <a href="#">Reach US</a>
+                          </li>
+                          <li class="separator">&nbsp;</li>
+                          <li>
+                              <a href="account-orders.html">&nbsp;</a>
+                          </li>
+                          <li class="separator">&nbsp;</li>
+                          <li>@ViewBag.Title</li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
 
 @*Put any of desired single page content here*@
-    <div class="reservation_top">
+          <div style="width:75%; margin:0 auto">
+<div class="reservation_top">
         <div class="contact_right">
-            <h2><strong><span style="color:limegreen">Reach</span> <span style="color:salmon">US</span> </strong></h2>
+
             <h5><strong> We will respond to you shortly.</strong></h5>
-            <div class="contact-form" id="Contact-Form">
+            <div class="contact-form">
                 @*<form method="post" action="contact-post.html">
                     <input type="text" class="textbox" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
                     <input type="text" class="textbox" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
@@ -25,23 +41,12 @@
                     <div class="clearfix"> </div>
                 </form>*@
                 @Html.Partial("~/Views/Shared/_Contact.cshtml")
-                <address class="address">
-                    <p>No 1,Old Bukuru Rd, <br>Off Yakubu Gowon Way, Opp. Building Materials,
-Jos South</p>
-                    <dl>
-                        <dt> </dt>
-                        <dd>Phone US:<span> +234 </span></dd>
-                        <dd>TWITTER:<span> @@ajaoko_official</span></dd>
-                        <dd>SKYPE: <span>nicholasalfa1</span></dd>
-                        <dd>E-mail:&nbsp; <a href="mailto@support@Ajaoko.com">support@@Ajaoko.com</a></dd>
-                    </dl>
-                </address>
+
             </div>
         </div>
-    </div>
+    </div></div>
 
 
-@Scripts.Render("~/Template/assets/css")
-@Scripts.Render("~/Templates/assets/js")
-@Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/bundles/jquery")
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@Scripts.Render("~/bundles/jqueryval")

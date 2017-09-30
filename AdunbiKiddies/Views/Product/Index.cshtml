@@ -178,11 +178,11 @@
         <!-- Widget Price Range-->
         <section class="widget widget-categories">
             <h3 class="widget-title">Price Range</h3>
-            <form class="price-range-slider" method="post" data-start-min="250" data-start-max="650" data-min="0" data-max="1000" data-step="1">
+            <form id="filterform" onsubmit="return false;" class="price-range-slider" method="get" data-start-min="250" data-start-max="650" data-min="0" data-max="1000" data-step="1">
                 <div class="ui-range-slider"></div>
                 <footer class="ui-range-slider-footer">
                     <div class="column">
-                        <button class="btn btn-outline-primary btn-sm" type="submit">Filter</button>
+                        <button id="filterbtn" class="btn btn-outline-primary btn-sm" type="submit">Filter</button>
                     </div>
                     <div class="column">
                         <div class="ui-range-values">
@@ -198,7 +198,7 @@
             </form>
         </section>
         <!-- Widget Brand Filter-->
-        <section class="widget">
+        @*<section class="widget">
             <h3 class="widget-title">Filter by Brand</h3>
             <label class="custom-control custom-checkbox d-block">
                 <input class="custom-control-input" type="checkbox"><span class="custom-control-indicator"></span><span class="custom-control-description">Adidas&nbsp;<span class="text-muted">(254)</span></span>
@@ -215,9 +215,9 @@
             <label class="custom-control custom-checkbox d-block">
                 <input class="custom-control-input" type="checkbox"><span class="custom-control-indicator"></span><span class="custom-control-description">Tommy Bahama&nbsp;<span class="text-muted">(42)</span></span>
             </label>
-        </section>
+        </section>*@
         <!-- Widget Size Filter-->
-        <section class="widget">
+        @*<section class="widget">
             <h3 class="widget-title">Filter by Size</h3>
             <label class="custom-control custom-checkbox d-block">
                 <input class="custom-control-input" type="checkbox"><span class="custom-control-indicator"></span><span class="custom-control-description">XL&nbsp;<span class="text-muted">(208)</span></span>
@@ -231,15 +231,19 @@
             <label class="custom-control custom-checkbox d-block">
                 <input class="custom-control-input" type="checkbox"><span class="custom-control-indicator"></span><span class="custom-control-description">S&nbsp;<span class="text-muted">(213)</span></span>
             </label>
-        </section>
+        </section>*@
         <!-- Promo Banner-->
-        <section class="promo-box" style="background-image: url(img/banners/02.jpg);">
-            <!-- Choose between .overlay-dark (#000) or .overlay-light (#fff) with default opacity of 50%. You can overrride default color and opacity values via 'style' attribute.--><span class="overlay-dark" style="opacity: .45;"></span>
+        
+        <section class="promo-box" style="background-image: url('~/Content/Images/future-farming.Resized.Further.png');">
+            <!-- Choose between .overlay-dark (#000) or .overlay-light (#fff) with default opacity of 50%. You can overrride default color and opacity values via 'style' attribute.-->
+            <span class="overlay-dark" style="opacity: 45;"> <img  class="img-responsive" src="~/Content/Images/future-farming.Resized.Further.png"></span>
             <div class="promo-box-content text-center padding-top-3x padding-bottom-2x">
-                <h4 class="text-light text-thin text-shadow">New Collection of</h4>
-                <h3 class="text-bold text-light text-shadow">Sunglassess</h3><a class="btn btn-sm btn-primary" href="#">Shop Now</a>
+                <h2 style="color:white" ><strong>AjaOko</strong></h2>
+                <h3 style="color:white"><strong>Farming Virtualized</strong></h3>
+                @*<h3 class="text-bold text-light text-shadow">AjaOko</h3><a class="btn btn-sm btn-primary" href="#">Shop Now</a>*@
             </div>
         </section>
+        
     </aside>
 </div>
 </div>
@@ -250,19 +254,25 @@
     $(document).ready(function () {
  
         // Document.ready -> link up remove event handler
-        $("#AddLink").click(function () {
-            // Get the id from the link
-            var recordToAdd = $(this).attr("data-id");
-            window.alert(recordToAdd);
-            if (recordToAdd !== '') {
-                // Perform the ajax post
-                $.post("/ShoppingCart/AddToCart", { "id": recordToAdd },
-                    function (data) {
-                        var url = "/ShoppingCart/PartialIndex";
-                        $('#mycart').load(url);
-                        toastr["success"](data.status);
-                    });
-            }
+        $("#filterbtn").click(function () {
+
+            var data = $("#filterform").serialize();
+            window.alert(data);
+            $.ajax({
+                type: "POST",
+                url: "/ProductReviews/Create",
+                contentType: "application/json",
+                data: data,
+                success: function (data) {
+                    if (data.status) {
+                        $('#myform')[0].reset();
+                        toastr["success"](data.message);
+                    } else {
+                        toastr["error"](data.message);
+                    }
+
+                }
+            });
         });
     });
 </script>

@@ -29,7 +29,7 @@ namespace AdunbiKiddies.Models.Repository
     }
     public class ProductRepo : Repository<Product>
     {
-       public List<Product> GetProductByCat(int id)
+        public List<Product> GetProductByCat(int id)
         {
             return DbSet.Where(p => p.CategoryId == id).ToList();
         }
@@ -41,15 +41,14 @@ namespace AdunbiKiddies.Models.Repository
         public List<Product> GetByPriceLowest()
         {
             return DbSet.OrderBy(p => p.Price).ToList();
-            
+
         }
         public List<Product> GetByDateRecent()
         {
-            return DbSet.OrderBy(p => p.DateAdded).ToList();
+            return DbSet.OrderByDescending(p => p.DateAdded).ToList();
 
         }
 
-      
 
         public List<Product> SearchProduct(string searchTerm)
         {

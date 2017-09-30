@@ -253,28 +253,28 @@
                     
                 </li>
                 <li>
-                    <a href="#"><span>Merchant</span></a>
+                    <a href="#"><span>Be A Seller</span></a>
                     <ul class="sub-menu">
                         @if (!(Request.IsAuthenticated && User.IsInRole("Admin")))
                         {
-                            <li><a href="@Url.Action("RegisterMerchant","Account")">Be A Merhants </a></li>
+                            <li><a href="@Url.Action("RegisterMerchant","Account")">Be A Seller </a></li>
                         }
                                               
                         
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><span>Professionals</span></a>
+                    <a href="#"><span>Service Providers</span></a>
                     <ul class="sub-menu">
                         @if (Request.IsAuthenticated && User.IsInRole("Professional"))
                         {
-                            <li><a href="@Url.Action("ProWorkerView","ProfessionalWorkers")">View Professionals </a></li>
+                            <li><a href="@Url.Action("ProWorkerView","ProfessionalWorkers")">View Service Providers </a></li>
 
                         }
                         else
                         {
-                            <li><a href="@Url.Action("RegisterProfessional","Account")">Be A Professional</a></li>
-                            <li><a href="@Url.Action("ProWorkerView","ProfessionalWorkers")">View Professionals </a></li>
+                            <li><a href="@Url.Action("RegisterProfessional","Account")">Be A Service Provider</a></li>
+                            <li><a href="@Url.Action("ProWorkerView","ProfessionalWorkers")">View Service Providers </a></li>
 
                         }
 
@@ -377,7 +377,7 @@
                     <a href="#"><span>Pages</span></a>
                     <ul class="sub-menu">
                         <li><a href="@Url.Action("About","Home")">About Us</a></li>
-                        <li><a href="@Url.Action("Contact","Home")">Contact Us</a></li>
+                        <li><a href="@Url.Action("Create","Contacts")">Contact Us</a></li>
                         <li><a href="#">Help / FAQ</a></li>
                         @*<li><a href="order-tracking.html">Order Tracking</a></li>
                         <li><a href="search-results.html">Search Results</a></li>
@@ -430,44 +430,45 @@
                         <!-- Contact Info-->
                         <section class="widget widget-light-skin">
                             <h3 class="widget-title">Get In Touch With Us</h3>
-                            <p class="text-white">Phone: 00 33 169 7720</p>
+                            <p class="text-white">Phone: +234 816 730 461</p>
                             <ul class="list-unstyled text-sm text-white">
                                 <li><span class="opacity-50">Monday-Friday:</span>9.00 am - 8.00 pm</li>
                                 <li><span class="opacity-50">Saturday:</span>10.00 am - 6.00 pm</li>
                             </ul>
-                            <p><a class="navi-link-light" href="#">support@unishop.com</a></p><a class="social-button shape-circle sb-facebook sb-light-skin" href="#"><i class="socicon-facebook"></i></a><a class="social-button shape-circle sb-twitter sb-light-skin" href="#"><i class="socicon-twitter"></i></a><a class="social-button shape-circle sb-instagram sb-light-skin" href="#"><i class="socicon-instagram"></i></a><a class="social-button shape-circle sb-google-plus sb-light-skin" href="#"><i class="socicon-googleplus"></i></a>
+                            <p><a class="navi-link-light" href="#">support@Ajaoko.com</a></p><a class="social-button shape-circle sb-facebook sb-light-skin" href="#"><i class="socicon-facebook"></i></a><a class="social-button shape-circle sb-twitter sb-light-skin" href="#"><i class="socicon-twitter"></i></a><a class="social-button shape-circle sb-instagram sb-light-skin" href="#"><i class="socicon-instagram"></i></a><a class="social-button shape-circle sb-google-plus sb-light-skin" href="#"><i class="socicon-googleplus"></i></a>
                         </section>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <!-- Mobile App Buttons-->
                         <section class="widget widget-light-skin">
-                            <h3 class="widget-title">Our Mobile App</h3><a class="market-button google-button mb-light-skin" href="#"><span class="mb-subtitle">Download on the</span><span class="mb-title">Google Play</span></a><a class="market-button windows-button mb-light-skin" href="#"><span class="mb-subtitle">Download on the</span><span class="mb-title">Windows Store</span></a>
+                            <h3 class="widget-title">Our Mobile App</h3><a class="market-button google-button mb-light-skin" href="#"><span class="mb-subtitle">Coming Very Soon</span><span class="mb-title">On Google Play</span></a><a class="market-button windows-button mb-light-skin" href="#"><span class="mb-subtitle">Coming Very Soon</span><span class="mb-title"> On Windows Store</span></a>
                         </section>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <!-- About Us-->
                         <section class="widget widget-links widget-light-skin">
-                            <h3 class="widget-title">About Us</h3>
+                            <h3 class="widget-title">Nav Links</h3>
                             <ul>
-                                <li><a href="#">Careers</a></li>
-                                <li><a href="#">About Ajaoko</a></li>
-                                <li><a href="#">Our Story</a></li>
-                                <li><a href="#">Services</a></li>
-                                <li><a href="#">Our Blog</a></li>
+                                <li><a href="@Url.Action("Index","Products")">View Products</a></li>
+                                <li><a href="@Url.Action("About","Home")">About Ajaoko</a></li>
+                                <li><a href="@Url.Action("Contact", "Home")">Reach Us</a></li>
+                                <li><a href="@Url.Action("ProWorkersView","ProfessionalWorkers")">View Service Provider</a></li>
+                                
                             </ul>
                         </section>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <!-- Account / Shipping Info-->
                         <section class="widget widget-links widget-light-skin">
-                            <h3 class="widget-title">Account &amp; Shipping Info</h3>
+                            <h3 class="widget-title">Things you can do with us</h3>
                             <ul>
-                                <li><a href="#">Your Account</a></li>
-                                <li><a href="#">Shipping Rates & Policies</a></li>
-                                <li><a href="#">Refunds & Replacements</a></li>
-                                <li><a href="#">Taxes</a></li>
-                                <li><a href="#">Delivery Info</a></li>
-                                <li><a href="#">Affiliate Program</a></li>
+                                <li><a href="#">Buy Goods from varying sellers</a></li>
+                                <li><a href="#">Hire a tool or machinery</a></li>
+                                <li><a href="#">Hire a Service</a></li>
+                                <li><a href="#">Exhibit your food products</a></li>
+                                <li><a href="#">Exhirit your professional service</a></li>
+                                <li><a href="#">Communicate & Partner with us</a></li>   
+                               
                             </ul>
                         </section>
                     </div>
@@ -477,13 +478,15 @@
                     <div class="col-md-7 padding-bottom-1x">
                         <!-- Payment Methods-->
                         <div class="margin-bottom-1x" style="max-width: 615px;">
-                            <img src="~/Content/Images/payment_methods.png" alt="Payment Methods">
+                            <img src="~/Content/Images/payment_methodsOrigin.png" />
+                            @*<img src="~/Content/Images/payment_methods.png" alt="Online Payment Methods"/>*@
+                            @*<img src="~/Content/Images/payment_methods.png" alt="Payment Methods">*@
                         </div>
                     </div>
                     <div class="col-md-5 padding-bottom-1x">
                         <div class="margin-top-1x hidden-md-up"></div>
                         <!--Subscription-->
-                        <form class="subscribe-form" action="http://rokaux.us12.list-manage.com/subscribe/post?u=c7103e2c981361a6639545bd5&amp;amp;id=1194bb7544" method="post" target="_blank" novalidate>
+                        <form class="subscribe-form" action="#" method="post" target="_blank" novalidate>
                             <div class="clearfix">
                                 <div class="input-group input-light">
                                     <input class="form-control" type="email" name="EMAIL" placeholder="Your e-mail"><span class="input-group-addon"><i class="icon-mail"></i></span>
